@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'PlexSansWeb';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/IBMPlexSans-Regular.eot'); /* IE9 Compat Modes */
+  src: url('fonts/IBMPlexSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/IBMPlexSans-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/IBMPlexSans-Regular.woff') format('woff'), /* Modern Browsers */
+       url('fonts/IBMPlexSans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'PlexSansWeb';
+  font-style: italic;
+  font-weight: 400;
+  src: url('fonts/IBMPlexSans-Italic.eot'); /* IE9 Compat Modes */
+  src: url('fonts/IBMPlexSans-Italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/IBMPlexSans-Italic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/IBMPlexSans-Italic.woff') format('woff'), /* Modern Browsers */
+       url('fonts/IBMPlexSans-Italic.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'PlexSansWeb';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/IBMPlexSans-Bold.eot'); /* IE9 Compat Modes */
+  src: url('fonts/IBMPlexSans-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/IBMPlexSans-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/IBMPlexSans-Bold.woff') format('woff'), /* Modern Browsers */
+       url('fonts/IBMPlexSans-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}

@@ -3,20 +3,16 @@
     <Map
       :cells="cells"
       :parks="parks"
-
       :initialCenter="mapCenter"
       :initialZoom="mapZoom"
-
-      :transportType="transportType"
-      :transportMaxDuration="transportMaxDuration"
-      :transportShortDistance="transportShortDistance"
-      :parkVisibleProperty="parkVisibleProperty"
+      :config="mapConfig"
     />
     <MapConfiguration
-      :transportType="transportType"
-      :transportMaxDuration="transportMaxDuration"
-      :transportShortDistance="transportShortDistance"
-      :parkVisibleProperty="parkVisibleProperty"
+      :parks="parks"
+      :transportMode.sync="mapConfig.transportMode"
+      :transportDuration.sync="mapConfig.transportDuration"
+      :transportTicketType.sync="mapConfig.transportTicketType"
+      :qualityProperty.sync="mapConfig.qualityProperty"
     />
   </div>
 </template>
@@ -46,11 +42,13 @@ export default {
       mapCenter: [52.517598, 13.388707],
       mapZoom: 12,
 
-      // User-modifiable map settings
-      transportType: 'walk',
-      transportMaxDuration: 5,
-      transportShortDistance: true,
-      parkVisibleProperty: 'size'
+      // User-modifiable map configuration
+      mapConfig: {
+        transportMode: 'walking',
+        transportDuration: 10,
+        transportTicketType: 'short',
+        qualityProperty: 'size'
+      }
     }
   }
 }

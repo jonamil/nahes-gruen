@@ -74,22 +74,17 @@ export default {
       default: () => 12
     },
 
-    // Map settings defined through the config interface
-    transportType: {
-      type: String,
-      default: () => 'walk'
-    },
-    transportMaxDuration: {
-      type: Number,
-      default: () => 5
-    },
-    transportShortDistance: {
-      type: Boolean,
-      default: () => true
-    },
-    parkVisibleProperty: {
-      type: String,
-      default: () => 'size'
+    // Map configuration defined through the interface
+    config: {
+      type: Object,
+      default: () => {
+        return {
+          transportMode: 'walking',
+          transportDuration: 10,
+          transportTicketType: 'short',
+          qualityProperty: 'size'
+        }
+      }
     }
   },
 

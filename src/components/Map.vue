@@ -9,8 +9,12 @@
     @update:zoom="zoomUpdate"
     @update:bounds="boundsUpdate"
   >
-    <LTileLayer
+    <!-- <LTileLayer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+    /> -->
+    <LTileLayer
+      url="https://api.mapbox.com/styles/v1/ellaeisemann/ckj74ra891xgq19mw7779128n/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZWxsYWVpc2VtYW5uIiwiYSI6ImNrajcydTJ5ejBqZHcyd3J1bHBhb3lyY2cifQ.FZSE_jY7uZsa14NvSxnnIQ"
       attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
     />
     <LGeoJson
@@ -28,7 +32,6 @@
 
 <script>
 import 'leaflet/dist/leaflet.css';
-// import { latLng } from 'leaflet';
 
 import {
   LMap,
@@ -109,7 +112,7 @@ export default {
         color: '#000',
         fillColor: '#00ff00',
         fillOpacity: 1
-      }
+      },
     }
   },
 

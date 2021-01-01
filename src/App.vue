@@ -22,7 +22,7 @@ import Map from './components/Map.vue';
 import MapConfiguration from './components/MapConfiguration.vue';
 
 import cells from './data/testcells.json';
-import parks from './data/testparks.json';
+import parks from './data/parks.json';
 
 export default {
   name: 'App',

@@ -110,8 +110,9 @@ export default {
       parkStyle: {
         weight: 1,
         color: '#000',
+        opacity: 0,
         fillColor: '#00ff00',
-        fillOpacity: 1
+        fillOpacity: 1,
       },
     }
   },

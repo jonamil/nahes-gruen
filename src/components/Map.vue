@@ -1,59 +1,48 @@
 <template>
-	<LMap
+  <MglMap 
     class="map"
-    :center="center"
-    :zoom="zoom"
-    :bounds="bounds"
-    :options="mapOptions"
-    @update:center="centerUpdate"
-    @update:zoom="zoomUpdate"
-    @update:bounds="boundsUpdate"
+    :accessToken="accessToken"
+    :mapStyle="mapStyle"
+    :center.sync="center"
+    :zoom.sync="zoom"
+    :minZoom="minZoom"
+    :maxZoom="maxZoom"
+    logo-position="bottom-left"
+    @load="mapLoaded"
   >
-    <!-- <LTileLayer
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-    /> -->
-    <LTileLayer
-      url="https://api.mapbox.com/styles/v1/ellaeisemann/ckj74ra891xgq19mw7779128n/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZWxsYWVpc2VtYW5uIiwiYSI6ImNrajcydTJ5ejBqZHcyd3J1bHBhb3lyY2cifQ.FZSE_jY7uZsa14NvSxnnIQ"
-      attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+    <MglGeojsonLayer
+      sourceId="cells"
+      :source="cellsSource"
+      layerId="cells"
+      :layer="cellsLayer"
     />
-    <LGeoJson
-      :geojson="cells"
-      :options="cellOptions"
+    <MglGeojsonLayer
+      sourceId="parks"
+      :source="parksSource"
+      layerId="parks"
+      :layer="parksLayer"
     />
-    <LGeoJson
-      :geojson="parks"
-      :options="parkOptions"
-      :options-style="parkStyle"
-    />
-    <LControlZoom position="bottomleft" />
-  </LMap>
+    <MglNavigationControl position="bottom-left" />
+  </MglMap>
 </template>
 
 <script>
-import 'leaflet/dist/leaflet.css';
+import Mapbox from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import {
-  LMap,
-  LTileLayer,
-  LGeoJson,
-  LControlZoom,
-  // LMarker,
-  // LPopup,
-  // LTooltip,
-} from 'vue2-leaflet';
+ MglMap,
+ MglGeojsonLayer,
+ MglNavigationControl
+} from 'vue-mapbox';
 
 export default {
   name: 'Map',
 
   components: {
-    LMap,
-    LTileLayer,
-    LGeoJson,
-    LControlZoom,
-    // LMarker,
-    // LPopup,
-    // LTooltip,
+    MglMap,
+    MglGeojsonLayer,
+    MglNavigationControl
   },
 
   props: {
@@ -70,14 +59,14 @@ export default {
     // Initial center and zoom values
     initialCenter: {
       type: Array,
-      default: () => [52.517598, 13.388707]
+      default: () => [13.388707, 52.517598]
     },
     initialZoom: {
       type: Number,
-      default: () => 12
+      default: () => 11
     },
 
-    // Map configuration defined through the interface
+    // Map configuration manipulated through the interface
     config: {
       type: Object,
       default: () => {
@@ -93,83 +82,96 @@ export default {
 
   data () {
     return {
-      // Variables storing current state of map
+      // Mapbox token and style
+      accessToken: 'pk.eyJ1Ijoiam9uYW1pbCIsImEiOiJja2plbTdqdXgwN2VhMnFvN3A5cGhoZjE0In0._TRwzZ4Zu9UA5B9mT9zwsg',
+      mapStyle: 'mapbox://styles/jonamil/ckjemog3e3qd219vwk883dhkx',
+
+      // Synchronized map state values
       center: null,
       zoom: null,
-      bounds: null,
 
-      // Leaflet map options object
-      mapOptions: {
-        zoomControl: false,
-        zoomSnap: 0.5,
-        minZoom: 11,
-        maxZoom: 15
+      // Map options
+      minZoom: 9,
+      maxZoom: 18,
+
+      // Cells: source and layer objects
+      cellsSource: {
+        type: 'geojson',
+        data: this.cells
+      },
+      cellsLayer: {
+        type: 'fill',
+        paint: {
+          'fill-color': '#ff0000',
+          'fill-opacity': 0.3,
+          'fill-outline-color': 'transparent'
+        },
+        filter: ['<=', 'API Testzellen Walking_duration', this.config.transportDuration * 60]
       },
 
-      // Style options for parks layer
-      parkStyle: {
-        weight: 1,
-        color: '#000',
-        opacity: 0,
-        fillColor: '#00ff00',
-        fillOpacity: 1,
+      // Parks: source and layer objects
+      parksSource: {
+        type: 'geojson',
+        data: this.parks
       },
+      parksLayer: {
+        type: 'fill',
+        paint: {
+          'fill-color': '#00ff00',
+          'fill-outline-color': 'transparent'
+        }
+      }
     }
   },
 
   computed: {
-    // Assign the cell and park layers functions that will be called on each of their features (through Leaflet options object)
-    cellOptions() {
-      return {
-        onEachFeature: this.setCellStyle
-      }
-    },
-    parkOptions() {
-      return {
-        onEachFeature: this.bindParkTooltip
-      }
+    transportDuration() {
+      return this.config.transportDuration;
     }
   },
 
   methods: {
-    centerUpdate(center) {
-      this.center = center;
+    mapLoaded(event) {
+      this.map = event.map;
+      this.prepareParkPopup();
     },
-    zoomUpdate(zoom) {
-      this.zoom = zoom;
-    },
-    boundsUpdate(bounds) {
-      this.bounds = bounds;
-    },
-    setCellStyle(feature, layer) {
-      let opacity;
-
-      // When the transportMaxDuration value gets updated after creation, this change is not being applied yet…
-      // Have to find a way to re-run the onEachFeature function each time the value gets changed
-      if (feature.properties['API Testzellen Walking_duration'] <= this.transportMaxDuration * 60) {
-        opacity = 0.5;
-      } else {
-        opacity = 0.15;
-      }
-
-      layer.setStyle({
-        weight: 0,
-        fillColor: '#0000ff',
-        fillOpacity: opacity
+    prepareParkPopup() {
+      this.parkPopup = new this.mapbox.Popup({
+        closeButton: false,
+        closeOnClick: false
       });
-    },
-    bindParkTooltip(feature, layer) {
-      layer.bindTooltip(
-        feature.properties.NAMENR,
-        { permanent: false, sticky: false }
-      );
+
+      const vm = this;
+
+      this.map.on('mouseenter', 'parks', function(e) {
+        vm.map.getCanvas().style.cursor = 'pointer';
+ 
+        const coordinates = e.lngLat;
+        const content = e.features[0].properties.NAMENR;
+         
+        vm.parkPopup.setLngLat(coordinates).setHTML(content).addTo(vm.map);
+      });
+
+      this.map.on('mouseleave', 'parks', function() {
+        vm.map.getCanvas().style.cursor = '';
+        vm.parkPopup.remove();
+      });
     }
   },
 
-  created: function() {
-    // When map instance is created, set instance’s center and zoom values to those passed in as props
+  watch: {
+    transportDuration: function(newDuration) {
+      this.cellsLayer.filter = ['<=', 'API Testzellen Walking_duration', newDuration * 60];
+    }
+  },
+
+  created () {
+    // When component instance is created, set instance’s center and zoom values to those passed in as props
     this.center = this.initialCenter;
     this.zoom = this.initialZoom;
+
+    this.mapbox = Mapbox;
+    this.map = null;
   }
 }
 </script>
@@ -183,5 +185,9 @@ export default {
   right: 0;
   width: 100%;
   z-index: -1;
+}
+
+.map canvas:focus {
+  outline: none;
 }
 </style>

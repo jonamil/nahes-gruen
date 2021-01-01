@@ -22,7 +22,7 @@ import Map from './components/Map.vue';
 import MapConfiguration from './components/MapConfiguration.vue';
 
 import cells from './data/testcells.json';
-import parks from './data/parks.json';
+import parks from './data/testparks.json';
 
 export default {
   name: 'App',
@@ -39,8 +39,8 @@ export default {
       parks,
 
       // Initial location values for map
-      mapCenter: [52.517598, 13.388707],
-      mapZoom: 12,
+      mapCenter: [13.388707, 52.517598],
+      mapZoom: 11,
 
       // User-modifiable map configuration
       mapConfig: {

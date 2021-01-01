@@ -31,11 +31,11 @@
             min="1"
             max="30"
             step="1"
-            :value="sliderTransportDuration"
-            @input="updateSliderTransportDuration(parseInt($event.target.value))"
-            @change="$emit('update:transportDuration', parseInt($event.target.value))"
+            :value="transportDuration"
+            @input="$emit('update:transportDuration', parseInt($event.target.value))"
           >
-          {{ sliderTransportDuration }} min
+          <!-- @input="updateSliderTransportDuration(parseInt($event.target.value))" -->
+          {{ transportDuration }} min
         </div>
 
         <div v-if="transportMode === 'vbb'" class="field">
@@ -154,7 +154,7 @@ export default {
         }
       },
 
-      sliderTransportDuration: undefined,
+      // sliderTransportDuration: undefined,
       reverseParkRanking: false
     }
   },
@@ -183,9 +183,9 @@ export default {
   },
 
   methods: {
-    updateSliderTransportDuration(newDuration) {
-      this.sliderTransportDuration = newDuration;
-    },
+    // updateSliderTransportDuration(newDuration) {
+    //   this.sliderTransportDuration = newDuration;
+    // },
     formatNumber: function(number) {
       if (number) {
         return new Intl.NumberFormat('en-US', { maximumSignificantDigits: 6 }).format(number.toFixed(0));
@@ -196,7 +196,7 @@ export default {
   },
 
   created () {
-    this.sliderTransportDuration = this.transportDuration;
+    // this.sliderTransportDuration = this.transportDuration;
   }
 }
 </script>

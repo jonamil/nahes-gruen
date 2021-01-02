@@ -50,6 +50,10 @@ export default {
         qualityProperty: 'size'
       }
     }
+  },
+
+  created () {
+    document.title = 'Green Inclusion';
   }
 }
 </script>

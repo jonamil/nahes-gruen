@@ -225,6 +225,7 @@ export default {
   padding: 10px 12px 14px;
   border-radius: 3px;
   box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   background: #fff;
 }
 

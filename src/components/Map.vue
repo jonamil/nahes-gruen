@@ -1,5 +1,5 @@
 <template>
-  <MglMap 
+  <MglMap
     class="map"
     :accessToken="accessToken"
     :mapStyle="mapStyle"
@@ -7,6 +7,7 @@
     :zoom.sync="zoom"
     :minZoom="minZoom"
     :maxZoom="maxZoom"
+    :attribution-control="false"
     logo-position="bottom-left"
     @load="mapLoaded"
   >
@@ -21,8 +22,20 @@
       :source="parksSource"
       layerId="parks"
       :layer="parksLayer"
+      @mouseenter="showParkPopup"
+      @mouseleave="hideParkPopup"
     />
+    <MglPopup
+      :showed="parkPopup.visible"
+      :coordinates="parkPopup.coordinates"
+      :closeButton="false"
+      :closeOnClick="false"
+      :offset="[0, -5]"
+    >
+      {{ parkPopupName }}
+    </MglPopup>
     <MglNavigationControl position="bottom-left" />
+    <MglAttributionControl position="bottom-right" :compact="false" />
   </MglMap>
 </template>
 
@@ -33,8 +46,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import {
  MglMap,
  MglGeojsonLayer,
- MglNavigationControl
+ MglPopup,
+ MglNavigationControl,
+ MglAttributionControl
 } from 'vue-mapbox';
+
+import centroid from '@turf/centroid';
 
 export default {
   name: 'Map',
@@ -42,7 +59,9 @@ export default {
   components: {
     MglMap,
     MglGeojsonLayer,
-    MglNavigationControl
+    MglPopup,
+    MglNavigationControl,
+    MglAttributionControl
   },
 
   props: {
@@ -120,6 +139,13 @@ export default {
           'fill-color': '#00ff00',
           'fill-outline-color': 'transparent'
         }
+      },
+
+      // Data of current park popup
+      parkPopup: {
+        visible: false,
+        coordinates: [0, 0],
+        feature: undefined
       }
     }
   },
@@ -127,35 +153,32 @@ export default {
   computed: {
     transportDuration() {
       return this.config.transportDuration;
+    },
+    parkPopupName() {
+      if (this.parkPopup.feature) {
+        return this.parkPopup.feature.properties.NAMENR;
+      } else {
+        return '';
+      }
     }
   },
 
   methods: {
     mapLoaded(event) {
       this.map = event.map;
-      this.prepareParkPopup();
     },
-    prepareParkPopup() {
-      this.parkPopup = new this.mapbox.Popup({
-        closeButton: false,
-        closeOnClick: false
-      });
+    showParkPopup(event) {
+      this.map.getCanvas().style.cursor = 'pointer';
 
-      const vm = this;
+      const feature = event.mapboxEvent.features[0];
 
-      this.map.on('mouseenter', 'parks', function(e) {
-        vm.map.getCanvas().style.cursor = 'pointer';
- 
-        const coordinates = e.lngLat;
-        const content = e.features[0].properties.NAMENR;
-         
-        vm.parkPopup.setLngLat(coordinates).setHTML(content).addTo(vm.map);
-      });
-
-      this.map.on('mouseleave', 'parks', function() {
-        vm.map.getCanvas().style.cursor = '';
-        vm.parkPopup.remove();
-      });
+      this.parkPopup.visible = true;
+      this.parkPopup.coordinates = centroid(feature).geometry.coordinates;
+      this.parkPopup.feature = feature;
+    },
+    hideParkPopup() {
+      this.map.getCanvas().style.cursor = '';
+      this.parkPopup.visible = false;
     }
   },
 
@@ -171,7 +194,6 @@ export default {
     this.zoom = this.initialZoom;
 
     this.mapbox = Mapbox;
-    this.map = null;
   }
 }
 </script>
@@ -189,5 +211,34 @@ export default {
 
 .map canvas:focus {
   outline: none;
+}
+
+.map .mapboxgl-map {
+  font: inherit;
+  font-size: 14px;
+}
+
+.map .mapboxgl-ctrl-logo.mapboxgl-compact {
+  width: 88px;
+}
+
+.map .mapboxgl-ctrl-attrib {
+  padding: 2px 5px 3px;
+  font-size: 12px;
+  border-radius: 3px 0 0 0;
+  background-color: rgba(255,255,255,0.65);
+}
+
+.map .mapboxgl-popup, .map .mapboxgl-popup * {
+  pointer-events: none;
+}
+
+.map .mapboxgl-popup-content {
+  padding: 8px 10px 9px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.map .mapboxgl-popup-tip {
+  display: none;
 }
 </style>

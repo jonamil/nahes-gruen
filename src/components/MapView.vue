@@ -17,7 +17,7 @@ import ParkTooltip from './ParkTooltip.vue';
 import Mapbox from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { Deck/*, WebMercatorViewport*/ } from '@deck.gl/core';
+import { Deck } from '@deck.gl/core';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import { ContourLayer } from '@deck.gl/aggregation-layers';
 
@@ -57,7 +57,7 @@ export default {
           tourIndex: false,
           transportMode: 'walking',
           transportMinutes: 5,
-          parkProperty: false
+          parkProperty: 'none'
         }
       }
     },
@@ -79,10 +79,6 @@ export default {
 
   data () {
     return {
-      // Mapbox token and style (defined in .env file in root directory)
-      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: process.env.VUE_APP_MAPBOX_STYLE,
-
       // View state object for Deck.gl
       viewState: {
         longitude: null,
@@ -101,6 +97,9 @@ export default {
         tooltipOrientation: 'above'
       },
 
+      // Variable to store the timeout to hide the tooltip upon un-hovering a park
+      tooltipTimeout: null,
+
       // Pixel values for tooltip placement
       tooltipDimensions: {
         width: 214,
@@ -112,11 +111,14 @@ export default {
       },
 
       // For testing purposes
-      isobandsLayerType: 'contour'
+      isobandsLayerType: 'geojson'
     }
   },
 
   computed: {
+    contentView() {
+      return this.controlState.contentView;
+    },
     transportMinutes() {
       return this.controlState.transportMinutes;
     },
@@ -192,6 +194,7 @@ export default {
   methods: {
     initializeMapbox() {
       this.mapbox = new Mapbox.Map({
+        // Mapbox token and style defined in .env.local file in root directory
         accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
         style: process.env.VUE_APP_MAPBOX_STYLE,
         container: this.$refs.mapbox,
@@ -223,15 +226,23 @@ export default {
                 center: [viewState.longitude, viewState.latitude],
                 zoom: viewState.zoom,
                 pitch: viewState.pitch,
-                bearing: viewState.bearing,
+                bearing: viewState.bearing
             });
           }
         }
       });
     },
+    renderLayers(layers) {
+      this.deck.setProps({
+        layers: layers
+      });
+    },
     updateParkTooltip(info) {
       if (info.picked) {
         this.deck.setProps({ getCursor: ({ isDragging }) => isDragging ? 'grabbing' : 'pointer' });
+        
+        clearTimeout(this.tooltipTimeout);
+
         this.pickedPark.active = true;
         this.pickedPark.feature = info.object;
 
@@ -253,7 +264,10 @@ export default {
         this.$refs.tooltip.$el.style.transform = 'translate(' + x + 'rem, ' + y + 'rem)';
       } else {
         this.deck.setProps({ getCursor: ({ isDragging }) => isDragging ? 'grabbing' : 'grab' });
-        this.pickedPark.active = false;
+        
+        this.tooltipTimeout = setTimeout(() => {
+          this.pickedPark.active = false;
+        }, 100);
       }
     }
   },
@@ -261,9 +275,15 @@ export default {
   watch: {
     // Whenever the computed deckLayers property changes, pass these new layers to Deck.gl
     deckLayers: function(layers) {
-      this.deck.setProps({
-        layers: layers
-      });
+      if (this.controlState.contentView === 'map') {
+        this.renderLayers(layers);
+      }
+    },
+    // When the content view switches back to the map, pass the current deckLayers to Deck.gl
+    contentView: function(contentView) {
+      if (contentView === 'map') {
+        this.renderLayers(this.deckLayers);
+      }
     }
   },
 

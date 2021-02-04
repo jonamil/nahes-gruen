@@ -95,12 +95,19 @@
     </div>
     <div class="floating bottom">
     </div>
+    <ExplanationModal :currentModal.sync="currentModal" />
   </div>
 </template>
 
 <script>
+import ExplanationModal from './ExplanationModal.vue'
+
 export default {
   name: 'Controls',
+
+  components: {
+    ExplanationModal
+  },
 
   props: {
     contentView: {

@@ -94,22 +94,34 @@
       </div>
     </div>
     <div class="floating bottom">
+      <TourWindow
+        :tourStops="tourStops"
+        :tourIndex="tourIndex"
+        v-on:update:tourIndex="$emit('update:tourIndex', $event);"
+      />
     </div>
     <ExplanationModal :currentModal.sync="currentModal" />
   </div>
 </template>
 
 <script>
+import TourWindow from './TourWindow.vue'
 import ExplanationModal from './ExplanationModal.vue'
 
 export default {
   name: 'Controls',
 
   components: {
+    TourWindow,
     ExplanationModal
   },
 
   props: {
+    tourStops: {
+      type: Array,
+      default: () => []
+    },
+
     contentView: {
       type: String,
       default: 'map'
@@ -181,6 +193,18 @@ export default {
   },
 
   methods: {
+    
+  },
+
+  watch: {
+    tourIndex: function(tourIndex) {
+      if (tourIndex !== false) {
+        this.$emit('update:contentView', this.tourStops[tourIndex].controlState.contentView);
+        this.$emit('update:transportMode', this.tourStops[tourIndex].controlState.transportMode);
+        this.$emit('update:transportMinutes', this.tourStops[tourIndex].controlState.transportMinutes);
+        this.$emit('update:parkProperty', this.tourStops[tourIndex].controlState.parkProperty);
+      }
+    }
   },
 
   mounted () {

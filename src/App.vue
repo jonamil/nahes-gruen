@@ -5,6 +5,7 @@
       :isobands="isobands"
       :parks="parks"
       :water="water"
+      :tourStops="tourStops"
       :controlState="controlState"
       :mapState="mapState"
     />
@@ -12,6 +13,7 @@
       :class="controlState.contentView !== 'district' ? 'hidden' : ''"
     />
     <Controls
+      :tourStops="tourStops"
       v-bind.sync="controlState"
     />
   </div>
@@ -28,6 +30,7 @@ import cells from './data/cells.json';
 import isobands from './data/isobands.json';
 import parks from './data/parks.json';
 import water from './data/water.json';
+import tourStops from './data/tour-stops.json';
 
 export default {
   name: 'App',
@@ -45,6 +48,7 @@ export default {
       isobands,
       parks,
       water,
+      tourStops,
 
       // Control state whose properties are synced with the Controls component
       controlState: {

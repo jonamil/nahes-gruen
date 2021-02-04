@@ -47,6 +47,12 @@ export default {
       default: () => {}
     },
 
+    // Imported array of tour stops
+    tourStops: {
+      type: Array,
+      default: () => []
+    },
+
     // Control state manipulated by the interface
     controlState: {
       type: Object,

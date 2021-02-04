@@ -1,7 +1,23 @@
 <template>
   <div :class="'tooltip ' + pickedPark.tooltipOrientation">
     <div class="inner">
-      <h3>{{ parkName }}</h3>
+      <h2>{{ parkName }}</h2>
+      <span>{{ parkProperties.ortsteil }}</span>
+      <div class="property size">
+        <h3>Fläche</h3>
+        <span>{{ parkSize }} ha</span>
+      </div>
+      <div :class="'property noise' + (controlState.parkProperty === 'noise' ? ' active' : '')">
+        <h3>Verkehrslärm</h3>
+        <div class="rating">
+          <div :class="parkProperties.noise >= ratingThresholds.noise[0] ? 'filled' : ''"></div>
+          <div :class="parkProperties.noise >= ratingThresholds.noise[1] ? 'filled' : ''"></div>
+          <div :class="parkProperties.noise >= ratingThresholds.noise[2] ? 'filled' : ''"></div>
+          <div :class="parkProperties.noise >= ratingThresholds.noise[3] ? 'filled' : ''"></div>
+          <div :class="parkProperties.noise >= ratingThresholds.noise[4] ? 'filled' : ''"></div>
+        </div>
+        <span>{{ parkNoise }} db</span>
+      </div>
     </div>
   </div>
 </template>
@@ -14,6 +30,22 @@ export default {
     pickedPark: {
       type: Object,
       default: () => {}
+    },
+    controlState: {
+      type: Object,
+      default: () => {
+        return {
+          parkProperty: 'none'
+        }
+      }
+    }
+  },
+
+  data () {
+    return {
+      ratingThresholds: {
+        noise: [0, 50, 55, 60, 65]
+      }
     }
   },
 
@@ -33,6 +65,12 @@ export default {
       } else {
         return 'Waldgebiet';
       }
+    },
+    parkSize() {
+      return new Intl.NumberFormat('de-DE').format((this.parkProperties.size / 10000).toFixed(1));
+    },
+    parkNoise() {
+      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise);
     }
   }
 }
@@ -41,24 +79,24 @@ export default {
 <style>
 .tooltip {
   position: relative;
-  width: 214px;
-  height: 220px;
+  width: 214rem;
+  height: 212rem;
   pointer-events: none;
   z-index: 50;
 }
 
 .tooltip .inner {
   position: absolute;
+  box-sizing: border-box;
   bottom: 0;
   width: 100%;
-  min-height: 200px;
-  box-sizing: border-box;
-  padding: 16px 20px 20px;
-  border-radius: 20px;
+  /*min-height: 200rem;*/
+  padding: 16rem 20rem 17rem;
+  border-radius: 25rem;
   background: #FCFBF7;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.03),
-              0px 4px 4px rgba(0,0,0,0.03),
-              0px 2px 2px rgba(0,0,0,0.03);
+  box-shadow: 0rem 8rem 8rem rgba(0,0,0,0.03),
+              0rem 4rem 4rem rgba(0,0,0,0.03),
+              0rem 2rem 2rem rgba(0,0,0,0.03);
 }
 
 .tooltip.below .inner {
@@ -66,10 +104,118 @@ export default {
   bottom: auto;
 }
 
-.tooltip h3 {
+.tooltip h2 {
   margin: 0;
-  font-size: 14px;
-  font-weight: 700;
   text-align: center;
+  font-size: 14rem;
+  font-weight: 700;
+}
+
+.tooltip h2 + span, .tooltip h3 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+}
+
+.tooltip h2 + span {
+  display: block;
+  margin: 5rem 0 19rem;
+  text-align: center;
+  font-size: 11rem;
+  color: rgba(0,0,0,0.3);
+}
+
+.tooltip .property {
+  margin-top: 15rem;
+}
+
+.tooltip .property:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.tooltip .property h3 {
+  margin: 0 0 1rem;
+  font-size: 12rem;
+  color: rgba(0,0,0,0.65);
+}
+
+.tooltip .property.noise.active h3 {
+  color: #E0580C;
+}
+
+.tooltip .property span {
+  font-size: 14rem;
+  font-weight: 600;
+}
+
+.tooltip .property .rating {
+  float: left;
+  margin-top: 4rem;
+}
+
+.tooltip .property .rating div {
+  display: inline-block;
+  width: 14rem;
+  height: 14rem;
+  margin-right: 6rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5rem rgba(0,0,0,0.15);
+}
+
+.tooltip .property.noise.active .rating div {
+  box-shadow: inset 0 0 0 1.5rem rgba(224,88,12,0.2); 
+}
+
+.tooltip .property .rating div.filled {
+  background: rgba(102,102,102,0.44);
+  box-shadow: none !important;
+}
+
+.tooltip .property .rating div:nth-child(2).filled {
+  background: rgba(102,102,102,0.58);
+}
+
+.tooltip .property .rating div:nth-child(3).filled {
+  background: rgba(102,102,102,0.72);
+}
+
+.tooltip .property .rating div:nth-child(4).filled {
+  background: rgba(102,102,102,0.86);
+}
+
+.tooltip .property .rating div:nth-child(5).filled {
+  background: rgba(102,102,102,1);
+}
+
+.tooltip .property.noise.active .rating div.filled {
+  background: #F7D59A;
+}
+
+.tooltip .property.noise.active .rating div:nth-child(2).filled {
+  background: #F7C27C;
+}
+
+.tooltip .property.noise.active .rating div:nth-child(3).filled {
+  background: #F4A24F;
+}
+
+.tooltip .property.noise.active .rating div:nth-child(4).filled {
+  background: #EB802E;
+}
+
+.tooltip .property.noise.active .rating div:nth-child(5).filled {
+  background: #E0580C;
+}
+
+.tooltip .property .rating + span {
+  float: right;
+  display: inline-block;
+  margin-top: 4rem;
+}
+
+.tooltip .property.noise.active .rating + span {
+  color: #E0580C;
 }
 </style>

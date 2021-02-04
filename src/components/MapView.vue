@@ -5,6 +5,7 @@
     <ParkTooltip
       ref="tooltip"
       :pickedPark="pickedPark"
+      :controlState="controlState"
       v-show="pickedPark.active"
     />
   </div>
@@ -19,8 +20,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { Deck/*, WebMercatorViewport*/ } from '@deck.gl/core';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import { ContourLayer } from '@deck.gl/aggregation-layers';
-
-// import centroid from '@turf/centroid';
 
 export default {
   name: 'MapView',
@@ -105,10 +104,11 @@ export default {
       // Pixel values for tooltip placement
       tooltipDimensions: {
         width: 214,
-        height: 220,
-        topOffset: 8,
-        bottomOffset: 24,
-        boundaryDistance: 10
+        height: 212,
+        topCursorOffset: 8,
+        bottomCursorOffset: 24,
+        topBoundaryDistance: 10,
+        sideBoundaryDistance: 10
       },
 
       // For testing purposes
@@ -138,10 +138,10 @@ export default {
         getLineWidth: 0,
         getFillColor: park => {
           if (this.parkProperty === 'noise') {
-            if      (park.properties.noise > 65) return [224,88,12,255];
-            else if (park.properties.noise > 60) return [235,128,46,255];
-            else if (park.properties.noise > 55) return [244,162,79,255];
-            else if (park.properties.noise > 50) return [247,194,124,255];
+            if      (park.properties.noise >= 65) return [224,88,12,255];
+            else if (park.properties.noise >= 60) return [235,128,46,255];
+            else if (park.properties.noise >= 55) return [244,162,79,255];
+            else if (park.properties.noise >= 50) return [247,194,124,255];
             else                                 return [247,213,154,255];
           } else {
             return [41, 149, 90, 255];
@@ -202,6 +202,13 @@ export default {
         pitch: this.viewState.pitch,
         bearing: this.viewState.bearing
       });
+
+      // Accessibility: remove Mapbox attribution links from elements accessible via tab/keyboard
+      this.mapbox.on('idle', () => {
+        this.$refs.mapbox.getElementsByTagName('a').forEach(function(element) {
+          element.setAttribute('tabIndex', -1);
+        });
+      })
     },
     initializeDeck() {
       this.deck = new Deck({
@@ -228,29 +235,22 @@ export default {
         this.pickedPark.active = true;
         this.pickedPark.feature = info.object;
 
-        // const parkCentroid = centroid(info.object).geometry.coordinates;
-        // console.log(parkCentroid);
-
-        // const viewport = new WebMercatorViewport(this.viewState);
-        // const centroidPixels = viewport.project(parkCentroid);
-        // console.log(centroidPixels);
-
         let x = info.x - this.tooltipDimensions.width / 2;
-        if (x < this.tooltipDimensions.boundaryDistance) {
-          x = this.tooltipDimensions.boundaryDistance;
-        } else if (x > this.deck.width - this.tooltipDimensions.width - this.tooltipDimensions.boundaryDistance) {
-          x = this.deck.width - this.tooltipDimensions.width - this.tooltipDimensions.boundaryDistance;
+        if (x < this.tooltipDimensions.sideBoundaryDistance) {
+          x = this.tooltipDimensions.sideBoundaryDistance;
+        } else if (x > this.deck.width - this.tooltipDimensions.width - this.tooltipDimensions.sideBoundaryDistance) {
+          x = this.deck.width - this.tooltipDimensions.width - this.tooltipDimensions.sideBoundaryDistance;
         }
         
-        let y = info.y - this.tooltipDimensions.height - this.tooltipDimensions.topOffset;
-        if (y < 0) {
-          y = info.y + this.tooltipDimensions.bottomOffset;
+        let y = info.y - this.tooltipDimensions.height - this.tooltipDimensions.topCursorOffset;
+        if (y < this.tooltipDimensions.topBoundaryDistance) {
+          y = info.y + this.tooltipDimensions.bottomCursorOffset;
           this.pickedPark.tooltipOrientation = 'below';
         } else {
           this.pickedPark.tooltipOrientation = 'above';
         }
 
-        this.$refs.tooltip.$el.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+        this.$refs.tooltip.$el.style.transform = 'translate(' + x + 'rem, ' + y + 'rem)';
       } else {
         this.deck.setProps({ getCursor: ({ isDragging }) => isDragging ? 'grabbing' : 'grab' });
         this.pickedPark.active = false;
@@ -296,7 +296,6 @@ export default {
 
 #mapbox {
   font: inherit;
-  font-size: 14px;
   background: #EBE3DB;
 }
 
@@ -305,10 +304,14 @@ export default {
 }
 
 #mapbox .mapboxgl-ctrl-attrib {
-  padding: 2px 5px;
-  font-size: 12px;
-  border-radius: 3px 0 0 0;
+  padding: 2rem 5rem;
+  font-size: 12rem;
+  border-radius: 3rem 0 0 0;
   background-color: rgba(235,227,219,0.8);
+}
+
+#mapbox .mapboxgl-ctrl-attrib a {
+  color: rgba(0,0,0,0.65);
 }
 
 #mapbox .mapboxgl-ctrl-attrib a:hover {

@@ -11,5 +11,9 @@ export default {
 </script>
 
 <style>
-
+.district-view {
+  /*position: relative;*/
+  background: #EBE3DB;
+  z-index: 50;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="controlState.introScreen ? 'intro' : ''">
     <MapView
       :cells="cells"
       :isobands="isobands"
@@ -9,7 +9,7 @@
       :mapState="mapState"
     />
     <DistrictView
-      v-if="controlState.view === 'district'"
+      :class="controlState.contentView !== 'district' ? 'hidden' : ''"
     />
     <Controls
       v-bind.sync="controlState"
@@ -85,11 +85,16 @@ export default {
 @import './assets/normalize.css';
 @import './assets/fonts.css';
 
+html {
+  font-size: 6.25%;
+}
+
 #app {
   width: 100%;
   height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-size: 16px;
+  font-size: 16rem;
+  font-weight: 500;
   line-height: 1.25;
   color: rgba(0,0,0,0.8);
   background: #EBE3DB;
@@ -99,7 +104,13 @@ export default {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 250px;
+  left: 250rem;
   right: 0;
+  transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
+}
+
+.content-view.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 </style>

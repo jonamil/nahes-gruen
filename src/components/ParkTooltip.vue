@@ -5,7 +5,7 @@
       <span>{{ parkProperties.ortsteil }}</span>
       <div class="property size">
         <h3>Fläche</h3>
-        <span>{{ parkSize }} ha</span>
+        <span>{{ parkSize }}</span>
       </div>
       <div :class="'property noise' + (controlState.parkProperty === 'noise' ? ' active' : '')">
         <h3>Verkehrslärm</h3>
@@ -16,7 +16,18 @@
           <div :class="parkProperties.noise >= ratingThresholds.noise[3] ? 'filled' : ''"></div>
           <div :class="parkProperties.noise >= ratingThresholds.noise[4] ? 'filled' : ''"></div>
         </div>
-        <span>{{ parkNoise }} db</span>
+        <span>{{ parkNoise }}</span>
+      </div>
+      <div :class="'property vegetation' + (controlState.parkProperty === 'vegetation' ? ' active' : '')">
+        <h3>Vegetation</h3>
+        <div class="rating">
+          <div :class="parkProperties.veg > ratingThresholds.vegetation[0] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg > ratingThresholds.vegetation[1] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg > ratingThresholds.vegetation[2] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg > ratingThresholds.vegetation[3] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg > ratingThresholds.vegetation[4] ? 'filled' : ''"></div>
+        </div>
+        <span>{{ parkVegetation }}</span>
       </div>
     </div>
   </div>
@@ -29,7 +40,11 @@ export default {
   props: {
     pickedPark: {
       type: Object,
-      default: () => {}
+      default: () => {
+        return {
+          feature: false
+        }
+      }
     },
     controlState: {
       type: Object,
@@ -44,7 +59,8 @@ export default {
   data () {
     return {
       ratingThresholds: {
-        noise: [0, 50, 55, 60, 65]
+        noise: [0, 50, 55, 60, 65],
+        vegetation: [0, 3.4, 6.7, 10.7, 15.5]
       }
     }
   },
@@ -53,7 +69,14 @@ export default {
     parkProperties() {
       if (this.pickedPark.feature === false) {
         return {
-          name: ''
+          name: '',
+          ortsteil: '',
+          size: 0,
+          noise: 0,
+          veg: 0,
+          benches: 0,
+          toilets: 0,
+          playgrounds: 0
         }
       } else {
         return this.pickedPark.feature.properties;
@@ -67,10 +90,17 @@ export default {
       }
     },
     parkSize() {
-      return new Intl.NumberFormat('de-DE').format((this.parkProperties.size / 10000).toFixed(1));
+      return new Intl.NumberFormat('de-DE').format(this.parkProperties.size.toFixed(1)) + ' ha';
     },
     parkNoise() {
-      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise);
+      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise) + ' db';
+    },
+    parkVegetation() {
+      if (this.parkProperties.veg !== null) {
+        return new Intl.NumberFormat('de-DE').format(this.parkProperties.veg.toFixed(1)) + ' m³/m²';
+      } else {
+        return 'k.A.';
+      }
     }
   }
 }
@@ -79,10 +109,11 @@ export default {
 <style>
 .tooltip {
   position: relative;
-  width: 214rem;
-  height: 212rem;
+  width: 224rem;
+  height: 250rem;
   pointer-events: none;
   z-index: 50;
+  /*background: #f00;*/
 }
 
 .tooltip .inner {
@@ -126,13 +157,17 @@ export default {
 }
 
 .tooltip .property {
-  margin-top: 15rem;
+  margin-top: 14rem;
 }
 
 .tooltip .property:after {
   display: table;
   content: '';
   clear: both;
+}
+
+.tooltip .property.size {
+  margin-bottom: 15rem;
 }
 
 .tooltip .property h3 {
@@ -143,6 +178,10 @@ export default {
 
 .tooltip .property.noise.active h3 {
   color: #E0580C;
+}
+
+.tooltip .property.vegetation.active h3 {
+  color: #29955A;
 }
 
 .tooltip .property span {
@@ -162,10 +201,6 @@ export default {
   margin-right: 6rem;
   border-radius: 50%;
   box-shadow: inset 0 0 0 1.5rem rgba(0,0,0,0.15);
-}
-
-.tooltip .property.noise.active .rating div {
-  box-shadow: inset 0 0 0 1.5rem rgba(224,88,12,0.2); 
 }
 
 .tooltip .property .rating div.filled {
@@ -189,6 +224,18 @@ export default {
   background: rgba(102,102,102,1);
 }
 
+.tooltip .property .rating + span {
+  float: right;
+  display: inline-block;
+  margin-top: 4rem;
+}
+
+/* Custom noise rating styles */
+
+.tooltip .property.noise.active .rating div {
+  box-shadow: inset 0 0 0 1.5rem rgba(224,88,12,0.2); 
+}
+
 .tooltip .property.noise.active .rating div.filled {
   background: #F7D59A;
 }
@@ -209,13 +256,21 @@ export default {
   background: #E0580C;
 }
 
-.tooltip .property .rating + span {
-  float: right;
-  display: inline-block;
-  margin-top: 4rem;
-}
-
 .tooltip .property.noise.active .rating + span {
   color: #E0580C;
+}
+
+/* Custom vegetation rating styles */
+
+.tooltip .property.vegetation.active .rating div {
+  box-shadow: inset 0 0 0 1.5rem rgba(41,149,90,0.25);
+}
+
+.tooltip .property.vegetation.active .rating div.filled {
+  background: #29955A;
+}
+
+.tooltip .property.vegetation.active .rating + span {
+  color: #29955A;
 }
 </style>

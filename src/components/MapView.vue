@@ -92,8 +92,8 @@ export default {
 
       // Pixel values for tooltip placement
       tooltipDimensions: {
-        width: 214,
-        height: 212,
+        width: 224,
+        height: 250,
         topCursorOffset: 8,
         bottomCursorOffset: 24,
         topBoundaryDistance: 10,

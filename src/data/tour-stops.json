@@ -11,36 +11,36 @@
 			"parkProperty": "none"
 		},
 		"mapState": {
-			"longitude": 0,
-			"latitude": 0,
-			"zoom": 11
+			"longitude": 13.378707,
+        	"latitude": 52.517598,
+			"zoom": 10.25
 		},
 		"highlightedSections": [
 			"reachability"
 		]
 	},
 	{
-		"title": "Noch ein Titel der Station",
+		"title": "Hier geht es um Verkehrslärm",
 		"paragraphs": [
 			"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 		],
 		"controlState": {
 			"contentView": "map",
 			"transportMode": "walking",
-			"transportMinutes": 6,
+			"transportMinutes": 3,
 			"parkProperty": "noise"
 		},
 		"mapState": {
-			"longitude": 0,
-			"latitude": 0,
-			"zoom": 11
+			"longitude": 13.528707,
+        	"latitude": 52.557598,
+			"zoom": 12.5
 		},
 		"highlightedSections": [
 			"reachability"
 		]
 	},
 	{
-		"title": "Letzter Titel der Station",
+		"title": "Und Hopps, rüber zur Bezirksansicht",
 		"paragraphs": [
 			"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 		],
@@ -49,11 +49,6 @@
 			"transportMode": "cycling",
 			"transportMinutes": 10,
 			"parkProperty": "noise"
-		},
-		"mapState": {
-			"longitude": 0,
-			"latitude": 0,
-			"zoom": 11
 		},
 		"highlightedSections": [
 			"reachability"

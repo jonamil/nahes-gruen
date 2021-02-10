@@ -17,7 +17,7 @@ import ParkTooltip from './ParkTooltip.vue';
 import Mapbox from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { Deck } from '@deck.gl/core';
+import { Deck, FlyToInterpolator } from '@deck.gl/core';
 import { GeoJsonLayer } from '@deck.gl/layers';
 
 export default {
@@ -108,6 +108,9 @@ export default {
   computed: {
     contentView() {
       return this.controlState.contentView;
+    },
+    tourIndex() {
+      return this.controlState.tourIndex;
     },
     transportMinutes() {
       return this.controlState.transportMinutes;
@@ -270,6 +273,26 @@ export default {
     contentView: function(contentView) {
       if (contentView === 'map') {
         this.renderLayers(this.deckLayers);
+      }
+    },
+    tourIndex: function(tourIndex) {
+      if (tourIndex !== false && 'mapState' in this.tourStops[tourIndex]) {
+        const destinationViewState = this.tourStops[tourIndex].mapState;
+        const currentViewState = this.deck.viewState;
+
+        this.deck.setProps({
+          initialViewState: {
+            longitude: destinationViewState.longitude,
+            latitude: destinationViewState.latitude,
+            zoom: destinationViewState.zoom,
+            pitch: currentViewState.pitch,
+            bearing: currentViewState.bearing,
+            minZoom: currentViewState.minZoom,
+            maxZoom: currentViewState.maxZoom,
+            transitionDuration: 1000,
+            transitionInterpolator: new FlyToInterpolator()
+          }
+        });
       }
     }
   },

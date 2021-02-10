@@ -19,7 +19,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { Deck } from '@deck.gl/core';
 import { GeoJsonLayer } from '@deck.gl/layers';
-import { ContourLayer } from '@deck.gl/aggregation-layers';
 
 export default {
   name: 'MapView',
@@ -30,10 +29,6 @@ export default {
 
   props: {
     // Imported GeoJson content
-    cells: {
-      type: Array,
-      default: () => []
-    },
     isobands: {
       type: Object,
       default: () => {}
@@ -68,8 +63,8 @@ export default {
       }
     },
 
-    // Initial view state of the map (assigned to the viewState variable when instance is created)
-    mapState: {
+    // Initial view state of the map
+    initialMapState: {
       type: Object,
       default: () => {
         return {
@@ -85,17 +80,6 @@ export default {
 
   data () {
     return {
-      // View state object for Deck.gl
-      viewState: {
-        longitude: null,
-        latitude: null,
-        zoom: null,
-        minZoom: 8,
-        maxZoom: 18,
-        pitch: 0,
-        bearing: 0
-      },
-
       // Most recently picked park
       pickedPark: {
         active: false,
@@ -132,51 +116,46 @@ export default {
       return this.controlState.parkProperty;
     },
     waterLayer() {
-      return new GeoJsonLayer({
-        id: 'water',
-        data: this.water,
-        getLineWidth: 0,
-        getFillColor: [64, 106, 160, 255]
-      });
-    },
-    parksLayer() {
-      return new GeoJsonLayer({
-        id: 'parks',
-        data: this.parks,
-        getLineWidth: 0,
-        getFillColor: park => {
-          if (this.parkProperty === 'noise') {
-            if      (park.properties.noise >= 65) return [224,88,12,255];
-            else if (park.properties.noise >= 60) return [235,128,46,255];
-            else if (park.properties.noise >= 55) return [244,162,79,255];
-            else if (park.properties.noise >= 50) return [247,194,124,255];
-            else                                 return [247,213,154,255];
-          } else {
-            return [41, 149, 90, 255];
-          }
-        },
-        updateTriggers: {
-          getFillColor: this.parkProperty
-        },
-        pickable: true,
-        onHover: (info) => this.updateParkTooltip(info)
-      })
-    },
-    isobandsLayer() {
-      if (this.isobandsLayerType === 'contour') {
-        return new ContourLayer({
-          id: 'isobands',
-          data: this.cells,
-          cellSize: 150.5,
-          aggregation: 'MAX',
-          getPosition: cell => [cell.x, cell.y],
-          getWeight: cell => cell.duration / (this.transportMinutes * 60) + 1,
-          contours: [{ threshold: [1, 2], color: [201, 254, 83, 204] }],
-          updateTriggers: {
-            getWeight: this.transportMinutes
-          }
+      if (this.water) {
+        return new GeoJsonLayer({
+          id: 'water',
+          data: this.water,
+          getLineWidth: 0,
+          getFillColor: [64, 106, 160, 255]
         });
       } else {
+        return null;
+      }
+    },
+    parksLayer() {
+      if (this.parks) {
+        return new GeoJsonLayer({
+          id: 'parks',
+          data: this.parks,
+          getLineWidth: 0,
+          getFillColor: park => {
+            if (this.parkProperty === 'noise') {
+              if      (park.properties.noise >= 65) return [224,88,12,255];
+              else if (park.properties.noise >= 60) return [235,128,46,255];
+              else if (park.properties.noise >= 55) return [244,162,79,255];
+              else if (park.properties.noise >= 50) return [247,194,124,255];
+              else                                 return [247,213,154,255];
+            } else {
+              return [41, 149, 90, 255];
+            }
+          },
+          updateTriggers: {
+            getFillColor: this.parkProperty
+          },
+          pickable: true,
+          onHover: (info) => this.updateParkTooltip(info)
+        });
+      } else {
+        return null;
+      }
+    },
+    isobandsLayer() {
+      if (this.isobands) {
         return new GeoJsonLayer({
           id: 'isobands',
           data: this.isobands,
@@ -186,6 +165,8 @@ export default {
             getFillColor: this.transportMinutes
           }
         });
+      } else {
+        return null;
       }
     },
     deckLayers() {
@@ -206,18 +187,18 @@ export default {
         container: this.$refs.mapbox,
         interactive: false,
 
-        center: [this.viewState.longitude, this.viewState.latitude],
-        zoom: this.viewState.zoom,
-        pitch: this.viewState.pitch,
-        bearing: this.viewState.bearing
+        center: [this.initialMapState.longitude, this.initialMapState.latitude],
+        zoom: this.initialMapState.zoom,
+        pitch: this.initialMapState.pitch,
+        bearing: this.initialMapState.bearing
       });
 
       // Accessibility: remove Mapbox attribution links from elements accessible via tab/keyboard
-      this.mapbox.on('idle', () => {
-        this.$refs.mapbox.getElementsByTagName('a').forEach(function(element) {
-          element.setAttribute('tabIndex', -1);
-        });
-      })
+      // this.mapbox.on('idle', () => {
+      //   this.$refs.mapbox.getElementsByTagName('a').forEach(function(element) {
+      //     element.setAttribute('tabIndex', -1);
+      //   });
+      // })
     },
     initializeDeck() {
       this.deck = new Deck({
@@ -225,7 +206,7 @@ export default {
         controller: true,
         layers: this.deckLayers,
         
-        initialViewState: this.viewState,
+        initialViewState: this.initialMapState,
         onViewStateChange: ({ viewState }) => {
           if (this.mapbox !== null) {
             this.mapbox.jumpTo({
@@ -294,10 +275,7 @@ export default {
   },
 
   created () {
-    // Set the viewState data variable to the initial map state passed in as a prop
-    this.viewState = this.mapState;
-
-    // Create variables for Mapbox and Deck.gl instances, which are set when component is mounted
+    // Create variables for Mapbox and Deck.gl instances, which are populated when component is mounted
     this.mapbox = null;
     this.deck = null;
   },

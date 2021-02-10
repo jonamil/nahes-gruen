@@ -1,13 +1,15 @@
 <template>
   <div id="app" :class="controlState.introScreen ? 'intro' : ''">
     <MapView
-      :cells="cells"
       :isobands="isobands"
       :parks="parks"
       :water="water"
       :tourStops="tourStops"
       :controlState="controlState"
-      :mapState="mapState"
+      :initialMapState="initialMapState"
+    />
+    <LoadingView
+      :class="loadingComplete ? 'hidden' : ''"
     />
     <DistrictView
       :class="controlState.contentView !== 'district' ? 'hidden' : ''"
@@ -22,14 +24,11 @@
 <script>
 // Main components
 import MapView from './components/MapView.vue';
+import LoadingView from './components/LoadingView.vue';
 import DistrictView from './components/DistrictView.vue';
 import Controls from './components/Controls.vue';
 
-// JSON data
-import cells from './data/cells.json';
-import isobands from './data/isobands.json';
-import parks from './data/parks.json';
-import water from './data/water.json';
+// Tour stops JSON
 import tourStops from './data/tour-stops.json';
 
 export default {
@@ -37,17 +36,19 @@ export default {
 
   components: {
     MapView,
+    LoadingView,
     DistrictView,
     Controls
   },
 
   data () {
     return {
-      // Imported JSON data
-      cells,
-      isobands,
-      parks,
-      water,
+      // Variables for JSON geodata, which are populated once data is fetched
+      isobands: null,
+      parks: null,
+      water: null,
+
+      // Statically imported tour stops
       tourStops,
 
       // Control state whose properties are synced with the Controls component
@@ -67,20 +68,63 @@ export default {
       },
 
       // Initial view state of the map
-      mapState: {
+      initialMapState: {
         longitude: 13.388707,
         latitude: 52.517598,
-        zoom: 11,
+        zoom: 12,
         pitch: 0,
         bearing: 0,
         minZoom: 10,
         maxZoom: 16
+      },
+
+      loadingComplete: false
+    }
+  },
+
+  computed: {
+    dataFetched() {
+      if (this.isobands && this.parks && this.water) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
+
+  methods: {
+    // Once JSON source is fetched, assign its contents to a data variable with the same name
+    async fetchJSON(source) {
+      try {
+        const response = await fetch('./geodata/' + source + '.json');
+        const data = await response.json();
+        this[source] = data;
+      } catch {
+        this.[source] = null;
+      }
+    }
+  },
+
+  watch: {
+    dataFetched: function(fetched) {
+      if (fetched) {
+        setTimeout(() => this.loadingComplete = true, 2000);
       }
     }
   },
 
   created () {
     document.title = 'Nahes Grün, Fernes Grün';
+
+    // Asynchronously fetch each geodata source
+    ['isobands', 'parks', 'water'].forEach(source => {
+      this.fetchJSON(source);
+    });
+
+    // If the intro screen was hidden during a previous visit, load straight into the regular view
+    if (window.localStorage.getItem('introScreen') === 'false') {
+      this.controlState.introScreen = false;
+    }
   }
 }
 </script>

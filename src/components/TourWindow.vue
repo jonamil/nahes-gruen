@@ -159,10 +159,6 @@ export default {
 }
 
 .tour .navigation button {
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  box-sizing: border-box;
   padding: 0 16rem;
   font-size: 12rem;
   font-weight: 600;
@@ -171,14 +167,6 @@ export default {
   border-radius: 17rem;
   color: rgba(0,0,0,0.65);
   background: rgba(0,0,0,0.06);
-}
-
-.tour .navigation button:focus {
-  outline: none;
-}
-
-.tour .navigation button:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
 }
 
 .tour .navigation button.skip {

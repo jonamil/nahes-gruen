@@ -5,7 +5,7 @@
     @keydown.esc="hideModal"
   >
     <div ref="window" class="window">
-      <button title="Schließen" @click="hideModal" />
+      <button ref="closeButton" title="Schließen" @click="hideModal" />
       <h3>Erläuterung</h3>
       <h1>{{ currentModalContent.title }}</h1>
       <p
@@ -56,8 +56,13 @@ export default {
 
   mounted () {
     document.addEventListener('keydown', event => {
-      if (this.currentModal && event.keyCode === 27) {
-        this.hideModal();
+      if (this.currentModal) {
+        if (event.keyCode === 27) {
+          this.hideModal();
+        } else if (event.keyCode === 9) {
+          this.$refs.closeButton.focus();
+          event.preventDefault();
+        }
       }
     });
   }
@@ -75,6 +80,7 @@ export default {
   right: 0;
   background: rgba(0,0,0,0.6);
   transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
+  z-index: 300;
 }
 
 .modal.visible {
@@ -89,7 +95,7 @@ export default {
   top: 50%;
   left: 50%;
   width: 75vw;
-  max-width: 600rem;
+  max-width: 540rem;
   max-height: 75vh;
   /*margin: -200rem 0 0 -300rem;*/
   padding: 25rem;
@@ -107,11 +113,7 @@ export default {
 }
 
 .modal .window button {
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
   position: absolute;
-  box-sizing: border-box;
   top: 12rem;
   right: 12rem;
   width: 28rem;
@@ -122,16 +124,8 @@ export default {
   border: 2rem solid rgba(0,0,0,0.1);
 }
 
-.modal .window button:focus {
-  outline: none;
-}
-
-.modal .window button:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
-}
-
 .modal .window h3 {
-  margin: -1rem 0 0;
+  margin: -2rem 0 0;
   font-size: 12rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -140,15 +134,15 @@ export default {
 }
 
 .modal .window h1 {
-  margin: 3rem 0 -2rem;
-  font-size: 18rem;
+  margin: 2rem 0 -3rem;
+  font-size: 16rem;
   /*font-weight: 700;*/
 }
 
 .modal .window p {
-  margin: 16rem 0 0;
-  font-size: 14rem;
-  line-height: 1.35;
+  margin: 17rem 0 -1rem;
+  font-size: 12rem;
+  line-height: 1.4;
 }
 
 .modal .window p + p {

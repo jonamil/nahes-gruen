@@ -56,7 +56,7 @@ export default {
         // Currently visible content view
         contentView: 'map',
         // Whether the intro screen is visible inside the Controls component
-        introScreen: false,
+        introScreen: true,
         // Index of the current tour stop (if the tour is not running, this is false)
         tourIndex: false,
         // Currently selected transport mode

@@ -1,9 +1,9 @@
 <template>
-  <div class="controls">
-    <div class="sidebar">
-      <div class="inner">
+  <div class="controls" @click.self="hideIntro">
+    <div ref="sidebar" class="sidebar">
+      <div class="inner inputs">
         <section class="logo">
-          <img src="../assets/logo.svg" height="86" />
+          <img src="../assets/logo.svg" height="86" alt="Nahes Grün, Fernes Grün" />
         </section>
         <section class="reachability">
           <div class="field">
@@ -45,6 +45,11 @@
               </label>
             </div>
           </div>
+          <div class="field coverage">
+            <h3>Abdeckung</h3>
+            <mark>75,4<span>%</span></mark>
+            <span>aller Berliner*innen können unter diesen Bedingungen von zuhause einen Grünraum erreichen.</span>
+          </div>
         </section>
         <section :class="'properties' + (contentView !== 'map' ? ' hidden' : '')">
           <div class="field">
@@ -69,10 +74,24 @@
           </div>
         </section>
       </div>
+      <div class="inner intro">
+        <section class="welcome">
+          <img src="../assets/logo.svg" height="120" alt="Nahes Grün, Fernes Grün" />
+          <p v-html="introContents.welcome" />
+          <button @click="hideIntroAndExitTour">Karte erkunden</button>
+          <button @click="startTour">
+            {{ tourIndex !== false ? 'Rundgang fortsetzen' : 'Rundgang starten' }}
+          </button>
+        </section>
+        <section class="article">
+
+        </section>
+      </div>
+      <button class="close" title="Schließen" @click="hideIntro" />
     </div>
     <div class="floating top">
       <div class="view-settings">
-        <button title="Einführung" @click="$emit('update:introScreen', true)" />
+        <button title="Einführung" @click="showIntro" />
         <div class="view-toggle">
           <template v-for="(viewTitle, viewKey) in { map: 'Karte', district: 'Bezirke' }">
             <input
@@ -107,6 +126,8 @@
 <script>
 import TourWindow from './TourWindow.vue'
 import ExplanationModal from './ExplanationModal.vue'
+
+import introContents from '../data/intro-contents.json';
 
 export default {
   name: 'Controls',
@@ -150,6 +171,8 @@ export default {
 
   data () {
     return {
+      introContents,
+
       sliderProperties: {
         minValue: null,
         maxValue: null,
@@ -193,7 +216,30 @@ export default {
   },
 
   methods: {
-    
+    showIntro() {
+      this.$emit('update:introScreen', true);
+      this.$refs.sidebar.scrollTop = 0;
+      window.localStorage.setItem('introScreen', 'true');
+    },
+    hideIntro() {
+      this.$emit('update:introScreen', false);
+      window.localStorage.setItem('introScreen', 'false');
+    },
+    startTour() {
+      this.hideIntro();
+      if (this.tourIndex === false) {
+        setTimeout(() => {
+          this.$emit('update:tourIndex', 0);
+        }, 1000);
+      }
+    },
+    exitTour() {
+      this.$emit('update:tourIndex', false);
+    },
+    hideIntroAndExitTour() {
+      this.hideIntro();
+      this.exitTour();
+    }
   },
 
   watch: {
@@ -227,9 +273,36 @@ export default {
   pointer-events: none;
 }
 
-.controls > * {
+#app.intro .controls, .controls > * {
   pointer-events: auto;
 }
+
+/* Global focus styling */
+
+.controls *:focus {
+  outline: none;
+}
+
+.controls *:focus-visible {
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+}
+
+/* Global properties of input, label and button elements */
+
+.controls input, .controls label, .controls button {
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* No default styling of input elements and buttons */
+
+.controls input, .controls button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Text selection within labels and buttons invisible */
 
 .controls label::selection, .controls label ::selection, .controls button::selection {
   background: transparent;
@@ -239,14 +312,30 @@ export default {
   background: transparent;
 }
 
+/* Hyphenation for all p elements */
+
+.controls p {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+
+/* SIDEBAR GLOBAL */
+
 .controls .sidebar {
-  width: 250rem;
+  position: relative;
+  width: 75vw;
+  max-width: 250rem;
   height: 100%;
   background: #FAF6F0;
   box-shadow: 8rem 0rem 8rem rgba(0,0,0,0.03),
               4rem 0rem 4rem rgba(0,0,0,0.03),
               2rem 0rem 2rem rgba(0,0,0,0.03);
+  transition: max-width 0.5s ease-in-out;
+  z-index: 200;
 
+  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -257,27 +346,52 @@ export default {
   height: 0;
 }
 
-.controls .sidebar .inner {
-  position: relative;
-  box-sizing: border-box;
-  min-height: 100%;
-  padding-bottom: 239rem;
+#app.intro .controls .sidebar {
+  max-width: 650rem;
+  overflow-y: hidden;
 }
 
-.controls section {
+.controls .sidebar .inner {
+  transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.controls .sidebar .inner.intro,
+#app.intro .controls .sidebar .inner.inputs {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#app.intro .controls .sidebar .inner.intro {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* SIDEBAR INPUTS VIEW: GLOBAL */
+
+.controls .sidebar .inner.inputs {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 250rem;
+  min-height: 100%;
+  padding-bottom: 271rem;
+}
+
+.controls .sidebar .inner.inputs section {
+  box-sizing: border-box;
   padding: 0 24rem;
 }
 
-.controls section.logo {
+.controls .sidebar .inner.inputs section.logo {
   padding-top: 24rem;
   text-align: center;
 }
 
-.controls section.reachability {
+.controls .sidebar .inner.inputs section.reachability {
   margin-top: -4rem;
 }
 
-.controls section.properties {
+.controls .sidebar .inner.inputs section.properties {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -286,12 +400,12 @@ export default {
   transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
 }
 
-.controls section.properties.hidden {
+.controls .sidebar .inner.inputs section.properties.hidden {
   visibility: hidden;
   opacity: 0;
 }
 
-.controls .sidebar h3 {
+.controls .sidebar .inner.inputs h3 {
   display: inline-block;
   margin: 0 1rem 17rem;
   font-size: 12rem;
@@ -301,9 +415,7 @@ export default {
   color: rgba(0,0,0,0.65);
 }
 
-.controls .sidebar h3 + button {
-  cursor: pointer;
-  appearance: none;
+.controls .sidebar .inner.inputs h3 + button {
   vertical-align: middle;
   width: 15rem;
   height: 15rem;
@@ -315,17 +427,12 @@ export default {
   background: url('../assets/icons/question.svg') center no-repeat rgba(0,0,0,0.1);
 }
 
-.controls .sidebar h3 + button:focus {
-  outline: none;
-}
-
-.controls .sidebar h3 + button:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
-}
-
-.controls .sidebar .field {
+.controls .sidebar .inner.inputs .field {
   margin-top: 33rem;
 }
+
+
+/* SIDEBAR INPUTS VIEW: VERTICAL TOGGLE */
 
 .controls .sidebar .vertical-toggle {
   position: relative;
@@ -347,7 +454,6 @@ export default {
 .controls .sidebar .vertical-toggle label {
   position: relative;
   display: block;
-  cursor: pointer;
 }
 
 .controls .sidebar .vertical-toggle label:before {
@@ -372,24 +478,17 @@ export default {
 }
 
 .controls .sidebar .vertical-toggle label input {
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
   opacity: 0.33;
   vertical-align: middle;
-  box-sizing: border-box;
   margin: 0;
   width: 40rem;
   height: 52rem;
+  border: 2rem solid transparent;
   border-radius: 20rem;
 }
 
 .controls .sidebar .vertical-toggle label input:checked {
   opacity: 1;
-}
-
-.controls .sidebar .vertical-toggle label input:focus {
-  outline: none;
 }
 
 .controls .sidebar .vertical-toggle label input:focus-visible {
@@ -419,10 +518,6 @@ export default {
   box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1);
 }
 
-.controls .sidebar section.reachability .vertical-toggle:focus-within:before {
-  /*box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);*/
-}
-
 .controls .sidebar section.reachability .vertical-toggle label + label {
   margin-top: -10rem;
 }
@@ -432,7 +527,7 @@ export default {
 }
 
 .controls .sidebar section.reachability .vertical-toggle label input:checked {
-  border: 2rem solid rgba(0,0,0,0.25);
+  border-color: rgba(0,0,0,0.25);
 }
 
 .controls .sidebar section.reachability .vertical-toggle label.walking input {
@@ -460,7 +555,7 @@ export default {
 }
 
 .controls .sidebar section.properties .vertical-toggle label.none input:checked {
-  border: 2rem solid #AFADAA;
+  border-color: #AFADAA;
   background: url('../assets/icons/none.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(123, 123, 123, 0.15);
 }
 
@@ -469,7 +564,7 @@ export default {
 }
 
 .controls .sidebar section.properties .vertical-toggle label.noise input:checked {
-  border: 2rem solid rgba(0,0,0,0.25);
+  border-color: rgba(0,0,0,0.25);
   background: url('../assets/icons/noise-selected.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #E0580C;
 }
 
@@ -482,13 +577,16 @@ export default {
 }
 
 .controls .sidebar section.properties .vertical-toggle label.vegetation input:checked {
-  border: 2rem solid rgba(0,0,0,0.25);
+  border-color: rgba(0,0,0,0.25);
   background: url('../assets/icons/vegetation-selected.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #29955A;
 }
 
 .controls .sidebar section.properties .vertical-toggle label.vegetation input:checked + span {
   color: #29955A;
 }
+
+
+/* SIDEBAR INPUTS VIEW: SLIDER */
 
 .controls .sidebar .slider {
   position: relative;
@@ -516,20 +614,17 @@ export default {
 }
 
 .controls .sidebar .slider input {
-  appearance: none;
-  cursor: pointer;
   display: block;
   width: 100%;
   background: transparent;
 }
 
-.controls .sidebar .slider input:focus {
-  outline: none;
+.controls .sidebar .slider input:focus-visible {
+  box-shadow: none;
 }
 
-/* WEBKIT range shadow elements */
+/* Webkit range shadow elements */
 
-.controls .sidebar .slider input,
 .controls .sidebar .slider input::-webkit-slider-thumb,
 .controls .sidebar .slider input::-webkit-slider-runnable-track {
   -webkit-appearance: none;
@@ -563,7 +658,7 @@ export default {
   box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
 }
 
-/* FIREFOX range shadow elements */
+/* Firefox range shadow elements */
 
 .controls .sidebar .slider input::-moz-range-thumb {
   cursor: grab;
@@ -599,9 +694,10 @@ export default {
   box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.25);
 }
 
-/* END of range shadow elements */
+/* End of range shadow elements */
 
 .controls .sidebar .slider label {
+  cursor: default;
   position: relative;
   display: inline-block;
   width: 60rem;
@@ -619,20 +715,143 @@ export default {
   background: #C9FE53;
 }
 
+.controls .sidebar .field.coverage {
+  background: url('../assets/berlin-coverage.svg') 5rem -1rem no-repeat;
+}
+
+.controls .sidebar .field.coverage h3 {
+  display: block;
+  margin-top: 37rem;
+  margin-bottom: 16rem;
+}
+
+.controls .sidebar .field.coverage mark {
+  position: relative;
+  display: inline-block;
+  margin-left: -3rem;
+  padding: 3rem 16rem;
+  border-radius: 100rem;
+  font-size: 32rem;
+  font-weight: 600;
+  font-feature-settings: 'tnum';
+  letter-spacing: -2rem;
+  color: rgba(0,0,0,0.75);
+  background: #C9FE53;
+}
+
+.controls .sidebar .field.coverage mark span {
+  margin-left: 4rem;
+}
+
+.controls .sidebar .field.coverage > span {
+  display: block;
+  margin: 16rem 0 0 1rem;
+  font-size: 12rem;
+}
+
+
+/* SIDEBAR INTRO VIEW */
+
+.controls .sidebar .inner.intro {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 75vw;
+  max-width: 650rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.controls .sidebar .inner.intro section {
+  max-width: 450rem;
+  margin: 0 auto;
+  padding: 0 25rem;
+}
+
+.controls .sidebar .inner.intro section.welcome {
+  margin-top: 44rem;
+  margin-bottom: 44rem;
+  text-align: center;
+}
+
+.controls .sidebar .inner.intro section.welcome p {
+  margin: 42rem 0 46rem;
+  text-align: left;
+  font-size: 14rem;
+  line-height: 1.3;
+}
+
+.controls .sidebar .inner.intro section.welcome button {
+  display: inline-block;
+  padding: 0 16rem;
+  font-size: 12rem;
+  font-weight: 600;
+  line-height: 36rem;
+  border: 2rem solid rgba(0,0,0,0.1);
+  border-radius: 20rem;
+  color: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.06);
+}
+
+.controls .sidebar .inner.intro section.welcome button + button {
+  margin-left: 12rem;
+  border-color: rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.75);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
+}
+
+
+/* SIDEBAR CLOSE BUTTON */
+
+.controls .sidebar button.close {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 12rem;
+  right: 12rem;
+  width: 28rem;
+  height: 28rem;
+  border: none;
+  border-radius: 50%;
+  background: url('../assets/icons/close.svg') center no-repeat rgba(0,0,0,0.06);
+  border: 2rem solid rgba(0,0,0,0.1);
+  transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+#app.intro .controls .sidebar button.close {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* FLOATING CONTROLS */
+
 .controls .floating {
   position: absolute;
   left: 250rem;
   right: 0;
   text-align: center;
   pointer-events: none;
+  transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  z-index: 150;
 }
 
 .controls .floating > * {
   pointer-events: auto;
 }
 
+#app.intro .controls .floating {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .controls .floating.top {
   top: 0;
+}
+
+.controls .floating.bottom {
+  bottom: 0;
 }
 
 .controls .floating.top .view-settings {
@@ -647,12 +866,8 @@ export default {
 }
 
 .controls .floating.top .view-settings button {
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
   display: inline-block;
   vertical-align: top;
-  box-sizing: border-box;
   width: 40rem;
   height: 40rem;
   border: none;
@@ -661,44 +876,28 @@ export default {
   border: 2rem solid rgba(0,0,0,0.1);
 }
 
-.controls .floating.top .view-settings button:focus {
-  outline: none;
-}
-
-.controls .floating.top .view-settings button:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
-}
-
 .controls .floating.top .view-settings .view-toggle {
   display: inline-block;
   vertical-align: top;
   margin-left: 10rem;
-  border-radius: 25rem;
+  border-radius: 20rem;
   background: rgba(0,0,0,0.06);
   box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1);
 }
 
-.controls .floating.top .view-settings .view-toggle:focus-within {
-  /*box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);*/
-}
-
 .controls .floating.top .view-settings .view-toggle input {
-  -webkit-appearance: none;
-  appearance: none;
   width: 0;
   height: 0;
 }
 
 .controls .floating.top .view-settings .view-toggle label {
-  cursor: pointer;
   display: inline-block;
-  box-sizing: border-box;
   width: 92rem;
   font-size: 12rem;
   font-weight: 600;
   line-height: 36rem;
   border: 2rem solid transparent;
-  border-radius: 25rem;
+  border-radius: 20rem;
   color: rgba(0,0,0,0.65);
 }
 
@@ -707,16 +906,16 @@ export default {
 }
 
 .controls .floating.top .view-settings .view-toggle input:checked + label {
-  border: 2rem solid rgba(0,0,0,0.22);
+  border-color: rgba(0,0,0,0.22);
   color: #fff;
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), #7D7D7D;
 }
 
-.controls .floating.top .view-settings .view-toggle input:focus-visible + label {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #DFDBD5;
+.controls .floating.top .view-settings .view-toggle input:focus-visible {
+  box-shadow: none;
 }
 
-.controls .floating.bottom {
-  bottom: 0;
+.controls .floating.top .view-settings .view-toggle input:focus-visible + label {
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #DFDBD5;
 }
 </style>

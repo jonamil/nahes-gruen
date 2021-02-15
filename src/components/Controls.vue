@@ -48,7 +48,7 @@
           </div>
           <div class="field coverage">
             <h3>Abdeckung</h3>
-            <mark>75,4<span>%</span></mark>
+            <mark>{{ coveragePercentage }}<span>%</span></mark>
             <span>aller Berliner*innen können unter diesen Bedingungen von zuhause einen Grünraum erreichen.</span>
           </div>
         </section>
@@ -217,6 +217,14 @@ export default {
       const labelOffset = this.sliderProgressWidth - this.sliderProperties.labelWidth / 2;
 
       return labelOffset;
+    },
+    coveragePercentage() {
+      const percentage = this.coverage.city.percentages[this.transportMode][this.transportMinutes.toString()];
+
+      let digits = 1;
+      if (percentage >= 99.95) digits = 0;
+
+      return new Intl.NumberFormat('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(percentage);
     }
   },
 

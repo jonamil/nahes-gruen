@@ -127,7 +127,7 @@ export default {
           id: 'water',
           data: this.water,
           getLineWidth: 0,
-          getFillColor: [64, 106, 160, 255]
+          getFillColor: [64,106,160,255]
         });
       } else {
         return null;
@@ -145,9 +145,16 @@ export default {
               else if (park.properties.noise >= 60) return [235,128,46,255];
               else if (park.properties.noise >= 55) return [244,162,79,255];
               else if (park.properties.noise >= 50) return [247,194,124,255];
-              else                                 return [247,213,154,255];
+              else                                  return [247,213,154,255];
+            } else if (this.parkProperty === 'vegetation') {
+              if      (park.properties.veg >= 15) return [28,102,75,255];
+              else if (park.properties.veg >= 10) return [34,125,82,255];
+              else if (park.properties.veg >=  5) return [41,149,90,255];
+              else if (park.properties.veg >=  3) return [47,171,92,255];
+              else if (park.properties.veg  >  0) return [53,194,93,255];
+              else                                return [180,180,180,255];
             } else {
-              return [41, 149, 90, 255];
+              return [41,149,90,255];
             }
           },
           updateTriggers: {
@@ -260,7 +267,7 @@ export default {
         
         this.tooltipTimeout = setTimeout(() => {
           this.pickedPark.active = false;
-        }, 100);
+        }, 200);
       }
     }
   },

@@ -3,9 +3,17 @@
     <div class="inner">
       <h2>{{ parkName }}</h2>
       <span>{{ parkProperties.ortsteil }}</span>
-      <div class="property size">
-        <h3>Fläche</h3>
-        <span>{{ parkSize }}</span>
+      <div class="columns">
+        <div class="property size">
+          <h3>Fläche</h3>
+          <span>{{ parkSize }}</span>
+        </div>
+        <div class="property amenities">
+          <h3>Ausstattung</h3>
+          <div :class="'icon benches' + (parkProperties.benches > 0 ? '' : ' disabled')" />
+          <div :class="'icon toilets' + (parkProperties.toilets > 0 ? '' : ' disabled')" />
+          <div :class="'icon playgrounds' + (parkProperties.playgrounds > 0 ? '' : ' disabled')" />
+        </div>
       </div>
       <div :class="'property noise' + (controlState.parkProperty === 'noise' ? ' active' : '')">
         <h3>Verkehrslärm</h3>
@@ -60,7 +68,7 @@ export default {
     return {
       ratingThresholds: {
         noise: [0, 50, 55, 60, 65],
-        vegetation: [0, 3.4, 6.7, 10.7, 15.5]
+        vegetation: [0, 3, 5, 10, 15]
       }
     }
   },
@@ -93,7 +101,7 @@ export default {
       return new Intl.NumberFormat('de-DE').format(this.parkProperties.size.toFixed(1)) + ' ha';
     },
     parkNoise() {
-      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise) + ' db';
+      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise) + ' dB';
     },
     parkVegetation() {
       if (this.parkProperties.veg !== null) {
@@ -150,24 +158,33 @@ export default {
 
 .tooltip h2 + span {
   display: block;
-  margin: 5rem 0 19rem;
+  margin: 5rem 0 5rem;
   text-align: center;
   font-size: 11rem;
   color: rgba(0,0,0,0.3);
+}
+
+.tooltip .columns {
+  margin-bottom: 15rem;
+}
+
+.tooltip .columns:after, .tooltip .property:after {
+  display: table;
+  content: '';
+  clear: both;
 }
 
 .tooltip .property {
   margin-top: 14rem;
 }
 
-.tooltip .property:after {
-  display: table;
-  content: '';
-  clear: both;
+.tooltip .property.size {
+  float: left;
 }
 
-.tooltip .property.size {
-  margin-bottom: 15rem;
+.tooltip .property.amenities {
+  float: right;
+  text-align: center;
 }
 
 .tooltip .property h3 {
@@ -176,17 +193,56 @@ export default {
   color: rgba(0,0,0,0.65);
 }
 
-.tooltip .property.noise.active h3 {
-  color: #E0580C;
-}
-
-.tooltip .property.vegetation.active h3 {
-  color: #29955A;
-}
-
 .tooltip .property span {
   font-size: 14rem;
   font-weight: 600;
+}
+
+.tooltip .property.amenities .icon {
+  display: inline-block;
+  opacity: 0.75;
+  width: 26rem;
+  height: 26rem;
+  margin: -2rem 4rem -8rem;
+  /*background-color: #f00;*/
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tooltip .property.amenities .icon:first-of-type {
+  margin-left: -10rem;
+}
+
+.tooltip .property.amenities .icon:last-of-type {
+  margin-right: -10rem;
+}
+
+.tooltip .property.amenities .icon.disabled {
+  opacity: 0.18; 
+}
+
+.tooltip .property.amenities .icon.benches {
+  background-image: url('../assets/icons/benches.svg');
+}
+
+.tooltip .property.amenities .icon.benches.disabled {
+  background-image: url('../assets/icons/benches-disabled.svg');
+}
+
+.tooltip .property.amenities .icon.toilets {
+  background-image: url('../assets/icons/toilets.svg');
+}
+
+.tooltip .property.amenities .icon.toilets.disabled {
+  background-image: url('../assets/icons/toilets-disabled.svg');
+}
+
+.tooltip .property.amenities .icon.playgrounds {
+  background-image: url('../assets/icons/playgrounds.svg');
+}
+
+.tooltip .property.amenities .icon.playgrounds.disabled {
+  background-image: url('../assets/icons/playgrounds-disabled.svg');
 }
 
 .tooltip .property .rating {
@@ -232,6 +288,10 @@ export default {
 
 /* Custom noise rating styles */
 
+.tooltip .property.noise.active h3 {
+  color: #E0580C;
+}
+
 .tooltip .property.noise.active .rating div {
   box-shadow: inset 0 0 0 1.5rem rgba(224,88,12,0.2); 
 }
@@ -262,15 +322,35 @@ export default {
 
 /* Custom vegetation rating styles */
 
+.tooltip .property.vegetation.active h3 {
+  color: #227D52;
+}
+
 .tooltip .property.vegetation.active .rating div {
   box-shadow: inset 0 0 0 1.5rem rgba(41,149,90,0.25);
 }
 
 .tooltip .property.vegetation.active .rating div.filled {
+  background: #35C25D;
+}
+
+.tooltip .property.vegetation.active .rating div:nth-child(2).filled {
+  background: #2FAB5C;
+}
+
+.tooltip .property.vegetation.active .rating div:nth-child(3).filled {
   background: #29955A;
 }
 
+.tooltip .property.vegetation.active .rating div:nth-child(4).filled {
+  background: #227D52;
+}
+
+.tooltip .property.vegetation.active .rating div:nth-child(5).filled {
+  background: #1C664B;
+}
+
 .tooltip .property.vegetation.active .rating + span {
-  color: #29955A;
+  color: #227D52;
 }
 </style>

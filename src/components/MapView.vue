@@ -112,6 +112,9 @@ export default {
     tourIndex() {
       return this.controlState.tourIndex;
     },
+    transportMode() {
+      return this.controlState.transportMode;
+    },
     transportMinutes() {
       return this.controlState.transportMinutes;
     },
@@ -163,9 +166,9 @@ export default {
           id: 'isobands',
           data: this.isobands,
           getLineWidth: 0,
-          getFillColor: isoband => isoband.properties.index <= this.transportMinutes ? [201, 254, 83, 204] : [0, 0, 0, 0],
+          getFillColor: isoband => (isoband.properties.mode === this.transportMode && isoband.properties.minutes <= this.transportMinutes) ? [201,254,83,204] : [0,0,0,0],
           updateTriggers: {
-            getFillColor: this.transportMinutes
+            getFillColor: [this.transportMode, this.transportMinutes]
           }
         });
       } else {

@@ -78,7 +78,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.625);
   transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
   z-index: 300;
 }
@@ -95,7 +95,7 @@ export default {
   top: 50%;
   left: 50%;
   width: 75vw;
-  max-width: 540rem;
+  max-width: 600rem;
   max-height: 75vh;
   /*margin: -200rem 0 0 -300rem;*/
   padding: 25rem;

@@ -3,7 +3,8 @@
     <div ref="sidebar" class="sidebar">
       <div class="inner inputs">
         <section class="logo">
-          <img src="../assets/logo.svg" height="86" alt="Nahes Grün, Fernes Grün" />
+          <img class="large" src="../assets/logo.svg" height="86" alt="Nahes Grün, Fernes Grün" @click="showIntro" />
+          <img class="small" src="../assets/logo-small.svg" height="64" alt="Nahes Grün, Fernes Grün" @click="showIntro" />
         </section>
         <section class="reachability">
           <div class="field">
@@ -30,7 +31,7 @@
             <h3>Zeitaufwand</h3>
             <button title="Erläuterung" @click="currentModal = 'transportMinutes'" />
             <div ref="slider" class="slider">
-              <span :style="sliderProperties.minValue ? 'width: ' + sliderProgressWidth + 'rem' : ''"></span>
+              <span :style="sliderProperties.minValue ? 'width: ' + sliderProgressWidth + 'rem' : ''" />
               <input
                 id="transport-minutes"
                 type="range"
@@ -78,7 +79,7 @@
         <section class="welcome">
           <img src="../assets/logo.svg" height="120" alt="Nahes Grün, Fernes Grün" />
           <p v-html="introContents.welcome" />
-          <button @click="hideIntroAndExitTour">Karte erkunden</button>
+          <button @click="exploreMap">Karte erkunden</button>
           <button @click="startTour">
             {{ tourIndex !== false ? 'Rundgang fortsetzen' : 'Rundgang starten' }}
           </button>
@@ -236,9 +237,10 @@ export default {
     exitTour() {
       this.$emit('update:tourIndex', false);
     },
-    hideIntroAndExitTour() {
-      this.hideIntro();
+    exploreMap() {
       this.exitTour();
+      this.hideIntro();
+      this.$emit('update:contentView', 'map');
     }
   },
 
@@ -383,12 +385,13 @@ export default {
 }
 
 .controls .sidebar .inner.inputs section.logo {
+  margin-bottom: 8rem;
   padding-top: 24rem;
   text-align: center;
 }
 
 .controls .sidebar .inner.inputs section.reachability {
-  margin-top: -4rem;
+  padding-top: 21rem;
 }
 
 .controls .sidebar .inner.inputs section.properties {
@@ -429,6 +432,38 @@ export default {
 
 .controls .sidebar .inner.inputs .field {
   margin-top: 33rem;
+}
+
+.controls .sidebar .inner.inputs section.reachability .field:first-child {
+  margin-top: 0;
+}
+
+
+/* LOGO */
+
+.controls .sidebar .inner.inputs section.logo img {
+  cursor: pointer;
+}
+
+.controls .sidebar .inner.inputs section.logo img.small {
+  display: none;
+  margin: -2rem 0 -11rem -5rem;
+}
+
+@media (max-height: 844px) {
+  .controls .sidebar .inner.inputs section.logo img.large {
+    display: none;
+  }
+
+  .controls .sidebar .inner.inputs section.logo img.small {
+    display: initial;
+  }
+}
+
+@media (max-height: 809px) {
+  .controls .sidebar .inner.inputs section.logo {
+    display: none;
+  }
 }
 
 
@@ -565,11 +600,11 @@ export default {
 
 .controls .sidebar section.properties .vertical-toggle label.noise input:checked {
   border-color: rgba(0,0,0,0.25);
-  background: url('../assets/icons/noise-selected.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #E0580C;
+  background: url('../assets/icons/noise.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #F4A24F;
 }
 
 .controls .sidebar section.properties .vertical-toggle label.noise input:checked + span {
-  color: #E0580C;
+  /*color: #E0580C;*/
 }
 
 .controls .sidebar section.properties .vertical-toggle label.vegetation input {
@@ -578,11 +613,11 @@ export default {
 
 .controls .sidebar section.properties .vertical-toggle label.vegetation input:checked {
   border-color: rgba(0,0,0,0.25);
-  background: url('../assets/icons/vegetation-selected.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #29955A;
+  background: url('../assets/icons/vegetation.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #5FBF7A;
 }
 
 .controls .sidebar section.properties .vertical-toggle label.vegetation input:checked + span {
-  color: #29955A;
+  /*color: #29955A;*/
 }
 
 
@@ -716,7 +751,7 @@ export default {
 }
 
 .controls .sidebar .field.coverage {
-  background: url('../assets/berlin-coverage.svg') 5rem -1rem no-repeat;
+  background: url('../assets/berlin-coverage.svg') 5rem -2rem no-repeat;
 }
 
 .controls .sidebar .field.coverage h3 {
@@ -729,7 +764,7 @@ export default {
   position: relative;
   display: inline-block;
   margin-left: -3rem;
-  padding: 3rem 16rem;
+  padding: 2rem 16rem;
   border-radius: 100rem;
   font-size: 32rem;
   font-weight: 600;

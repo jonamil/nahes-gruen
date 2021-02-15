@@ -30,7 +30,7 @@
               <div
                 v-for="figureNumber in district.figures"
                 :key="figureNumber"
-                :class="'figure' + (figureNumber / district.figures <= district.percentage / 100 ? '' : ' excluded')"
+                :class="'figure' + (figureNumber / district.figures <= Math.round(district.percentage * 10) / 1000 ? '' : ' excluded')"
               />
             </div>
           </div>
@@ -135,13 +135,12 @@ export default {
 
   methods: {
     highlightWidth(district) {
-      return Math.floor(district.percentage / 100 * district.figures) * this.figureWidth;
+      return Math.floor(Math.round(district.percentage * 10) / 1000 * district.figures) * this.figureWidth;
     },
     formatPercentage(percentage) {
-      let digits = 1;
-      if (percentage >= 100) digits = 0;
-      
-      return new Intl.NumberFormat('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(percentage);
+      let number = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(percentage);
+      if (number.length > 4) number = number.substring(0, 3);
+      return number;
     }
   }
 }

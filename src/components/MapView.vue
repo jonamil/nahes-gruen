@@ -322,28 +322,33 @@ export default {
 </script>
 
 <style>
-#mapbox, #deck {
+.map-view canvas {
+  transition: transform 0.5s ease-in-out;
+}
+
+#app.intro .map-view canvas {
+  transform: translateX(200rem);
+}
+
+.map-view canvas:focus {
+  outline: none;
+}
+
+#mapbox {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-}
-
-#mapbox {
   font: inherit;
   background: #EBE3DB;
 }
 
-#mapbox .mapboxgl-control-container {
-  z-index: 10;
-}
-
 #mapbox .mapboxgl-ctrl-attrib {
-  padding: 2rem 5rem;
-  font-size: 12rem;
-  border-radius: 3rem 0 0 0;
+  padding: 4rem 5rem 3rem;
+  font-size: 11rem;
+  border-radius: 5rem 0 0 0;
   background-color: rgba(235,227,219,0.8);
 }
 
@@ -357,9 +362,5 @@ export default {
 
 #mapbox .mapbox-improve-map {
   display: none;
-}
-
-.map-view canvas:focus {
-  outline: none;
 }
 </style>

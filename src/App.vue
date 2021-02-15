@@ -13,9 +13,12 @@
     />
     <DistrictView
       :class="controlState.contentView !== 'district' ? 'hidden' : ''"
+      :coverage="coverage"
+      :controlState="controlState"
     />
     <Controls
       :tourStops="tourStops"
+      :coverage="coverage"
       v-bind.sync="controlState"
     />
   </div>
@@ -30,6 +33,7 @@ import Controls from './components/Controls.vue';
 
 // Tour stops JSON
 import tourStops from './data/tour-stops.json';
+import coverage from './data/coverage.json';
 
 export default {
   name: 'App',
@@ -48,8 +52,9 @@ export default {
       parks: null,
       water: null,
 
-      // Statically imported tour stops
+      // Statically imported data
       tourStops,
+      coverage,
 
       // Control state whose properties are synced with the Controls component
       controlState: {
@@ -150,6 +155,7 @@ html {
 
 .content-view {
   position: absolute;
+  overflow: hidden;
   top: 0;
   bottom: 0;
   left: 250rem;

@@ -143,6 +143,10 @@ export default {
       type: Array,
       default: () => []
     },
+    coverage: {
+      type: Object,
+      default: () => {}
+    },
 
     contentView: {
       type: String,

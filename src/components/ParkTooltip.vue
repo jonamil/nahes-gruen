@@ -117,8 +117,8 @@ export default {
 <style>
 .tooltip {
   position: relative;
-  width: 224rem;
-  height: 250rem;
+  width: 22.4rem;
+  height: 25.0rem;
   pointer-events: none;
   z-index: 50;
   /*background: #f00;*/
@@ -129,13 +129,13 @@ export default {
   box-sizing: border-box;
   bottom: 0;
   width: 100%;
-  /*min-height: 200rem;*/
-  padding: 16rem 20rem 17rem;
-  border-radius: 25rem;
+  /*min-height: 20.0rem;*/
+  padding: 1.6rem 2.0rem 1.7rem;
+  border-radius: 2.5rem;
   background: #FCFBF7;
-  box-shadow: 0rem 8rem 8rem rgba(0,0,0,0.03),
-              0rem 4rem 4rem rgba(0,0,0,0.03),
-              0rem 2rem 2rem rgba(0,0,0,0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.03),
+              0 0.4rem 0.4rem rgba(0,0,0,0.03),
+              0 0.2rem 0.2rem rgba(0,0,0,0.03);
 }
 
 .tooltip.below .inner {
@@ -146,26 +146,26 @@ export default {
 .tooltip h2 {
   margin: 0;
   text-align: center;
-  font-size: 14rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
 .tooltip h2 + span, .tooltip h3 {
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05rem;
 }
 
 .tooltip h2 + span {
   display: block;
-  margin: 5rem 0 5rem;
+  margin: 0.5rem 0 0.5rem;
   text-align: center;
-  font-size: 11rem;
+  font-size: 1.1rem;
   color: rgba(0,0,0,0.3);
 }
 
 .tooltip .columns {
-  margin-bottom: 15rem;
+  margin-bottom: 1.5rem;
 }
 
 .tooltip .columns:after, .tooltip .property:after {
@@ -175,7 +175,7 @@ export default {
 }
 
 .tooltip .property {
-  margin-top: 14rem;
+  margin-top: 1.4rem;
 }
 
 .tooltip .property.size {
@@ -188,33 +188,33 @@ export default {
 }
 
 .tooltip .property h3 {
-  margin: 0 0 1rem;
-  font-size: 12rem;
+  margin: 0 0 0.1rem;
+  font-size: 1.2rem;
   color: rgba(0,0,0,0.65);
 }
 
 .tooltip .property span {
-  font-size: 14rem;
+  font-size: 1.4rem;
   font-weight: 600;
 }
 
 .tooltip .property.amenities .icon {
   display: inline-block;
   opacity: 0.75;
-  width: 26rem;
-  height: 26rem;
-  margin: -2rem 4rem -8rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin: -0.2rem 0.4rem -0.8rem;
   /*background-color: #f00;*/
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .tooltip .property.amenities .icon:first-of-type {
-  margin-left: -10rem;
+  margin-left: -1.0rem;
 }
 
 .tooltip .property.amenities .icon:last-of-type {
-  margin-right: -10rem;
+  margin-right: -1.0rem;
 }
 
 .tooltip .property.amenities .icon.disabled {
@@ -247,16 +247,16 @@ export default {
 
 .tooltip .property .rating {
   float: left;
-  margin-top: 4rem;
+  margin-top: 0.4rem;
 }
 
 .tooltip .property .rating div {
   display: inline-block;
-  width: 14rem;
-  height: 14rem;
-  margin-right: 6rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 0.6rem;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1.5rem rgba(0,0,0,0.15);
+  box-shadow: inset 0 0 0 0.15rem rgba(0,0,0,0.15);
 }
 
 .tooltip .property .rating div.filled {
@@ -283,7 +283,7 @@ export default {
 .tooltip .property .rating + span {
   float: right;
   display: inline-block;
-  margin-top: 4rem;
+  margin-top: 0.4rem;
 }
 
 /* Custom noise rating styles */
@@ -293,7 +293,7 @@ export default {
 }
 
 .tooltip .property.noise.active .rating div {
-  box-shadow: inset 0 0 0 1.5rem rgba(224,88,12,0.2); 
+  box-shadow: inset 0 0 0 0.15rem rgba(224,88,12,0.2); 
 }
 
 .tooltip .property.noise.active .rating div.filled {
@@ -327,7 +327,7 @@ export default {
 }
 
 .tooltip .property.vegetation.active .rating div {
-  box-shadow: inset 0 0 0 1.5rem rgba(41,149,90,0.25);
+  box-shadow: inset 0 0 0 0.15rem rgba(41,149,90,0.25);
 }
 
 .tooltip .property.vegetation.active .rating div.filled {

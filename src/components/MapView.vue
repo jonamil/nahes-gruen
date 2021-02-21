@@ -261,7 +261,7 @@ export default {
           this.pickedPark.tooltipOrientation = 'above';
         }
 
-        this.$refs.tooltip.$el.style.transform = 'translate(' + x + 'rem, ' + y + 'rem)';
+        this.$refs.tooltip.$el.style.transform = 'translate(' + x / 10 + 'rem, ' + y / 10 + 'rem)';
       } else {
         this.deck.setProps({ getCursor: ({ isDragging }) => isDragging ? 'grabbing' : 'grab' });
         
@@ -327,7 +327,7 @@ export default {
 }
 
 #app.intro .map-view canvas {
-  transform: translateX(200rem);
+  transform: translateX(20.0rem);
 }
 
 .map-view canvas:focus {
@@ -346,9 +346,9 @@ export default {
 }
 
 #mapbox .mapboxgl-ctrl-attrib {
-  padding: 4rem 5rem 3rem;
-  font-size: 11rem;
-  border-radius: 5rem 0 0 0;
+  padding: 0.4rem 0.5rem 0.3rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem 0 0 0;
   background-color: rgba(235,227,219,0.8);
 }
 

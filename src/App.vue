@@ -31,7 +31,7 @@ import LoadingView from './components/LoadingView.vue';
 import DistrictView from './components/DistrictView.vue';
 import Controls from './components/Controls.vue';
 
-// Tour stops JSON
+// Tour stops and coverage percentages JSON
 import tourStops from './data/tour-stops.json';
 import coverage from './data/coverage.json';
 
@@ -139,14 +139,14 @@ export default {
 @import './assets/fonts.css';
 
 html {
-  font-size: 6.25%;
+  font-size: 62.5%;
 }
 
 #app {
   width: 100%;
   height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-size: 16rem;
+  font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.25;
   color: rgba(0,0,0,0.8);
@@ -158,7 +158,7 @@ html {
   overflow: hidden;
   top: 0;
   bottom: 0;
-  left: 250rem;
+  left: 25.0rem;
   right: 0;
   transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
 }

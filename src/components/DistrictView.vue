@@ -28,7 +28,7 @@
           :key="index"
           class="district"
         >
-          <mark :style="'width: ' + highlightWidth(district) + 'rem'" />
+          <mark :style="'width: ' + highlightWidth(district) / 10 + 'rem'" />
           <div class="name">{{ district.name }}</div>
           <div class="coverage">
             <div class="percentage">
@@ -152,20 +152,20 @@ export default {
 
 .district-view .inner {
   margin: 0 auto;
-  padding: 105rem 50rem 38rem;
-  width: 790rem;
+  padding: 10.5rem 5.0rem 3.8rem;
+  width: 79.0rem;
   text-align: center;
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 #app.intro .district-view .inner {
   opacity: 0.35;
-  transform: translateX(200rem);
+  transform: translateX(20.0rem);
 }
 
 .district-view section.inhabitants .excluded {
-  margin-left: 50rem;
-  margin-right: -12rem;
+  margin-left: 5.0rem;
+  margin-right: -1.2rem;
 }
 
 .district-view section.inhabitants div {
@@ -176,18 +176,18 @@ export default {
 
 .district-view section.inhabitants h1 {
   display: inline-block;
-  margin: 0 0 5rem -2rem;
-  font-size: 40rem;
+  margin: 0 0 0.5rem -0.2rem;
+  font-size: 4.0rem;
   font-weight: 600;
   font-feature-settings: 'tnum';
   line-height: 1.2;
-  letter-spacing: -2rem;
+  letter-spacing: -0.2rem;
 }
 
 .district-view section.inhabitants .included h1 {
-  margin-left: -16rem;
-  padding: 0 18rem 0 14rem;
-  background: url('../assets/edges/left-bg-2.svg') left -1rem center no-repeat, url('../assets/edges/right-bg-1.svg') right -1rem center no-repeat, #C9FE53;
+  margin-left: -1.6rem;
+  padding: 0 1.8rem 0 1.4rem;
+  background: url('../assets/edges/left-bg-2.svg') left -0.1rem center no-repeat, url('../assets/edges/right-bg-1.svg') right -0.1rem center no-repeat, #C9FE53;
   background-size: auto 100%;
 }
 
@@ -197,7 +197,7 @@ export default {
 
 .district-view section.inhabitants span {
   display: block;
-  font-size: 12rem;
+  font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -208,12 +208,12 @@ export default {
 
 .district-view section.inhabitants .excluded span u {
   text-decoration: none;
-  border-bottom: 1rem solid rgba(0,0,0,0.22);
+  border-bottom: 0.1rem solid rgba(0,0,0,0.22);
 }
 
 .district-view section.legend {
-  margin: 37rem 0;
-  font-size: 12rem;
+  margin: 3.7rem 0;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
@@ -221,9 +221,9 @@ export default {
   display: inline-block;
   opacity: 0.75;
   vertical-align: middle;
-  margin: 0 6rem 1rem -3rem;
-  width: 14rem;
-  height: 28rem;
+  margin: 0 0.6rem 0.1rem -0.3rem;
+  width: 1.4rem;
+  height: 2.8rem;
   background: url('../assets/icons/figure-legend.svg') center no-repeat;
 }
 
@@ -233,17 +233,17 @@ export default {
 
 .district-view section.districts .district {
   position: relative;
-  margin-bottom: 46rem;
+  margin-bottom: 4.6rem;
 }
 
 .district-view section.districts .district mark {
   position: absolute;
   display: block;
-  top: -4rem;
-  bottom: -4rem;
-  left: 131rem;
-  padding: 0 6rem 0 83rem;
-  background: url('../assets/edges/left-bg-2.svg') left -1rem center no-repeat, url('../assets/edges/right-bg-3.svg') right -1rem center no-repeat, #C9FE53;
+  top: -0.4rem;
+  bottom: -0.4rem;
+  left: 13.1rem;
+  padding: 0 0.6rem 0 8.3rem;
+  background: url('../assets/edges/left-bg-2.svg') left -0.1rem center no-repeat, url('../assets/edges/right-bg-3.svg') right -0.1rem center no-repeat, #C9FE53;
   background-size: auto 100%;
   z-index: -1;
 }
@@ -263,35 +263,35 @@ export default {
 
 .district-view section.districts .district .name {
   box-sizing: border-box;
-  width: 140rem;
-  margin: -20rem 0;
-  padding-right: 25rem;
-  font-size: 13rem;
+  width: 14.0rem;
+  margin: -2.0rem 0;
+  padding-right: 2.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .district-view section.districts .district .coverage {
-  height: 28rem;
+  height: 2.8rem;
 }
 
 .district-view section.districts .district .coverage .percentage {
-  width: 74rem;
-  font-size: 22rem;
+  width: 7.4rem;
+  font-size: 2.2rem;
   font-weight: 600;
   font-feature-settings: 'tnum';
-  line-height: 28rem;
-  letter-spacing: -1.5rem;
+  line-height: 2.8rem;
+  letter-spacing: -0.15rem;
 }
 
 .district-view section.districts .district .coverage .percentage span {
-  margin-left: 2rem;
+  margin-left: 0.2rem;
 }
 
 .district-view section.districts .district .coverage .figures .figure {
   opacity: 0.75;
-  width: 14rem;
-  height: 28rem;
+  width: 1.4rem;
+  height: 2.8rem;
   background: url('../assets/icons/figure.svg') center no-repeat;
 }
 

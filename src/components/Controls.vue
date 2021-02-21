@@ -31,7 +31,7 @@
             <h3>Zeitaufwand</h3>
             <button title="Erläuterung" @click="currentModal = 'transportMinutes'" />
             <div ref="slider" class="slider">
-              <span :style="sliderProperties.minValue ? 'width: ' + sliderProgressWidth + 'rem' : ''" />
+              <span :style="sliderProperties.minValue ? 'width: ' + sliderProgressWidth / 10 + 'rem' : ''" />
               <input
                 id="transport-minutes"
                 type="range"
@@ -41,7 +41,7 @@
                 :value="transportMinutes"
                 @input="$emit('update:transportMinutes', parseInt($event.target.value))"
               >
-              <label for="transport-minutes" :style="sliderProperties.minValue ? 'left: ' + sliderLabelOffset + 'rem' : ''">
+              <label for="transport-minutes" :style="sliderProperties.minValue ? 'left: ' + sliderLabelOffset / 10 + 'rem' : ''">
                 <mark>{{ transportMinutes }} Min.</mark>
               </label>
             </div>
@@ -354,12 +354,12 @@ export default {
 
 .controls p sup {
   cursor: pointer;
-  top: -4rem;
-  margin: 0 0 -1rem 1rem;
-  padding: 1rem 2rem;
+  top: -0.4rem;
+  margin: 0 0 -0.1rem 0.1rem;
+  padding: 0.1rem 0.2rem;
   font-size: 0.7em;
   /*font-size: inherit;*/
-  border-radius: 2rem;
+  border-radius: 0.2rem;
   color: rgba(0,0,0,0.5);
   background: rgba(0,0,0,0.1);
 }
@@ -370,12 +370,12 @@ export default {
 .controls .sidebar {
   position: relative;
   width: 75vw;
-  max-width: 250rem;
+  max-width: 25.0rem;
   height: 100%;
   background: #FAF6F0;
-  box-shadow: 8rem 0rem 8rem rgba(0,0,0,0.03),
-              4rem 0rem 4rem rgba(0,0,0,0.03),
-              2rem 0rem 2rem rgba(0,0,0,0.03);
+  box-shadow: 0.8rem 0 0.8rem rgba(0,0,0,0.03),
+              0.4rem 0 0.4rem rgba(0,0,0,0.03),
+              0.2rem 0 0.2rem rgba(0,0,0,0.03);
   transition: max-width 0.5s ease-in-out;
   z-index: 200;
 
@@ -391,7 +391,7 @@ export default {
 }
 
 #app.intro .controls .sidebar {
-  max-width: 650rem;
+  max-width: 65.0rem;
   overflow-y: hidden;
 }
 
@@ -416,24 +416,24 @@ export default {
 .controls .sidebar .inner.inputs {
   position: relative;
   box-sizing: border-box;
-  max-width: 250rem;
+  max-width: 25.0rem;
   min-height: 100%;
-  padding-bottom: 271rem;
+  padding-bottom: 27.1rem;
 }
 
 .controls .sidebar .inner.inputs section {
   box-sizing: border-box;
-  padding: 0 24rem;
+  padding: 0 2.4rem;
 }
 
 .controls .sidebar .inner.inputs section.logo {
-  margin-bottom: 8rem;
-  padding-top: 24rem;
+  margin-bottom: 0.8rem;
+  padding-top: 2.4rem;
   text-align: center;
 }
 
 .controls .sidebar .inner.inputs section.reachability {
-  padding-top: 21rem;
+  padding-top: 2.1rem;
 }
 
 .controls .sidebar .inner.inputs section.properties {
@@ -441,7 +441,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  margin-bottom: 26rem;
+  margin-bottom: 2.6rem;
   transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
 }
 
@@ -452,28 +452,27 @@ export default {
 
 .controls .sidebar .inner.inputs h3 {
   display: inline-block;
-  margin: 0 1rem 17rem;
-  font-size: 12rem;
+  margin: 0 0.1rem 1.7rem;
+  font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05rem;
   color: rgba(0,0,0,0.65);
 }
 
 .controls .sidebar .inner.inputs h3 + button {
   vertical-align: middle;
-  width: 15rem;
-  height: 15rem;
-  margin-left: 5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.5rem;
   border: none;
   border-radius: 50%;
-  font-size: 0.1rem;
   color: transparent;
   background: url('../assets/icons/question.svg') center no-repeat rgba(0,0,0,0.1);
 }
 
 .controls .sidebar .inner.inputs .field {
-  margin-top: 33rem;
+  margin-top: 3.3rem;
 }
 
 .controls .sidebar .inner.inputs section.reachability .field:first-child {
@@ -489,7 +488,7 @@ export default {
 
 .controls .sidebar .inner.inputs section.logo img.small {
   display: none;
-  margin: -2rem 0 -11rem -5rem;
+  margin: -0.2rem 0 -1.1rem -0.5rem;
 }
 
 @media (max-height: 844px) {
@@ -522,10 +521,10 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 40rem;
-  border-radius: 20rem;
+  width: 4.0rem;
+  border-radius: 2.0rem;
   background: rgba(0,0,0,0.05);
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.08);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.08);
 }
 
 .controls .sidebar .vertical-toggle label {
@@ -537,10 +536,10 @@ export default {
   position: absolute;
   display: block;
   content: '';
-  top: 2rem;
-  left: 10rem;
-  width: 20rem;
-  height: 2rem;
+  top: 0.2rem;
+  left: 1.0rem;
+  width: 2.0rem;
+  height: 0.2rem;
   background: rgba(0,0,0,0.11);
 }
 
@@ -551,17 +550,17 @@ export default {
 }
 
 .controls .sidebar .vertical-toggle label + label {
-  margin-top: -6rem;
+  margin-top: -0.6rem;
 }
 
 .controls .sidebar .vertical-toggle label input {
   opacity: 0.33;
   vertical-align: middle;
   margin: 0;
-  width: 40rem;
-  height: 52rem;
-  border: 2rem solid transparent;
-  border-radius: 20rem;
+  width: 4.0rem;
+  height: 5.2rem;
+  border: 0.2rem solid transparent;
+  border-radius: 2.0rem;
 }
 
 .controls .sidebar .vertical-toggle label input:checked {
@@ -575,14 +574,14 @@ export default {
 .controls .sidebar .vertical-toggle label span {
   display: inline-block;
   vertical-align: middle;
-  max-width: 150rem;
-  margin-left: 9rem;
-  margin-right: -10rem;
-  padding: 3rem 5rem;
-  font-size: 12rem;
+  max-width: 15.0rem;
+  margin-left: 0.9rem;
+  margin-right: -1.0rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.3;
-  border-radius: 3rem;
+  border-radius: 0.3rem;
   color: rgba(0,0,0,0.3);
 }
 
@@ -592,15 +591,15 @@ export default {
 
 .controls .sidebar section.reachability .vertical-toggle:before {
   background: #F2FFD7;
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1);
 }
 
 .controls .sidebar section.reachability .vertical-toggle label + label {
-  margin-top: -10rem;
+  margin-top: -1.0rem;
 }
 
 .controls .sidebar section.reachability .vertical-toggle label input {
-  height: 60rem;
+  height: 6.0rem;
 }
 
 .controls .sidebar section.reachability .vertical-toggle label input:checked {
@@ -667,18 +666,18 @@ export default {
 
 .controls .sidebar .slider {
   position: relative;
-  margin-top: -4rem;
+  margin-top: -0.4rem;
 }
 
 .controls .sidebar .slider span {
   position: absolute;
   display: block;
-  top: 4rem;
+  top: 0.4rem;
   left: 0;
-  height: 12rem;
-  border-radius: 6rem 0 0 6rem;
+  height: 1.2rem;
+  border-radius: 0.6rem 0 0 0.6rem;
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.25);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.25);
   pointer-events: none;
 }
 
@@ -711,12 +710,12 @@ export default {
 .controls .sidebar .slider input::-webkit-slider-thumb {
   cursor: grab;
   position: relative;
-  width: 20rem;
-  height: 20rem;
-  margin-top: -4rem;
+  width: 2.0rem;
+  height: 2.0rem;
+  margin-top: -0.4rem;
   border-radius: 100%;
   background: #565655;
-  box-shadow: inset 0 0 0 2rem #565655, inset 0 0 0 4rem #C9FE53;
+  box-shadow: inset 0 0 0 0.2rem #565655, inset 0 0 0 0.4rem #C9FE53;
 }
 
 .controls .sidebar .slider input::-webkit-slider-thumb:active {
@@ -724,28 +723,28 @@ export default {
 }
 
 .controls .sidebar .slider input::-webkit-slider-runnable-track {
-  height: 12rem;
-  margin: 4rem 0;
-  border-radius: 6rem;
+  height: 1.2rem;
+  margin: 0.4rem 0;
+  border-radius: 0.6rem;
   background: #F2FFD7;
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1);
 }
 
 .controls .sidebar .slider input:focus-visible::-webkit-slider-runnable-track {
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
 }
 
 /* Firefox range shadow elements */
 
 .controls .sidebar .slider input::-moz-range-thumb {
   cursor: grab;
-  width: 20rem;
-  height: 20rem;
-  margin-top: -4rem;
+  width: 2.0rem;
+  height: 2.0rem;
+  margin-top: -0.4rem;
   border: none;
   border-radius: 100%;
   background: #565655;
-  box-shadow: inset 0 0 0 2rem #565655, inset 0 0 0 4rem #C9FE53;
+  box-shadow: inset 0 0 0 0.2rem #565655, inset 0 0 0 0.4rem #C9FE53;
 }
 
 .controls .sidebar .slider input::-moz-range-thumb:active {
@@ -753,22 +752,22 @@ export default {
 }
 
 .controls .sidebar .slider input::-moz-range-track {
-  height: 12rem;
-  margin: 4rem 0;
-  border-radius: 6rem;
+  height: 1.2rem;
+  margin: 0.4rem 0;
+  border-radius: 0.6rem;
   background: #F2FFD7;
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1);
 }
 
 .controls .sidebar .slider input:focus-visible::-moz-range-track {
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
 }
 
 .controls .sidebar .slider input::-moz-range-progress {
-  height: 12rem;
-  border-radius: 6rem 0 0 6rem;
+  height: 1.2rem;
+  border-radius: 0.6rem 0 0 0.6rem;
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.25);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.25);
 }
 
 /* End of range shadow elements */
@@ -777,23 +776,23 @@ export default {
   cursor: default;
   position: relative;
   display: inline-block;
-  width: 60rem;
-  margin-top: 10rem;
+  width: 6.0rem;
+  margin-top: 1.0rem;
   text-align: center;
-  font-size: 12rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 14rem;
+  line-height: 1.4rem;
 }
 
 .controls .sidebar .slider label mark {
-  padding: 3rem 6rem 3rem 7rem;
+  padding: 0.3rem 0.6rem 0.3rem 0.7rem;
   color: inherit;
-  background: url('../assets/edges/left-ui-4.svg') left -1rem center no-repeat, url('../assets/edges/right-ui-3.svg') right -1rem center no-repeat, #C9FE53;
+  background: url('../assets/edges/left-ui-4.svg') left -0.1rem center no-repeat, url('../assets/edges/right-ui-3.svg') right -0.1rem center no-repeat, #C9FE53;
   background-size: auto 100%;
 }
 
 .controls .sidebar .field.coverage {
-  background: url('../assets/berlin-coverage.svg') 5rem 2rem no-repeat;
+  background: url('../assets/berlin-coverage.svg') 0.5rem 0.2rem no-repeat;
 }
 
 .controls .sidebar .field.coverage h3 + button {
@@ -808,25 +807,25 @@ export default {
 .controls .sidebar .field.coverage mark {
   position: relative;
   display: inline-block;
-  margin: -1rem 0 0 -3rem;
-  padding: 2rem 14rem 2rem 13rem;
-  font-size: 32rem;
+  margin: -0.1rem 0 0 -0.3rem;
+  padding: 0.2rem 1.4rem 0.2rem 1.3rem;
+  font-size: 3.2rem;
   font-weight: 600;
   font-feature-settings: 'tnum';
-  letter-spacing: -2rem;
+  letter-spacing: -0.2rem;
   color: rgba(0,0,0,0.75);
-  background: url('../assets/edges/left-ui-1.svg') left -1rem center no-repeat, url('../assets/edges/right-bg-3.svg') right -1rem center no-repeat, #C9FE53;
+  background: url('../assets/edges/left-ui-1.svg') left -0.1rem center no-repeat, url('../assets/edges/right-bg-3.svg') right -0.1rem center no-repeat, #C9FE53;
   background-size: auto 100%;
 }
 
 .controls .sidebar .field.coverage mark span {
-  margin-left: 4rem;
+  margin-left: 0.4rem;
 }
 
 .controls .sidebar .field.coverage p {
   display: block;
-  margin: 16rem 0 0 1rem;
-  font-size: 12rem;
+  margin: 1.6rem 0 0 0.1rem;
+  font-size: 1.2rem;
 }
 
 
@@ -838,66 +837,66 @@ export default {
   bottom: 0;
   left: 0;
   width: 75vw;
-  max-width: 650rem;
+  max-width: 65.0rem;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .controls .sidebar .inner.intro section {
-  max-width: 450rem;
+  max-width: 45.0rem;
   margin: 0 auto;
-  padding: 0 25rem;
+  padding: 0 2.5rem;
 }
 
 .controls .sidebar .inner.intro section.welcome {
-  margin-top: 44rem;
-  margin-bottom: 44rem;
+  margin-top: 4.4rem;
+  margin-bottom: 4.4rem;
   text-align: center;
 }
 
 .controls .sidebar .inner.intro section.welcome p {
-  margin: 42rem 0 46rem;
+  margin: 4.2rem 0 4.6rem;
   text-align: left;
-  font-size: 15rem;
+  font-size: 1.5rem;
   line-height: 1.35;
 }
 
 .controls .sidebar .inner.intro section.welcome button {
   display: inline-block;
-  padding: 0 16rem;
-  font-size: 12rem;
+  padding: 0 1.6rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 36rem;
-  border: 2rem solid rgba(0,0,0,0.1);
-  border-radius: 20rem;
+  line-height: 3.6rem;
+  border: 0.2rem solid rgba(0,0,0,0.1);
+  border-radius: 2.0rem;
   color: rgba(0,0,0,0.65);
   background: rgba(0,0,0,0.06);
 }
 
 .controls .sidebar .inner.intro section.welcome button + button {
-  margin-left: 12rem;
+  margin-left: 1.2rem;
   border-color: rgba(0,0,0,0.2);
   color: rgba(0,0,0,0.75);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
 }
 
 .controls .sidebar .inner.intro section.article {
-  margin-top: 140rem;
-  margin-bottom: 80rem;
+  margin-top: 14.0rem;
+  margin-bottom: 8.0rem;
 }
 
 .controls .sidebar .inner.intro section.article h3 {
-  margin: 32rem 0 -3rem;
-  font-size: 13rem;
+  margin: 3.2rem 0 -0.3rem;
+  font-size: 1.3rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05rem;
   color: rgba(0,0,0,0.65);
 }
 
 .controls .sidebar .inner.intro section.article p {
-  margin: 14rem 0 0;
-  font-size: 12rem;
+  margin: 1.4rem 0 0;
+  font-size: 1.2rem;
   line-height: 1.45;
 }
 
@@ -908,14 +907,14 @@ export default {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  top: 12rem;
-  right: 12rem;
-  width: 28rem;
-  height: 28rem;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 2.8rem;
+  height: 2.8rem;
   border: none;
   border-radius: 50%;
   background: url('../assets/icons/close.svg') center no-repeat rgba(0,0,0,0.06);
-  border: 2rem solid rgba(0,0,0,0.1);
+  border: 0.2rem solid rgba(0,0,0,0.1);
   transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -929,7 +928,7 @@ export default {
 
 .controls .floating {
   position: absolute;
-  left: 250rem;
+  left: 25.0rem;
   right: 0;
   text-align: center;
   pointer-events: none;
@@ -956,33 +955,33 @@ export default {
 
 .controls .floating.top .view-settings {
   display: inline-block;
-  margin-top: 10rem;
-  padding: 6rem;
-  border-radius: 26rem;
+  margin-top: 1.0rem;
+  padding: 0.6rem;
+  border-radius: 2.6rem;
   background: #FAF6F0;
-  box-shadow: 0rem 8rem 8rem rgba(0, 0, 0, 0.03),
-              0rem 4rem 4rem rgba(0, 0, 0, 0.03),
-              0rem 2rem 2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
+              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
+              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
 }
 
 .controls .floating.top .view-settings button {
   display: inline-block;
   vertical-align: top;
-  width: 40rem;
-  height: 40rem;
+  width: 4.0rem;
+  height: 4.0rem;
   border: none;
   border-radius: 50%;
   background: url('../assets/icons/info.svg') center no-repeat rgba(0,0,0,0.06);
-  border: 2rem solid rgba(0,0,0,0.1);
+  border: 0.2rem solid rgba(0,0,0,0.1);
 }
 
 .controls .floating.top .view-settings .view-toggle {
   display: inline-block;
   vertical-align: top;
-  margin-left: 10rem;
-  border-radius: 20rem;
+  margin-left: 1.0rem;
+  border-radius: 2.0rem;
   background: rgba(0,0,0,0.06);
-  box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1);
 }
 
 .controls .floating.top .view-settings .view-toggle input {
@@ -992,17 +991,17 @@ export default {
 
 .controls .floating.top .view-settings .view-toggle label {
   display: inline-block;
-  width: 92rem;
-  font-size: 12rem;
+  width: 9.2rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 36rem;
-  border: 2rem solid transparent;
-  border-radius: 20rem;
+  line-height: 3.6rem;
+  border: 0.2rem solid transparent;
+  border-radius: 2.0rem;
   color: rgba(0,0,0,0.65);
 }
 
 .controls .floating.top .view-settings .view-toggle label + input + label {
-  margin-left: -4rem;
+  margin-left: -0.4rem;
 }
 
 .controls .floating.top .view-settings .view-toggle input:checked + label {

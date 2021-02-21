@@ -22,30 +22,30 @@ export default {
 }
 
 #app.intro .loading-view {
-  left: 650rem;
+  left: 65.0rem;
 }
 
 .loading-view .indicator {
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 20rem 24rem;
-  border-radius: 25rem;
+  padding: 2.0rem 2.4rem;
+  border-radius: 2.5rem;
   text-align: center;
-  font-size: 12rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: rgba(0,0,0,0.45);
   /*color: #29955A;*/
   background: #F8F3EB;
-  box-shadow: 0rem 8rem 8rem rgba(0, 0, 0, 0.03),
-              0rem 4rem 4rem rgba(0, 0, 0, 0.03),
-              0rem 2rem 2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
+              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
+              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
   transform: translateX(-50%) translateY(-50%);
 }
 
 .loading-view .indicator svg {
   display: block;
-  margin: 0 auto 8rem;
+  margin: 0 auto 0.8rem;
   fill: rgba(0,0,0,0.08);
   stroke: rgba(0,0,0,0.35);
   stroke-dasharray: 861;

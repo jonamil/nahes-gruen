@@ -106,15 +106,15 @@ export default {
   vertical-align: top;
   box-sizing: border-box;
   width: 75%;
-  max-width: 540rem;
-  min-height: 100rem;
-  margin-bottom: 20rem;
-  padding: 20rem;
-  border-radius: 25rem;
+  max-width: 54.0rem;
+  min-height: 10.0rem;
+  margin-bottom: 2.0rem;
+  padding: 2.0rem;
+  border-radius: 2.5rem;
   background: #FAF6F0;
-  box-shadow: 0rem 8rem 8rem rgba(0, 0, 0, 0.03),
-              0rem 4rem 4rem rgba(0, 0, 0, 0.03),
-              0rem 2rem 2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
+              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
+              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
   transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -125,46 +125,46 @@ export default {
 
 .tour h3 {
   margin: 0;
-  font-size: 12rem;
+  font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05rem;
   color: rgba(0,0,0,0.5);
 }
 
 .tour h1 {
-  margin: 3rem 0 19rem;
-  font-size: 14rem;
+  margin: 0.3rem 0 1.9rem;
+  font-size: 1.4rem;
 }
 
 .tour p {
-  margin: 16rem 0 0;
+  margin: 1.6rem 0 0;
   text-align: left;
-  font-size: 12rem;
+  font-size: 1.2rem;
   line-height: 1.45;
 }
 
 .tour .navigation {
   position: relative;
-  margin-top: 18rem;
+  margin-top: 1.8rem;
   /*background: #f00;*/
 }
 
 .tour .navigation button {
-  padding: 0 16rem;
-  font-size: 12rem;
+  padding: 0 1.6rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 30rem;
-  border: 2rem solid rgba(0,0,0,0.1);
-  border-radius: 17rem;
+  line-height: 3.0rem;
+  border: 0.2rem solid rgba(0,0,0,0.1);
+  border-radius: 1.7rem;
   color: rgba(0,0,0,0.65);
   background: rgba(0,0,0,0.06);
 }
 
 .tour .navigation button.skip {
   position: absolute;
-  width: 34rem;
-  height: 34rem;
+  width: 3.4rem;
+  height: 3.4rem;
   padding: 0;
 }
 
@@ -175,7 +175,7 @@ export default {
 
 .tour .navigation button.skip.next {
   right: -1px;
-  border: 2rem solid rgba(0,0,0,0.22);
+  border: 0.2rem solid rgba(0,0,0,0.22);
   color: #fff;
   background: url('../assets/icons/tour-next.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), #7D7D7D;
 }

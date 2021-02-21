@@ -93,8 +93,12 @@ export default {
     // }
   },
 
-  created () {
-    // this.currentTourStop = this.tourStops[0];
+  mounted () {
+    this.$refs.tour.addEventListener('click', event => {
+      if (event.target.localName === 'sup') {
+        this.$emit('update:currentModal', 'sources');
+      }
+    });
   }
 }
 </script>

@@ -117,7 +117,8 @@
       <TourWindow
         :tourStops="tourStops"
         :tourIndex="tourIndex"
-        v-on:update:tourIndex="$emit('update:tourIndex', $event);"
+        v-on:update:tourIndex="$emit('update:tourIndex', $event)"
+        v-on:update:currentModal="currentModal = $event"
       />
     </div>
     <ExplanationModal :currentModal.sync="currentModal" />
@@ -272,6 +273,12 @@ export default {
     this.sliderProperties.minValue = parseInt(input.getAttribute('min'));
     this.sliderProperties.maxValue = parseInt(input.getAttribute('max'));
     this.sliderProperties.trackWidth = input.getBoundingClientRect().width;
+
+    this.$refs.introArticle.addEventListener('click', event => {
+      if (event.target.localName === 'sup') {
+        this.currentModal = 'sources';
+      }
+    });
   }
 }
 </script>
@@ -326,12 +333,24 @@ export default {
   background: transparent;
 }
 
-/* Hyphenation for all p elements */
+/* Hyphenation for all p elements and reference number style */
 
 .controls p {
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
+}
+
+.controls p sup {
+  cursor: pointer;
+  top: -4rem;
+  margin: 0 0 -1rem 1rem;
+  padding: 1rem 2rem;
+  font-size: 0.7em;
+  /*font-size: inherit;*/
+  border-radius: 2rem;
+  color: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.1);
 }
 
 

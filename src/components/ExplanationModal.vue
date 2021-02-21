@@ -65,6 +65,12 @@ export default {
         }
       }
     });
+
+    this.$refs.window.addEventListener('click', event => {
+      if (event.target.localName === 'sup') {
+        this.$emit('update:currentModal', 'sources');
+      }
+    });
   }
 }
 </script>

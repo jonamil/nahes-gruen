@@ -1,5 +1,5 @@
 {
-  "districs": {
+  "districts": {
     "properties": {
       "cw": {
         "name": "Charlottenburg-Wilmersdorf",
@@ -514,6 +514,6 @@
         "15": 100
       }
     },
-    "inhabitants": 3763608
+    "inhabitants": 3764000
   }
 }

@@ -1,8 +1,8 @@
 [
 	{
-		"title": "Grünanlagen in Laufentfernung",
+		"title": "Wohnungsnahe Grünanlagen",
 		"paragraphs": [
-			"Im Alltag ist der Zugang zu wohnungsnahen, öffentlichen Grünanlagen für die Kurzzeit- und Feierabend-Erholung von großer Bedeutung. Als »wohnungsnah« werden von der Stadt Berlin Grünanlagen in einem Einzugsbereich von 500 Metern bezeichnet, was in etwa sechs Gehminuten (bei einer Laufgeschwindigkeit von 5 km/h) entspricht. Unter diesen Voraussetzungen können ca. 75% der Berliner*innen von zuhause aus mindestens eine Grünanlage erreichen."
+			"Im Alltag ist der Zugang zu wohnungsnahen, öffentlichen Grünanlagen für die Kurzzeit- und Feierabend-Erholung von großer Bedeutung. Als »wohnungsnah« werden von der Stadt Berlin Grünanlagen in einem Einzugsbereich von 500 Metern bezeichnet <sup>16</sup>, was in etwa sechs Gehminuten entspricht. Unter diesen Voraussetzungen können ca. 79% der Berliner*innen von zuhause aus mindestens eine Grünanlage erreichen."
 		],
 		"controlState": {
 			"contentView": "map",
@@ -11,8 +11,8 @@
 			"parkProperty": "none"
 		},
 		"mapState": {
-			"longitude": 13.378707,
-        	"latitude": 52.517598,
+			"longitude": 13.3787,
+        	"latitude": 52.5176,
 			"zoom": 10.25
 		},
 		"highlightedSections": [
@@ -20,38 +20,55 @@
 		]
 	},
 	{
-		"title": "Hier geht es um Verkehrslärm",
+		"title": "Lautes Grün, leises Grün",
 		"paragraphs": [
-			"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+			"Orte mit einem niedrigen Lärmpegel sind besonders in Städten als Ausgleich und Entlastung zu alltäglichen Lärmsituationen von Bedeutung. Beim durchschnittlichen Verkehrslärmpegel innerhalb der Grünflächen zeigen sich klare Unterschiede, die sich vor allem durch angrenzende Straßen begründen lassen. Im innerstädtischen Raum wird kleineren Naturräumen ein Erholungswert zugesprochen, wenn sie eindeutig ruhiger sind als ihre Umgebung. Bei großen, zusammenhängenden Naturräumen und Freiflächen ist eine Klassifikation als sogenanntes ruhiges Gebiet bei einem Lärmpegel unter 55 dB<sub>A</sub> geläufig <sup>11</sup>."
 		],
 		"controlState": {
 			"contentView": "map",
 			"transportMode": "walking",
-			"transportMinutes": 3,
+			"transportMinutes": 6,
 			"parkProperty": "noise"
 		},
 		"mapState": {
-			"longitude": 13.528707,
-        	"latitude": 52.557598,
-			"zoom": 12.5
+			"longitude": 13.6061,
+        	"latitude": 52.4391,
+			"zoom": 11.7
 		},
 		"highlightedSections": [
 			"reachability"
 		]
 	},
 	{
-		"title": "Und Hopps, rüber zur Bezirksansicht",
+		"title": "Hohe Bäume, flaches Gras",
 		"paragraphs": [
-			"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+			"Die Vegetation beschreibt das Vorhandensein von Bäumen, Sträuchern und Gräsern in einer Grünanlage und kann auch als mittlere Wuchshöhe verstanden werden. Viel Vegetation bedeutet zum Beispiel eine stärkere Beschattung und kühlere Temperaturen, beeinflusst aber natürlich auch die Nutzungsmöglichkeiten der Grünfläche. Die Rehwiese entspricht mit einer Vegetation von 5,7 m³/m² in etwa dem Durchschnitt der Parks und Grünflächen in Berlin. Mehr als die Hälfte des gesamten Berliner Grünvolumens ist in den Wäldern zu finden, dort wachsen und gedeihen durchschnittlich 17,2 m³ Pflanzen pro Quadratmeter <sup>15</sup>."
 		],
 		"controlState": {
-			"contentView": "district",
-			"transportMode": "cycling",
-			"transportMinutes": 10,
-			"parkProperty": "noise"
+			"contentView": "map",
+			"transportMode": "walking",
+			"transportMinutes": 6,
+			"parkProperty": "vegetation"
+		},
+		"mapState": {
+			"longitude": 13.2016,
+        	"latitude": 52.4210,
+			"zoom": 11.5
 		},
 		"highlightedSections": [
 			"reachability"
 		]
+	},
+	{
+		"title": "Es geht noch weiter",
+		"paragraphs": [
+			"Einige Stopps fehlen noch, so zum Beispiel zur Bezirksansicht. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		],
+		"controlState": {
+			"contentView": "district",
+			"transportMode": "walking",
+			"transportMinutes": 6,
+			"parkProperty": "vegetation"
+		}
 	}
 ]

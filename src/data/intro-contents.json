@@ -2,9 +2,24 @@
 	"welcome": "Häufig wird Berlin als besonders grüne Hauptstadt charakterisiert. Jedoch profitieren nicht aller Berliner*innen gleichermaßen von den Grünräumen der Stadt. Diese interaktive Karte möchte die Unterschiede in der Verteilung und Erreichbarkeit des Berliner Stadtgrüns sichtbar und erkundbar machen.",
 	"articleSections": [
 		{
-			"heading": "",
+			"heading": "Hintergründe",
 			"paragraphs": [
-				""
+				"Öffentliches, urbanes Grün ist wichtig für alle Stadtbewohner*innen und bringt zahlreiche Nutzen mit sich. Auch in Berlin haben öffentliche Grünanlagen durch die Covid-19-Pandemie als Aufenthalts- und Erholungsorte stark an Bedeutung gewonnen.<sup>1</sup> Sie wirken sich unter anderem positiv auf die physische und psychische Gesundheit aus, fördern körperliche Aktivität und soziale Interaktion, bieten Raum für Entspannung und Erholung und helfen lokal bei der Eindämmung von Umweltbelastungen wie Luft- und Lärmverschmutzung sowie urbanen Hitzeinseln.<sup>8, 23</sup> Besonders wohnungsnahes öffentliches Grün in einer maximalen Wegdistanz von 500 Metern gilt im Alltag als wichtiger Bezugspunkt. Diese Karte bezieht als öffentliches Grün frei zugängliche Park- und Grünanlagen sowie Wälder ab einer Größe von 0,5 Hektar ein.",
+				"Wälder und öffentliche Grünflächen machen fast ein Drittel der Berliner Gesamtfläche aus,<sup>20</sup> jedoch ist nicht für jede*n Berliner*in eine öffentliche Grünfläche wohnungsnah erreichbar. Das Grünflächenangebot ist in der Stadt nicht gleichmäßig verteilt, wie auf der Karte schnell sichtbar wird. Aufgrund räumlicher Distanz können nicht alle Berliner*innen gleichermaßen von dem Angebot und den Vorteilen des öffentlichen Grüns profitieren. Die Verfügbarkeit von öffentlichem Grün gilt als wichtiger Indikator zur Untersuchung von Umweltgerechtigkeit und wird in der Karte auf Basis von Wegzeiten zur nächstgelegenen öffentlichen Grünfläche dargestellt. Umweltgerechtigkeit hat einen sozialräumlich gerechten Zugang zu Umweltressourcen, zum Beispiel öffentlichem Grün, sowie den Ausgleich überproportionaler Mehrbelastung durch Umweltbelastungen wie Luftverschmutzung und Lärmbelastung zum Ziel.<sup>2</sup>",
+				"Neben der Verfügbarkeit von öffentlichem Grün sind auch Aspekte der Zugänglichkeit und der Attraktivität von Grünanlagen zu bedenken,<sup>9</sup> denn Grün ist nicht gleich Grün. Welche physischen und psychologischen Barrieren schränken womöglich die Zugänglichkeit ein? Entspricht die Grünfläche mit ihrer Ausstattung, Gestaltung, Ge- und Verboten den Erwartungen und Bedürfnissen verschiedenster potenzieller Nutzer*innen, insbesondere der Anwohner*innen?<sup>4, 7, 8, 21</sup>",
+				"Um öffentliches Grün für alle Berliner*innen zu schaffen, müssen verschiedenste Bereiche mitgedacht werden. Mit unserer Karte zur Verteilung und Erreichbarkeit von Grünflächen leisten wir einen Beitrag zur Analyse der Verteilungsgerechtigkeit, möchten jedoch darauf hinweisen, dass im Rahmen der Umweltgerechtigkeit auch ein gleichberechtigter Zugang zu Umweltressourcen und gleichberechtigte Möglichkeiten der Beteiligung an Planungs- und Entscheidungsprozessen bezüglich umweltbezogener Interventionen anzustreben ist.<sup>3, 8, 9</sup> Nur so kann verhindert werden, dass Grünflächen und Begrünungsstrategien, die in einer kapitalistischen Gesellschaft und durch beständig zunehmenden Flächenkonkurrenz im urbanen Raum immer in marktgetriebene Strukturen eingebettet sind, soziale Ungleichheit, Ausgrenzung und Verdrängung verstärken.<sup>7</sup> Eine Kontextbetrachtung und der Fokus auf sozial-ökologische Zielkonflikte im Rahmen einer marktgesteuerten Stadtentwicklung sind unabdingbar.<sup>6</sup>"
+			]
+		},
+		{
+			"heading": "Daten & Methodik",
+			"paragraphs": [
+				"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt."
+			]
+		},
+		{
+			"heading": "Weitere Sektionen",
+			"paragraphs": [
+				"Hier unten fehlen noch »Team«, »Über das Projekt« und »Dank an«."
 			]
 		}
 	]

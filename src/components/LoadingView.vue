@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'DistrictView'
+  name: 'LoadingView'
 }
 </script>
 

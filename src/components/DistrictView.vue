@@ -3,20 +3,28 @@
     <div class="inner">
       <section class="inhabitants">
         <div class="included">
-          <h1>2.760.000</h1>
-          <span>Einwohner*innen können unter diesen<br>Bedingungen einen Grünraum erreichen</span>
+          <h1>
+            <AnimatedNumber
+              :number="includedInhabitants"
+            />
+          </h1>
+          <span>Berliner*innen können unter diesen<br>Bedingungen einen Grünraum erreichen</span>
         </div>
         <div class="excluded">
-          <h1>910.000</h1>
-          <span>Einwohner*innen können unter diesen<br>Bedingungen <u>keinen</u> Grünraum erreichen</span>
+          <h1>
+            <AnimatedNumber
+              :number="excludedInhabitants"
+            />
+          </h1>
+          <span>Berliner*innen können unter diesen<br>Bedingungen <u>keinen</u> Grünraum erreichen</span>
         </div>
       </section>
       <section class="legend">
-        <div class="figure" /> entspricht 10.000 Einwohner*innen
+        <div class="figure" /> entspricht 10.000 Berliner*innen
       </section>
       <section class="districts">
         <div
-          v-for="(district, index) in sortedDistricts"
+          v-for="(district, index) in rankedDistricts"
           :key="index"
           class="district"
         >
@@ -30,7 +38,7 @@
               <div
                 v-for="figureNumber in district.figures"
                 :key="figureNumber"
-                :class="'figure' + (figureNumber / district.figures <= Math.round(district.percentage * 10) / 1000 ? '' : ' excluded')"
+                :class="'figure' + (figureNumber / district.figures - 1 / district.figures * 0.5 <= district.percentage / 100 ? '' : ' excluded')"
               />
             </div>
           </div>
@@ -41,8 +49,14 @@
 </template>
 
 <script>
+import AnimatedNumber from './AnimatedNumber.vue';
+
 export default {
   name: 'DistrictView',
+
+  components: {
+    AnimatedNumber
+  },
 
   data () {
     return {
@@ -67,80 +81,59 @@ export default {
   },
 
   computed: {
-    sortedDistricts() {
-      return [
-        {
-          name: 'Friedrichshain-Kreuzberg',
-          percentage: 86.2,
-          figures: 29
-        },
-        {
-          name: 'Marzahn-Hellersdorf',
-          percentage: 84.3,
-          figures: 27
-        },
-        {
-          name: 'Lichtenberg',
-          percentage: 80.4,
-          figures: 29
-        },
-        {
-          name: 'Mitte',
-          percentage: 79.7,
-          figures: 39
-        },
-        {
-          name: 'Spandau',
-          percentage: 77.2,
-          figures: 25
-        },
-        {
-          name: 'Reinickendorf',
-          percentage: 76.2,
-          figures: 27
-        },
-        {
-          name: 'Pankow',
-          percentage: 72.6,
-          figures: 41
-        },
-        {
-          name: 'Charlottenburg-Wilmersdorf',
-          percentage: 72.5,
-          figures: 34
-        },
-        {
-          name: 'Treptow-Köpenick',
-          percentage: 72,
-          figures: 27
-        },
-        {
-          name: 'Steglitz-Zehlendorf',
-          percentage: 71.9,
-          figures: 31
-        },
-        {
-          name: 'Neukölln',
-          percentage: 66.8,
-          figures: 33
-        },
-        {
-          name: 'Tempelhof-Schöneberg',
-          percentage: 66.7,
-          figures: 35
+    includedInhabitants() {
+      return Math.round(this.coverage.city.inhabitants * this.coverage.city.percentages[this.controlState.transportMode][this.controlState.transportMinutes.toString()] / 100 / 1000) * 1000;
+    },
+    excludedInhabitants() {
+      return this.coverage.city.inhabitants - this.includedInhabitants;
+    },
+    rankedDistricts() {
+      const districtProperties = this.coverage.districts.properties;
+      const districtPercentages = this.coverage.districts.percentages[this.controlState.transportMode][this.controlState.transportMinutes.toString()];
+
+      let array = Object.keys(districtPercentages).map((key) => {
+        return [key, districtPercentages[key]];
+      });
+
+      array.sort((a, b) => {
+        if (b[1] - a[1] === 0) {
+          return districtProperties[b[0]].figures - districtProperties[a[0]].figures;
+        } else {
+          return b[1] - a[1];
         }
-      ]
+        // if (districtProperties[b[0]].name < districtProperties[a[0]].name) {
+        //   return 1;
+        // } else {
+        //   return -1;
+        // }
+      });
+
+      let rankedDistricts = [];
+
+      array.forEach(item => {
+        rankedDistricts.push({
+          name: districtProperties[item[0]].name,
+          figures: districtProperties[item[0]].figures,
+          percentage: item[1]
+        });
+      });
+
+      return rankedDistricts;
     }
   },
 
   methods: {
-    highlightWidth(district) {
-      return Math.floor(Math.round(district.percentage * 10) / 1000 * district.figures) * this.figureWidth;
+    formatInhabitants(inhabitants) {
+      return new Intl.NumberFormat('de-DE').format(inhabitants);
     },
     formatPercentage(percentage) {
-      let number = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(percentage);
-      if (number.length > 4) number = number.substring(0, 3);
-      return number;
+      let digits = 1;
+      if (percentage >= 99.95) digits = 0;
+
+      return new Intl.NumberFormat('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(percentage);
+    },
+    highlightWidth(district) {
+      return Math.round(district.percentage / 100 * district.figures) * this.figureWidth;
     }
   }
 }
@@ -264,7 +257,7 @@ export default {
   box-sizing: border-box;
   width: 140rem;
   margin: -20rem 0;
-  padding-right: 27rem;
+  padding-right: 25rem;
   font-size: 13rem;
   font-weight: 600;
   line-height: 1.2;

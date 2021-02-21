@@ -48,8 +48,8 @@
           </div>
           <div class="field coverage">
             <h3>Abdeckung</h3>
-            <mark>{{ coveragePercentage }}<span>%</span></mark>
-            <span>aller Berliner*innen können unter diesen Bedingungen von zuhause einen Grünraum erreichen.</span>
+            <br><mark>{{ coveragePercentage }}<span>%</span></mark>
+            <p>aller Berliner*innen können unter diesen Bedingungen von zuhause einen Grünraum erreichen.</p>
           </div>
         </section>
         <section :class="'properties' + (contentView !== 'map' ? ' hidden' : '')">
@@ -775,10 +775,10 @@ export default {
 }
 
 .controls .sidebar .slider label mark {
-  padding: 3rem 5rem;
-  border-radius: 3rem;
+  padding: 3rem 6rem 3rem 7rem;
   color: inherit;
-  background: #C9FE53;
+  background: url('../assets/edges/left-ui-4.svg') left -1rem center no-repeat, url('../assets/edges/right-ui-3.svg') right -1rem center no-repeat, #C9FE53;
+  background-size: auto 100%;
 }
 
 .controls .sidebar .field.coverage {
@@ -794,15 +794,15 @@ export default {
 .controls .sidebar .field.coverage mark {
   position: relative;
   display: inline-block;
-  margin-left: -3rem;
-  padding: 2rem 16rem;
-  border-radius: 100rem;
+  margin: -1rem 0 0 -3rem;
+  padding: 2rem 14rem 2rem 13rem;
   font-size: 32rem;
   font-weight: 600;
   font-feature-settings: 'tnum';
   letter-spacing: -2rem;
   color: rgba(0,0,0,0.75);
-  background: #C9FE53;
+  background: url('../assets/edges/left-ui-1.svg') left -1rem center no-repeat, url('../assets/edges/right-bg-3.svg') right -1rem center no-repeat, #C9FE53;
+  background-size: auto 100%;
 }
 
 .controls .sidebar .field.coverage mark span {

@@ -1,7 +1,7 @@
 <template>
   <div :class="'tour' + (this.tourIndex !== false ? ' visible' : '')">
     <h3>Station {{ mostRecentTourIndex + 1 }} von {{ finalTourStopIndex + 1 }}</h3>
-    <h1><mark>{{ mostRecentTourStop.title }}</mark></h1>
+    <h1>{{ mostRecentTourStop.title }}</h1>
     <p
       v-for="(paragraph, index) in mostRecentTourStop.paragraphs"
       :key="index"
@@ -140,13 +140,6 @@ export default {
 .tour h1 {
   margin: 5rem 0 20rem;
   font-size: 14rem;
-}
-
-.tour h1 mark {
-  padding: 3rem 5rem;
-  border-radius: 3rem;
-  color: inherit;
-  background: #C9FE53;
 }
 
 .tour p {

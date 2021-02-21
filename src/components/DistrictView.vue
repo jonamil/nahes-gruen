@@ -185,10 +185,10 @@ export default {
 }
 
 .district-view section.inhabitants .included h1 {
-  margin-left: -18rem;
-  padding: 0 20rem 0 16rem;
-  border-radius: 100rem;
-  background: #C9FE53;
+  margin-left: -16rem;
+  padding: 0 18rem 0 14rem;
+  background: url('../assets/edges/left-bg-2.svg') left -1rem center no-repeat, url('../assets/edges/right-bg-1.svg') right -1rem center no-repeat, #C9FE53;
+  background-size: auto 100%;
 }
 
 .district-view section.inhabitants .excluded h1 {
@@ -241,11 +241,19 @@ export default {
   display: block;
   top: -4rem;
   bottom: -4rem;
-  left: 130rem;
-  padding: 0 6rem 0 84rem;
-  border-radius: 100rem;
-  background: #C9FE53;
+  left: 131rem;
+  padding: 0 6rem 0 83rem;
+  background: url('../assets/edges/left-bg-2.svg') left -1rem center no-repeat, url('../assets/edges/right-bg-3.svg') right -1rem center no-repeat, #C9FE53;
+  background-size: auto 100%;
   z-index: -1;
+}
+
+.district-view section.districts .district:nth-child(3n-1) mark {
+  background-image: url('../assets/edges/left-bg-1.svg'), url('../assets/edges/right-bg-2.svg');
+}
+
+.district-view section.districts .district:nth-child(3n) mark {
+  background-image: url('../assets/edges/left-bg-4.svg'), url('../assets/edges/right-bg-1.svg');
 }
 
 .district-view section.districts .district div {

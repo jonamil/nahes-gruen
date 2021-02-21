@@ -6,7 +6,7 @@
       <div class="columns">
         <div class="property size">
           <h3>Fläche</h3>
-          <span>{{ parkSize }}</span>
+          <span>{{ parkSize }} ha</span>
         </div>
         <div class="property amenities">
           <h3>Ausstattung</h3>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div :class="'property noise' + (controlState.parkProperty === 'noise' ? ' active' : '')">
-        <h3>Verkehrslärm</h3>
+        <h3>Lärmbelastung</h3>
         <div class="rating">
           <div :class="parkProperties.noise >= ratingThresholds.noise[0] ? 'filled' : ''"></div>
           <div :class="parkProperties.noise >= ratingThresholds.noise[1] ? 'filled' : ''"></div>
@@ -24,10 +24,10 @@
           <div :class="parkProperties.noise >= ratingThresholds.noise[3] ? 'filled' : ''"></div>
           <div :class="parkProperties.noise >= ratingThresholds.noise[4] ? 'filled' : ''"></div>
         </div>
-        <span>{{ parkNoise }}</span>
+        <span>{{ parkNoise }} dB<sub>A</sub></span>
       </div>
       <div :class="'property vegetation' + (controlState.parkProperty === 'vegetation' ? ' active' : '')">
-        <h3>Vegetation</h3>
+        <h3>Vegetationsmenge</h3>
         <div class="rating">
           <div :class="parkProperties.veg > ratingThresholds.vegetation[0] ? 'filled' : ''"></div>
           <div :class="parkProperties.veg > ratingThresholds.vegetation[1] ? 'filled' : ''"></div>
@@ -98,10 +98,10 @@ export default {
       }
     },
     parkSize() {
-      return new Intl.NumberFormat('de-DE').format(this.parkProperties.size.toFixed(1)) + ' ha';
+      return new Intl.NumberFormat('de-DE').format(this.parkProperties.size.toFixed(1));
     },
     parkNoise() {
-      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise) + ' dB';
+      return new Intl.NumberFormat('de-DE').format(this.parkProperties.noise);
     },
     parkVegetation() {
       if (this.parkProperties.veg !== null) {

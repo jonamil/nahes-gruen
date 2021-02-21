@@ -48,13 +48,14 @@
           </div>
           <div class="field coverage">
             <h3>Abdeckung</h3>
+            <button title="Erläuterung" @click="currentModal = 'coverage'" />
             <br><mark>{{ coveragePercentage }}<span>%</span></mark>
             <p>aller Berliner*innen können unter diesen Bedingungen von zuhause einen Grünraum erreichen.</p>
           </div>
         </section>
         <section :class="'properties' + (contentView !== 'map' ? ' hidden' : '')">
           <div class="field">
-            <h3>Merkmale</h3>
+            <h3>Flächenmerkmale</h3>
             <button title="Erläuterung" @click="currentModal = 'properties'" />
             <div class="vertical-toggle">
               <label
@@ -77,15 +78,25 @@
       </div>
       <div class="inner intro">
         <section class="welcome">
-          <img src="../assets/logo.svg" height="120" alt="Nahes Grün, Fernes Grün" />
+          <img src="../assets/logo.svg" height="126" alt="Nahes Grün, Fernes Grün" />
           <p v-html="introContents.welcome" />
           <button @click="exploreMap">Karte erkunden</button>
           <button @click="startTour">
             {{ tourIndex !== false ? 'Rundgang fortsetzen' : 'Rundgang starten' }}
           </button>
         </section>
-        <section class="article">
-
+        <section ref="introArticle" class="article">
+          <div
+            v-for="(section, index) in introContents.articleSections"
+            :key="index"
+          >
+            <h3 v-if="section.heading">{{ section.heading }}</h3>
+            <p
+              v-for="(paragraph, index) in section.paragraphs"
+              :key="index"
+              v-html="paragraph"
+            />
+          </div>
         </section>
       </div>
       <button class="close" title="Schließen" @click="hideIntro" />
@@ -198,10 +209,10 @@ export default {
           title: 'Keine Auswahl'
         },
         noise: {
-          title: 'Verkehrslärm'
+          title: 'Lärmbelastung'
         },
         vegetation: {
-          title: 'Vegetation'
+          title: 'Vegetationsmenge'
         }
       }
     }
@@ -782,13 +793,16 @@ export default {
 }
 
 .controls .sidebar .field.coverage {
-  background: url('../assets/berlin-coverage.svg') 5rem -2rem no-repeat;
+  background: url('../assets/berlin-coverage.svg') 5rem 2rem no-repeat;
 }
 
-.controls .sidebar .field.coverage h3 {
-  display: block;
-  margin-top: 37rem;
-  margin-bottom: 16rem;
+.controls .sidebar .field.coverage h3 + button {
+  background-color: #E1DDD8;
+  box-shadow: 0 0 0 2px #FAF6F0;
+}
+
+.controls .sidebar .field.coverage h3 + button:focus-visible {
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
 }
 
 .controls .sidebar .field.coverage mark {
@@ -809,7 +823,7 @@ export default {
   margin-left: 4rem;
 }
 
-.controls .sidebar .field.coverage > span {
+.controls .sidebar .field.coverage p {
   display: block;
   margin: 16rem 0 0 1rem;
   font-size: 12rem;
@@ -844,8 +858,8 @@ export default {
 .controls .sidebar .inner.intro section.welcome p {
   margin: 42rem 0 46rem;
   text-align: left;
-  font-size: 14rem;
-  line-height: 1.3;
+  font-size: 15rem;
+  line-height: 1.35;
 }
 
 .controls .sidebar .inner.intro section.welcome button {
@@ -865,6 +879,26 @@ export default {
   border-color: rgba(0,0,0,0.2);
   color: rgba(0,0,0,0.75);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
+}
+
+.controls .sidebar .inner.intro section.article {
+  margin-top: 140rem;
+  margin-bottom: 80rem;
+}
+
+.controls .sidebar .inner.intro section.article h3 {
+  margin: 32rem 0 -3rem;
+  font-size: 13rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  color: rgba(0,0,0,0.65);
+}
+
+.controls .sidebar .inner.intro section.article p {
+  margin: 14rem 0 0;
+  font-size: 12rem;
+  line-height: 1.45;
 }
 
 

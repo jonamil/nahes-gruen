@@ -6,7 +6,7 @@
   >
     <div ref="window" class="window">
       <button ref="closeButton" title="Schließen" @click="hideModal" />
-      <h3>Erläuterung</h3>
+      <h3 v-if="currentModalContent.key !== 'sources'">Erläuterung</h3>
       <h1>{{ currentModalContent.title }}</h1>
       <p
         v-for="(paragraph, index) in currentModalContent.paragraphs"
@@ -47,6 +47,7 @@ export default {
     currentModal: function(currentModal) {
       if (currentModal in this.modalContents) {
         this.currentModalContent = this.modalContents[currentModal];
+        this.currentModalContent.key = currentModal;
         this.$refs.window.scrollTop = 0;
       } else if (currentModal !== false) {
         this.hideModal();
@@ -103,7 +104,6 @@ export default {
   width: 75vw;
   max-width: 600rem;
   max-height: 75vh;
-  /*margin: -200rem 0 0 -300rem;*/
   padding: 25rem;
   border-radius: 25rem;
   background: #F8F3EB;
@@ -140,14 +140,17 @@ export default {
 }
 
 .modal .window h1 {
-  margin: 2rem 0 -3rem;
+  margin: -2rem 0 -3rem;
   font-size: 16rem;
-  /*font-weight: 700;*/
+}
+
+.modal .window h3 + h1 {
+  margin-top: 2rem;
 }
 
 .modal .window p {
   margin: 17rem 0 -1rem;
-  font-size: 12rem;
+  font-size: 13rem;
   line-height: 1.4;
 }
 

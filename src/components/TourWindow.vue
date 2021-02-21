@@ -1,5 +1,5 @@
 <template>
-  <div :class="'tour' + (this.tourIndex !== false ? ' visible' : '')">
+  <div ref="tour" :class="'tour' + (this.tourIndex !== false ? ' visible' : '')">
     <h3>Station {{ mostRecentTourIndex + 1 }} von {{ finalTourStopIndex + 1 }}</h3>
     <h1>{{ mostRecentTourStop.title }}</h1>
     <p
@@ -18,7 +18,7 @@
         class="exit"
         @click="exitTour"
       >
-        Rundgang verlassen
+        {{ tourIndex === tourStops.length - 1 ? 'Rundgang abschließen' : 'Rundgang verlassen' }}
       </button>
       <button
         v-if="mostRecentTourIndex !== finalTourStopIndex"
@@ -86,11 +86,6 @@ export default {
         this.mostRecentTourIndex = tourIndex;
       }
     }
-    // tourIndex: function(tourIndex) {
-    //   if (tourIndex !== false && this.tourIndex <= this.finalTourStopIndex) {
-    //     this.currentTourStop = this.tourStops[tourIndex];
-    //   }
-    // }
   },
 
   mounted () {
@@ -138,7 +133,7 @@ export default {
 }
 
 .tour h1 {
-  margin: 5rem 0 20rem;
+  margin: 3rem 0 19rem;
   font-size: 14rem;
 }
 
@@ -146,7 +141,7 @@ export default {
   margin: 16rem 0 0;
   text-align: left;
   font-size: 12rem;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .tour .navigation {

@@ -34,7 +34,7 @@
 
 @supports (font-variation-settings: normal) {
   @font-face {
-    font-family: 'Inter';
+    font-family: 'InterVar';
     font-weight: 400 900;
     font-display: swap;
     font-style: oblique 0deg 10deg;

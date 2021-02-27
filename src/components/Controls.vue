@@ -3,8 +3,7 @@
     <div ref="sidebar" class="sidebar">
       <div class="inner inputs">
         <section class="logo">
-          <img class="large" src="../assets/logo.svg" height="86" alt="Nahes Grün, Fernes Grün" @click="showIntro" />
-          <img class="small" src="../assets/logo-small.svg" height="64" alt="Nahes Grün, Fernes Grün" @click="showIntro" />
+          <img src="../assets/logo.svg" height="86" alt="Nahes Grün / Fernes Grün" @click="showIntro" />
         </section>
         <section class="reachability">
           <div class="field">
@@ -76,9 +75,10 @@
           </div>
         </section>
       </div>
-      <div class="inner intro">
+      <button class="close" title="Schließen" @click="hideIntro" />
+      <div ref="intro" :class="'inner intro' + (introExpanded ? ' expanded' : '')">
         <section class="welcome">
-          <img src="../assets/logo.svg" height="126" alt="Nahes Grün, Fernes Grün" />
+          <img src="../assets/logo.svg" height="122" alt="Nahes Grün, Fernes Grün" />
           <p v-html="introContents.welcome" />
           <button @click="exploreMap">Karte erkunden</button>
           <button @click="startTour">
@@ -119,7 +119,6 @@
           </a>
         </section>
       </div>
-      <button class="close" title="Schließen" @click="hideIntro" />
     </div>
     <div class="floating inputs top">
       <div class="view-settings">
@@ -352,7 +351,7 @@ export default {
 }
 
 .controls *:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
 }
 
 /* Global properties of input, label and button elements */
@@ -368,6 +367,7 @@ export default {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  border: none;
 }
 
 /* Text selection within labels and buttons invisible */
@@ -394,10 +394,17 @@ export default {
   margin: 0 0 -0.1rem 0.1rem;
   padding: 0.1rem 0.2rem;
   font-size: 0.7em;
-  /*font-size: inherit;*/
+  font-weight: 500;
+  white-space: nowrap;
   border-radius: 0.2rem;
-  color: rgba(0,0,0,0.5);
+  color: rgba(0,0,0,0.8);
   background: rgba(0,0,0,0.1);
+  transition: color 0.1s ease-in-out, background 0.1s ease-in-out;
+}
+
+.controls p sup:hover {
+  color: #FAF6F0;
+  background: rgba(0,0,0,0.65);
 }
 
 
@@ -496,11 +503,12 @@ export default {
   color: rgba(0,0,0,0.65);
 }
 
-.controls .sidebar .inner.inputs h3 + button {
+.controls .sidebar h3 + button {
   vertical-align: middle;
   width: 1.5rem;
   height: 1.5rem;
   margin-left: 0.5rem;
+  font-size: 0;
   border: none;
   border-radius: 50%;
   color: transparent;
@@ -522,22 +530,7 @@ export default {
   cursor: pointer;
 }
 
-.controls .sidebar .inner.inputs section.logo img.small {
-  display: none;
-  margin: -0.2rem 0 -1.1rem -0.5rem;
-}
-
-@media (max-height: 844px) {
-  .controls .sidebar .inner.inputs section.logo img.large {
-    display: none;
-  }
-
-  .controls .sidebar .inner.inputs section.logo img.small {
-    display: initial;
-  }
-}
-
-@media (max-height: 809px) {
+@media (max-height: 842px) {
   .controls .sidebar .inner.inputs section.logo {
     display: none;
   }
@@ -546,11 +539,11 @@ export default {
 
 /* SIDEBAR INPUTS VIEW: VERTICAL TOGGLE */
 
-.controls .sidebar .vertical-toggle {
+.controls .vertical-toggle {
   position: relative;
 }
 
-.controls .sidebar .vertical-toggle:before {
+.controls .vertical-toggle:before {
   position: absolute;
   display: block;
   content: '';
@@ -563,12 +556,12 @@ export default {
   box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.08);
 }
 
-.controls .sidebar .vertical-toggle label {
+.controls .vertical-toggle label {
   position: relative;
   display: block;
 }
 
-.controls .sidebar .vertical-toggle label:before {
+.controls .vertical-toggle label:before {
   position: absolute;
   display: block;
   content: '';
@@ -579,17 +572,17 @@ export default {
   background: rgba(0,0,0,0.11);
 }
 
-.controls .sidebar .vertical-toggle label:first-child:before,
-.controls .sidebar .vertical-toggle label.checked:before,
-.controls .sidebar .vertical-toggle label.checked + label:before {
+.controls .vertical-toggle label:first-child:before,
+.controls .vertical-toggle label.checked:before,
+.controls .vertical-toggle label.checked + label:before {
   display: none;
 }
 
-.controls .sidebar .vertical-toggle label + label {
+.controls .vertical-toggle label + label {
   margin-top: -0.6rem;
 }
 
-.controls .sidebar .vertical-toggle label input {
+.controls .vertical-toggle label input {
   opacity: 0.33;
   vertical-align: middle;
   margin: 0;
@@ -599,29 +592,28 @@ export default {
   border-radius: 2.0rem;
 }
 
-.controls .sidebar .vertical-toggle label input:checked {
+.controls .vertical-toggle label input:checked {
   opacity: 1;
 }
 
-.controls .sidebar .vertical-toggle label input:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #DFDBD5;
+.controls .vertical-toggle label input:focus-visible {
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
 }
 
-.controls .sidebar .vertical-toggle label span {
+.controls .vertical-toggle label span {
   display: inline-block;
   vertical-align: middle;
-  max-width: 15.0rem;
-  margin-left: 0.9rem;
+  width: 14.8rem;
+  margin-left: 0.6rem;
   margin-right: -1.0rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.5rem 0.8rem;
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.3;
-  border-radius: 0.3rem;
   color: rgba(0,0,0,0.3);
 }
 
-.controls .sidebar .vertical-toggle label input:checked + span {
+.controls .vertical-toggle label input:checked + span {
   color: rgba(0,0,0,0.75);
 }
 
@@ -650,6 +642,10 @@ export default {
   background: url('../assets/icons/walking.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
 }
 
+.controls .sidebar section.reachability .vertical-toggle label.walking input:checked + span {
+  background: url('../assets/edges/walking-ui.svg') center left no-repeat;
+}
+
 .controls .sidebar section.reachability .vertical-toggle label.cycling input {
   background: url('../assets/icons/cycling.svg') center no-repeat;
 }
@@ -658,8 +654,8 @@ export default {
   background: url('../assets/icons/cycling.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
 }
 
-.controls .sidebar section.reachability .vertical-toggle label input:checked + span {
-  background: #C9FE53;
+.controls .sidebar section.reachability .vertical-toggle label.cycling input:checked + span {
+  background: url('../assets/edges/cycling-ui.svg') center left no-repeat;
 }
 
 .controls .sidebar section.properties .vertical-toggle label.none input {
@@ -680,10 +676,6 @@ export default {
   background: url('../assets/icons/noise.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #F4A24F;
 }
 
-.controls .sidebar section.properties .vertical-toggle label.noise input:checked + span {
-  /*color: #E0580C;*/
-}
-
 .controls .sidebar section.properties .vertical-toggle label.vegetation input {
   background: url('../assets/icons/vegetation.svg') center no-repeat;
 }
@@ -691,10 +683,6 @@ export default {
 .controls .sidebar section.properties .vertical-toggle label.vegetation input:checked {
   border-color: rgba(0,0,0,0.25);
   background: url('../assets/icons/vegetation.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), #5FBF7A;
-}
-
-.controls .sidebar section.properties .vertical-toggle label.vegetation input:checked + span {
-  /*color: #29955A;*/
 }
 
 
@@ -749,6 +737,7 @@ export default {
   width: 2.0rem;
   height: 2.0rem;
   margin-top: -0.4rem;
+  border: none;
   border-radius: 100%;
   background: #565655;
   box-shadow: inset 0 0 0 0.2rem #565655, inset 0 0 0 0.4rem #C9FE53;
@@ -767,7 +756,7 @@ export default {
 }
 
 .controls .sidebar .slider input:focus-visible::-webkit-slider-runnable-track {
-  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
 }
 
 /* Firefox range shadow elements */
@@ -796,7 +785,7 @@ export default {
 }
 
 .controls .sidebar .slider input:focus-visible::-moz-range-track {
-  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
 }
 
 .controls .sidebar .slider input::-moz-range-progress {
@@ -828,7 +817,7 @@ export default {
 }
 
 .controls .sidebar .field.coverage {
-  background: url('../assets/berlin-coverage.svg') 0.5rem 0.2rem no-repeat;
+  background: url('../assets/berlin-coverage.svg') 5.7rem 0.7rem no-repeat;
 }
 
 .controls .sidebar .field.coverage h3 + button {
@@ -837,7 +826,7 @@ export default {
 }
 
 .controls .sidebar .field.coverage h3 + button:focus-visible {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
 }
 
 .controls .sidebar .field.coverage mark {
@@ -1084,11 +1073,13 @@ export default {
   right: 1.2rem;
   width: 2.8rem;
   height: 2.8rem;
+  font-size: 0;
   border: none;
   border-radius: 50%;
   background: url('../assets/icons/close.svg') center no-repeat rgba(0,0,0,0.06);
   border: 0.2rem solid rgba(0,0,0,0.1);
   transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  z-index: 290;
 }
 
 #app.intro .controls .sidebar button.close {
@@ -1203,6 +1194,6 @@ export default {
 }
 
 .controls .floating.top .view-settings .view-toggle input:focus-visible + label {
-  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #DFDBD5;
+  box-shadow: 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
 }
 </style>

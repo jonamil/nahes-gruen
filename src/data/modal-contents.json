@@ -2,37 +2,86 @@
 	"transportMode": {
 		"title": "Fortbewegung",
 		"paragraphs": [
-			"Gehen und Fahrradfahren sind vor allem im urbanen Raum wichtige Fortbewegungsarten. Nicht jede*r hat jedoch die Möglichkeit zu Fuß zu gehen oder mit dem Fahrrad zu fahren. So sind 7% der Gesamtbevölkerung in Deutschland aufgrund gesundheitlicher Einschränkungen in ihrer Mobilität beeinträchtigt.<sup>12</sup> Zudem besitzen ein Viertel der Berliner Haushalte kein Fahrrad<sup>12</sup> und 47% der Radfahrenden in großen Städten fühlen sich im Straßenverkehr nicht sicher.<sup>5</sup> Daneben gelten noch weitere Einschränkungen, zum Beispiel ist das Fahrrad für große Familien nur begrenzt zur Fortbewegung geeignet."
+			"Hier kann zwischen zwei Fortbewegungsarten für die Route zum nächstgelegenen öffentlichen Grün gewählt werden: zu Fuß oder mit dem Fahrrad.",
+			"Gehen und Fahrradfahren sind vor allem in der Stadt wichtige Arten sich fortzubewegen. Es hat jedoch nicht jede:r die Möglichkeit zu Fuß zu gehen oder Fahrrad zu fahren. So sind 7% der Gesamtbevölkerung in Deutschland aufgrund gesundheitlicher Einschränkungen in ihrer Mobilität eingeschränkt.<sup>9</sup> Zudem besitzt ein Viertel der Berliner Haushalte kein Fahrrad<sup>9</sup> und in großen Städten fühlt sich fast die Hälfte der Radfahrenden im Straßenverkehr nicht sicher.<sup>19</sup> Daneben spielen noch weitere Einschränkungen eine Rolle, zum Beispiel ist das Fahrrad nur begrenzt für große Familien zur Fortbewegung geeignet."
 		]
 	},
 	"transportMinutes": {
 		"title": "Zeitaufwand",
 		"paragraphs": [
-			"Für die Routenberechnung werden eine durchschnittliche Gehgeschwindigkeit von 5 km/h bzw. eine Fahrtgeschwindigkeit von 11 km/h angenommen.<sup>13, 14</sup> Die tatsächliche Geschwindigkeit ist zusätzlich abhängig vom Verkehrsaufkommen, der Ampelschaltung, der körperlichen Fitness und vielen weiteren Faktoren.",
-			"In der Regel sind Menschen bereit, zur täglichen Erholung maximal 15 Minuten bis zum nächsten öffentlichen Grün zu gehen.<sup>10</sup> Auch die Senatsverwaltung Berlin rechnet mit einem maximalen Freiraum-Einzugsbereich von 1.500 Metern, jedoch ausschließlich für besonders große Parks.<sup>16</sup> Dies entspricht in etwa 18 Gehminuten."
+			"Hier lässt sich einstellen, wie lange der Weg zum nächstgelegenen öffentlichen Grün maximal dauern soll. Die neongrünen Flächen auf der Karte zeigen, von wo aus innerhalb dieser Zeit mindestens eine Grünfläche erreichbar ist.",
+			"Die Zeiten basieren auf einer Routenberechnung für Fuß- und Fahrradwege. Für die Routenberechnung werden eine durchschnittliche Gehgeschwindigkeit von 5 km/h und eine Fahrtgeschwindigkeit von 11 km/h angenommen.<sup>10, 11</sup> Damit sind beispielsweise für eine Strecke von 500 Metern sechs Minuten Fußweg oder knapp drei Minuten mit dem Fahrrad nötig. Selbstverständlich ist die tatsächliche Geschwindigkeit zusätzlich abhängig vom Verkehrsaufkommen, der Ampelschaltung, der körperlichen Fitness und vielen weiteren Faktoren.",
+			"In der Regel sind Menschen bereit, zur täglichen Erholung maximal 15 Minuten bis zum nächsten öffentlichen Grün zu gehen.<sup>17</sup> Auch die Senatsverwaltung Berlin rechnet mit einem maximalen Einzugsbereich von 1500 Metern, jedoch ausschließlich für besonders große Parks.<sup>14</sup> Dies entspricht in etwa 18 Gehminuten."
 		]
 	},
 	"coverage": {
 		"title": "Abdeckung",
 		"paragraphs": [
-			"A."
+			"Diese Prozentzahl repräsentiert den Anteil der Berliner:innen, die unter den eingestellten Bedingungen (Fortbewegungsart und Zeitaufwand) von zuhause mindestens eine öffentliche Grünfläche erreichen können. Während die neongrünen Flächen auf der Karte die geografische Abdeckung zeigen, wird hier einbezogen, wie viele Personen laut amtlichem Melderegister (Stand 2019)<sup>F</sup> in diesen Flächen wohnen. Dies ist wichtig, da die Einwohner:innenzahl in Berlin nicht gleichmäßig verteilt ist. Es wohnen auch nicht überall im Stadtgebiet Menschen, weshalb der Wert bei 100 Prozent liegen kann, ohne dass ganz Berlin geografisch, also neongrün, abgedeckt ist."
 		]
 	},
 	"properties": {
 		"title": "Flächenmerkmale",
 		"paragraphs": [
-			"Grün ist nicht gleich Grün. Lärmbelastung und Vegetationsmenge vermitteln einen ersten Eindruck der Unterschiede zwischen öffentlichen Grünflächen, doch natürlich spielen noch zahlreiche weitere Merkmale eine wichtige Rolle.",
-			"Die <strong>Lärmbelastung</strong> beschreibt den durchschnittlichen Lärmpegel innerhalb einer Grünfläche durch Straßenverkehr und öffentlichen Nahverkehr, Industrie- und Gewerbegelände, Eisenbahnen sowie Flugverkehr im 24-Stunden-Mittelungspegel (LDEN, Stand 2017).<sup>19, 22</sup> Durch eine hohe Lärmbelastung verringert sich die Aufenthalts- und Erholungsqualität von öffentlichem Grün. An Berlins Hauptverkehrsstraßen herrscht zum Beispiel zumeist ein Lärmpegel von über 70 dB<sub>A</sub>.<sup>18</sup>",
-			"Die <strong>Vegetationsmenge</strong> wird in Form der Grünvolumenzahl (Stand 2009/2010) angegeben und beschreibt das Volumen von Bäumen, Sträuchern und Gräsern in Kubikmeter pro Quadratmeter. Je mehr Vegetation, desto größer ihre Wirkung zur Staubbindung, Senkung der Temperatur, Beschattung und Lärmminderung. Die Grünvolumenzahl kann auch als mittlere Vegetationshöhe verstanden werden.<sup>15</sup>"
+			"Hier ist es möglich, die Lärmbelastung und den Bewuchs der Grünflächen zu erkunden. Mit Auswahl eines Flächenmerkmals färben sich die Grünflächen auf der Karte unterschiedlich ein. Die genauen Werte einer Grünfläche lassen sich ablesen, wenn der Mauszeiger auf die Grünfläche bewegt wird. Dort wird auch angezeigt, ob Sitzgelegenheiten, öffentliche Toiletten (WCs) und Spielplätze vorhanden sind.",
+			"<img src='img/legend-noise.svg' height='55' alt='Legende der Lärmbelastung' />",
+			"Die <strong style='color: #E0580C'>Lärmbelastung</strong> beschreibt den durchschnittlichen Lärmpegel innerhalb einer Grünfläche durch Straßenverkehr und öffentlichen Nahverkehr, Industrie- und Gewerbegelände, Eisenbahnen sowie Flugverkehr im 24-Stunden-Mittelungspegel (L<sub>DEN</sub>) (Stand 2017).<sup>C</sup> Lärm durch Personen, Musik oder Anderes wird hierbei nicht beachtet. Bei einer hohen Lärmbelastung ist die Aufenthalts- und Erholungsqualität von öffentlichem Grün geringer. An Berlins Hauptverkehrsstraßen herrscht zum Beispiel größtenteils ein Lärmpegel von über 70 dB<sub>A</sub>.",
+			"<img src='img/legend-vegetation.svg' height='55' alt='Legende der Vegetation' />",
+			"Die <strong style='color: #227D52'>Vegetationsmenge</strong> wird in Form der Grünvolumenzahl (Stand 2009/2010)<sup>B</sup> angegeben und beschreibt das Volumen von Bäumen, Sträuchern und Gräsern in Kubikmeter pro Quadratmeter, also in Volumen pro Fläche. Je mehr Vegetation, desto größer ihre Wirkung zur Staubbindung, Senkung der Temperatur, Beschattung und Lärmminderung. Die Grünvolumenzahl kann auch als durchschnittliche Wuchshöhe verstanden werden.<sup>13</sup>",
+			"Grün ist nicht gleich Grün. Lärm und Vegetation vermitteln einen ersten Eindruck der Unterschiede öffentlichen Grüns, doch natürlich spielen noch zahlreiche weitere Merkmale wie Wegbeschaffenheit oder Beleuchtung eine wichtige Rolle. Diese können hier jedoch nicht berücksichtigt werden."
+		]
+	},
+	"team": {
+		"title": "Team",
+		"paragraphs": [
+			"<strong>Ella Eisemann</strong>, M.A. Urbane Zukunft<br>→ Recherche, Daten, Koordination",
+			"<strong>Ester Scheck</strong>, M.A. Urbane Zukunft<br>→ Recherche, Texte, Daten",
+			"<strong>Henning Oskamp</strong>, M.A. Design<br>→ Design",
+			"<strong>Jona Pomerance</strong>, B.A. Interfacedesign<br>→ Design, Daten, Programmierung"
 		]
 	},
 	"sources": {
 		"title": "Verzeichnis der Quellen",
-		"paragraphs": [
-			"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-			"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-			"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
-			"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+		"lists": [
+			{
+				"heading": "Geodaten",
+				"style": "upper-latin",
+				"items": [
+					"OpenStreetMap. https://openstreetmap.org/copyright [28.12.2020].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen (2017). Umweltatlas Berlin: 05.09 Grünvolumen. https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=wmsk05_09_gruendvol2010@senstadt [27.12.2020].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen (2017). Umweltatlas Berlin: 07.05 Strat. Lärmkarte Gesamtlärmindex L_DEN (Tag-Abend-Nacht) Raster. https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=wmsk_07_05_14verkehr_gesDEN2016@senstadt [27.12.2020].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen (2020). Geoportal Berlin: Grünanlagenbestand Berlin (einschließlich der öffentlichen Spielplätze). https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=gris_oeffgruen@senstadt [27.12.2020].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen (2020). Geoportal Berlin: Verwaltungseinheiten der Berliner Forsten. https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=wmsk_forst_verwalt2014@senstadt [27.12.2020].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen (2020). Umweltatlas Berlin: Einwohnerdichte 2019. https://fbinter.stadt-berlin.de/fb/index.jsp?loginkey=zoomStart&mapId=k_06_06ewdichte2019@senstadt [26.01.2020].",
+					"Openrouteservice. API Reference: Matrix. https://openrouteservice.org/dev/#/api-docs/matrix/ [10.02.2021]."
+				]
+			},
+			{
+				"heading": "Literatur",
+				"style": "decimal",
+				"items": [
+					"Adiang, Aluel; Blechner, Charlotte; Brell, Marie et al. (2020). <em>Mobilität und Gesundheit in Zeiten von COVID-19: Perspektiven auf Veränderungen der Mobilität in Berlin und weltweit.</em> Berlin: Hunmboldt-Universität zu Berlin. https://edoc.hu-berlin.de/bitstream/handle/18452/22692/Mobilit%C3%A4t%20und%20Gesundheit%20in%20Zeiten%20von%20COVID-19.pdf [25.02.2021].",
+					"Bunge, Christiane; Böhme, Christa (2019). Umweltgerechtigkeit. <em>Bundeszentrale für gesundheitliche Aufklärung</em>, 02.08.2019. https://www.leitbegriffe.bzga.de/alphabetisches-verzeichnis/umweltgerechtigkeit/ [17.01.2021].",
+					"Enssle, Friederike; Kabisch, Nadja (2020). Urban green spaces for the social interaction, health and well-being of older people: An integrated view of urban ecosystem services and socio-environmental justice. <em>Environmental Science & Policy</em> 109: 36–44.",
+					"Haase, Annegret; Haase, Dagmar; Kabisch, Sigrun (2017). Grüne Stadt für alle? Zu aktuellen Herausforderungen von Stadtgrüngestaltung und sozialverträglicher Entwicklung. <em>Innovationsnetzwerk Ökosystemleistungen Deutschland</em>, 21.08.2017. https://www.esp-de.de/gruene-stadt-fuer-alle-zu-aktuellen-herausforderungen-von-stadtgruengestaltung-und-sozialvertraeglicher-entwicklung-2/ [25.01.2021].",
+					"Haase, Dagmar; Kabisch, Sigrun; Haase, Annegret et al. (2017). Greening cities – To be socially inclusive? About the alleged paradox of society and ecology in cities. <em>Habitat International</em> 64: 41–48.",
+					"Kabisch, Nadja; Haase, Dagmar (2014). Green justice or just green? Provision of urban green spaces in Berlin, Germany. <em>Landscape and Urban Planning</em> 122: 129–139.",
+					"Kronenberg, Jakub; Haase, Annegret; Łaszkiewicz, Edyta et al. (2020). Environmental justice in the context of urban green space availability, accessibility, and attractiveness in postsocialist cities. <em>Cities</em> 106: 1–13.",
+					"McPhearson, Timon; Kennedy, Christopher; Lopez, Bianca et al. (2020). Parks are Critical Urban Infrastructure: The Use of Urban Green Space in New York City During COVID-19. <em>The Nature of Cities</em>, 06.10.2020. https://www.thenatureofcities.com/2020/10/06/parks-are-critical-urban-infrastructure-the-use-of-urban-green-space-in-new-york-city-during-covid-19/ [25.01.2021].",
+					"Nobis, Claudia; Kuhnimhof, Tobias (2018). <em>Mobilität in Deutschland – MiD Ergebnisbericht: Studie von infas, DLR, IVT und infas 360 im Auftrag des Bundesministeriums für Verkehr und digitale Infrastruktur.</em> Bonn und Berlin: Bundesministerium für Verkehr und digitale Infrastruktur. http://www.mobilitaet-in-deutschland.de/pdf/MiD2017_Ergebnisbericht.pdf [25.02.2021].",
+					"Openrouteservice Forum (2020). Walking speed in ORS tools. 17.04.2020. https://ask.openrouteservice.org/t/walking-speed-in-ors-tools/1584 [15.02.2021].",
+					"Openrouteservice Forum (2020). Avg speed / total time with a profil cycling-road. 28.05.2020. https://ask.openrouteservice.org/t/avg-speed-total-time-with-a-profil-cycling-road/1750 [15.02.2021].",
+					"Senatskanzlei Berlin (2020). Toilettenkonzept weiter erfolgreich umgesetzt: Mehr als hundert neue Berliner Toiletten aufgebaut. <em>Senatskanzlei Berlin</em>, 16.06.2020. https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2020/pressemitteilung.945727.php [20.02.2021].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen Berlin (2017). Umweltatlas Berlin: 05.09 Grünvolumen. https://www.stadtentwicklung.berlin.de/umwelt/umweltatlas/i509.htm [14.02.2021].",
+					"Senatsverwaltung für Stadtentwicklung und Wohnen Berlin (2017). Umweltatlas Berlin: 06.05 Versorgung mit öffentlichen, wohnungsnahen Grünanlagen. https://www.stadtentwicklung.berlin.de/umwelt/umweltatlas/ib605.htm [15.02.2021].",
+					"Senatsverwaltung für Umwelt, Verkehr und Klimaschutz Berlin. Umweltgerechtigkeit. https://www.berlin.de/sen/uvk/umwelt/nachhaltigkeit/umweltgerechtigkeit/ [17.01.2021].",
+					"Senatsverwaltung für Umwelt, Verkehr und Klimaschutz Berlin (2020). Lärmaktionsplan Berlin 2019–2023. https://www.berlin.de/senuvk/umwelt/laerm/laermminderungsplanung/de/laermaktionsplan/2019/download.shtml [25.02.2021].",
+					"Senatsverwaltung für Umwelt, Verkehr und Klimaschutz Berlin (2017). Landschaftsprogramm: Artenschutzprogramm. https://www.berlin.de/sen/uvk/_assets/natur-gruen/landschaftsplanung/lapro_broschuere_dez_2017_text.pdf [25.02.2021].",
+					"Senatsverwaltung für Umwelt, Verkehr und Klimaschutz Berlin (2019). Anteil öffentlicher Grünflächen in Berlin. https://www.berlin.de/senuvk/umwelt/stadtgruen/gruenanlagen/de/daten_fakten/downloads/ausw_5.pdf [28.12.2020].",
+					"SINUS-Institut (2019). <em>Fahrrad-Monitor Deutschland 2019.</em> Heidelberg: Sinus Markt- und Sozialforschung GmbH. https://www.bmvi.de/SharedDocs/DE/Anlage/K/fahrradmonitor-2019-ergebnisse.pdf?__blob=publicationFile [25.02.2021].",
+					"Zhou, Xiaolu; Parves Rana, Masud (2012). Social benefits of urban green space. <em>Management of Environmental Quality</em> 23: 173–189."
+				]
+			}
 		]
 	}
 }

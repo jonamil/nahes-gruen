@@ -18,7 +18,7 @@
       <div :class="'property noise' + (controlState.parkProperty === 'noise' ? ' active' : '')">
         <h3>Lärmbelastung</h3>
         <div class="rating">
-          <div :class="parkProperties.noise >= ratingThresholds.noise[0] ? 'filled' : ''"></div>
+          <div :class="parkProperties.noise > ratingThresholds.noise[0] ? 'filled' : ''"></div>
           <div :class="parkProperties.noise >= ratingThresholds.noise[1] ? 'filled' : ''"></div>
           <div :class="parkProperties.noise >= ratingThresholds.noise[2] ? 'filled' : ''"></div>
           <div :class="parkProperties.noise >= ratingThresholds.noise[3] ? 'filled' : ''"></div>
@@ -30,10 +30,10 @@
         <h3>Vegetationsmenge</h3>
         <div class="rating">
           <div :class="parkProperties.veg > ratingThresholds.vegetation[0] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg > ratingThresholds.vegetation[1] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg > ratingThresholds.vegetation[2] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg > ratingThresholds.vegetation[3] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg > ratingThresholds.vegetation[4] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg >= ratingThresholds.vegetation[1] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg >= ratingThresholds.vegetation[2] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg >= ratingThresholds.vegetation[3] ? 'filled' : ''"></div>
+          <div :class="parkProperties.veg >= ratingThresholds.vegetation[4] ? 'filled' : ''"></div>
         </div>
         <span>{{ parkVegetation }}</span>
       </div>

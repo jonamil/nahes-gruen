@@ -145,9 +145,9 @@ html {
 #app {
   width: 100%;
   height: 100%;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 460;
   line-height: 1.25;
   color: rgba(0,0,0,0.8);
   background: #EBE3DB;

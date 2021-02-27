@@ -858,6 +858,7 @@ export default {
   margin: 4.2rem 0 4.6rem;
   text-align: left;
   font-size: 1.5rem;
+  font-weight: 520;
   line-height: 1.35;
 }
 

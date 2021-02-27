@@ -1,8 +1,42 @@
 [
 	{
+		"title": "Erreichbarkeit von öffentlichem Grün",
+		"paragraphs": [
+			"Wo gibt es in Berlin öffentliche Grünräume? Und von wo aus sind diese erreichbar? Die nadelgrünen Flächen auf der Karte zeigen die mehr als 1.200 öffentlichen Grünflächen der Stadt. In Neongrün ist dargestellt, von wo aus unter den eingestellten Bedingungen, also zum Beispiel maximal drei Minuten Fußweg, mindestens eine dieser Grünflächen erreichbar ist. Bahngleise, fehlende Straßen oder andere Hindernisse können dabei die Erreichbarkeit einschränken."
+		],
+		"controlState": {
+			"contentView": "map",
+			"transportMode": "walking",
+			"transportMinutes": 3,
+			"parkProperty": "none"
+		},
+		"mapState": {
+			"longitude": 13.388707,
+        	"latitude": 52.517598,
+        	"zoom": 11.3
+		}
+	},
+	{
+		"title": "Berliner Durchschnittsgrün",
+		"paragraphs": [
+			"Der oben zu sehende <strong>Unionpark</strong> in Moabit entspricht ungefähr dem Berliner Durchschnitt in Größe, Lärmbelastung und Vegetationsmenge. Bei Berührung mit dem Mauszeiger erscheinen zusätzliche Infos: Laut OpenStreetMap-Daten gibt es keine Sitzgelegenheit und keine öffentlichen Toiletten, was bei der Gesamtzahl von weniger als 300 öffentlichen Toiletten in ganz Berlin nicht überrascht.<sup>12</sup> Es gibt im Park jedoch einen Spielplatz, wie in insgesamt 43% der eingezeichneten öffentlichen Grünflächen."
+		],
+		"controlState": {
+			"contentView": "map",
+			"transportMode": "walking",
+			"transportMinutes": 3,
+			"parkProperty": "none"
+		},
+		"mapState": {
+			"longitude": 13.33778,
+        	"latitude": 52.53051,
+			"zoom": 15
+		}
+	},
+	{
 		"title": "Wohnungsnahe Grünanlagen",
 		"paragraphs": [
-			"Im Alltag ist der Zugang zu wohnungsnahen, öffentlichen Grünanlagen für die Kurzzeit- und Feierabend-Erholung von großer Bedeutung. Als »wohnungsnah« werden von der Stadt Berlin Grünanlagen in einem Einzugsbereich von 500 Metern bezeichnet <sup>16</sup>, was in etwa sechs Gehminuten entspricht. Unter diesen Voraussetzungen können ca. 79% der Berliner*innen von zuhause aus mindestens eine Grünanlage erreichen."
+			"Für die Erholung im Alltag ist der Zugang zu wohnungsnahen, öffentlichen Grünanlagen von großer Bedeutung. Als »wohnungsnah« werden von der Stadt Berlin Grünanlagen in einem Einzugsbereich von 500 Metern bezeichnet,<sup>14</sup> was in etwa sechs Gehminuten entspricht. Unter diesen Voraussetzungen können fast 80% der Berliner:innen von zuhause aus mindestens eine Grünanlage erreichen."
 		],
 		"controlState": {
 			"contentView": "map",
@@ -11,18 +45,15 @@
 			"parkProperty": "none"
 		},
 		"mapState": {
-			"longitude": 13.3787,
+			"longitude": 13.4087,
         	"latitude": 52.5176,
 			"zoom": 10.25
-		},
-		"highlightedSections": [
-			"reachability"
-		]
+		}
 	},
 	{
 		"title": "Lautes Grün, leises Grün",
 		"paragraphs": [
-			"Orte mit einem niedrigen Lärmpegel sind besonders in Städten als Ausgleich und Entlastung zu alltäglichen Lärmsituationen von Bedeutung. Beim durchschnittlichen Verkehrslärmpegel innerhalb der Grünflächen zeigen sich klare Unterschiede, die sich vor allem durch angrenzende Straßen begründen lassen. Im innerstädtischen Raum wird kleineren Naturräumen ein Erholungswert zugesprochen, wenn sie eindeutig ruhiger sind als ihre Umgebung. Bei großen, zusammenhängenden Naturräumen und Freiflächen ist eine Klassifikation als sogenanntes ruhiges Gebiet bei einem Lärmpegel unter 55 dB<sub>A</sub> geläufig <sup>11</sup>."
+			"Orte mit einer niedrigen Lärmbelastung sind besonders in Städten als Ausgleich und Entlastung zum Alltagslärm wichtig. Beim durchschnittlichen Lärmpegel innerhalb der Grünflächen, basierend auf Verkehrslärm, zeigen sich klare Unterschiede, zum Beispiel hier im Südosten Berlins. Die dunkleren Flächen sind im Durchschnitt sehr laut, die blassorangenen Flächen eher ruhig. Große Naturräume können bei einem Lärmpegel unter 55dB<sub>A</sub> als sogenannte ruhige Gebiete eingestuft werden.<sup>16</sup>"
 		],
 		"controlState": {
 			"contentView": "map",
@@ -33,16 +64,13 @@
 		"mapState": {
 			"longitude": 13.6061,
         	"latitude": 52.4391,
-			"zoom": 11.7
-		},
-		"highlightedSections": [
-			"reachability"
-		]
+			"zoom": 11.5
+		}
 	},
 	{
 		"title": "Hohe Bäume, flaches Gras",
 		"paragraphs": [
-			"Die Vegetation beschreibt das Vorhandensein von Bäumen, Sträuchern und Gräsern in einer Grünanlage und kann auch als mittlere Wuchshöhe verstanden werden. Viel Vegetation bedeutet zum Beispiel eine stärkere Beschattung und kühlere Temperaturen, beeinflusst aber natürlich auch die Nutzungsmöglichkeiten der Grünfläche. Die Rehwiese entspricht mit einer Vegetation von 5,7 m³/m² in etwa dem Durchschnitt der Parks und Grünflächen in Berlin. Mehr als die Hälfte des gesamten Berliner Grünvolumens ist in den Wäldern zu finden, dort wachsen und gedeihen durchschnittlich 17,2 m³ Pflanzen pro Quadratmeter <sup>15</sup>."
+			"Die Vegetationsmenge beschreibt die Menge an Bäumen, Sträuchern und Gräsern. Viel Vegetation bedeutet zum Beispiel eine stärkere Beschattung und kühlere Temperaturen, beeinflusst aber auch die Nutzungsmöglichkeiten von öffentlichem Grün. Mehr Vegetation ist also nicht automatisch besser oder schlechter. Mehr als die Hälfte des gesamten Berliner Grünvolumens ist in den Wäldern zu finden.<sup>13</sup>"
 		],
 		"controlState": {
 			"contentView": "map",
@@ -51,24 +79,21 @@
 			"parkProperty": "vegetation"
 		},
 		"mapState": {
-			"longitude": 13.2016,
-        	"latitude": 52.4210,
-			"zoom": 11.5
-		},
-		"highlightedSections": [
-			"reachability"
-		]
+			"longitude": 13.29423,
+        	"latitude": 52.58998,
+			"zoom": 13.25
+		}
 	},
 	{
-		"title": "Es geht noch weiter",
+		"title": "Die Bezirke im Vergleich",
 		"paragraphs": [
-			"Einige Stopps fehlen noch, so zum Beispiel zur Bezirksansicht. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+			"Die Berliner Bezirke haben unterschiedlich viel öffentliches Grün. An erster Stelle steht Friedrichshain-Kreuzberg, wo bei sechs Gehminuten 89,7% aller Einwohner:innen öffentliches Grün in Wohnungsnähe haben. Die geringste Abdeckung bieten Neukölln und Tempelhof-Schöneberg. Im Ost-West-Vergleich zeigt sich eine höhere Abdeckung im ehemaligen Ostberlin (82,7%) im Vergleich zum ehemaligen Westberlin (76,0%)."
 		],
 		"controlState": {
 			"contentView": "district",
 			"transportMode": "walking",
 			"transportMinutes": 6,
-			"parkProperty": "vegetation"
+			"parkProperty": "none"
 		}
 	}
 ]

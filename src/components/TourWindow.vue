@@ -15,10 +15,10 @@
         @click="previousStop"
       />
       <button
-        class="exit"
+        :class="'exit' + (mostRecentTourIndex === tourStops.length - 1 ? ' final' : '')"
         @click="exitTour"
       >
-        {{ tourIndex === tourStops.length - 1 ? 'Rundgang abschließen' : 'Rundgang verlassen' }}
+        {{ mostRecentTourIndex === tourStops.length - 1 ? 'Rundgang abschließen' : 'Rundgang verlassen' }}
       </button>
       <button
         v-if="mostRecentTourIndex !== finalTourStopIndex"
@@ -133,7 +133,7 @@ export default {
 }
 
 .tour h1 {
-  margin: 0.3rem 0 1.9rem;
+  margin: 0.2rem 0 1.7rem;
   font-size: 1.4rem;
 }
 
@@ -146,7 +146,7 @@ export default {
 
 .tour .navigation {
   position: relative;
-  margin-top: 1.8rem;
+  margin-top: 1.9rem;
   /*background: #f00;*/
 }
 
@@ -173,10 +173,17 @@ export default {
   background: url('../assets/icons/tour-previous.svg') center no-repeat, rgba(0,0,0,0.06);
 }
 
+.tour .navigation button.skip.next, .tour .navigation button.exit.final {
+  border: 0.2rem solid rgba(0,0,0,0.22);
+}
+
 .tour .navigation button.skip.next {
   right: -1px;
-  border: 0.2rem solid rgba(0,0,0,0.22);
-  color: #fff;
   background: url('../assets/icons/tour-next.svg') center no-repeat, linear-gradient(to bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), #7D7D7D;
+}
+
+.tour .navigation button.exit.final {
+  color: #fff;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), #7D7D7D; 
 }
 </style>

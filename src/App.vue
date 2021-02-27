@@ -81,7 +81,7 @@ export default {
         zoom: 12,
         pitch: 0,
         bearing: 0,
-        minZoom: 10,
+        minZoom: 9.5,
         maxZoom: 16
       },
 

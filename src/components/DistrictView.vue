@@ -8,7 +8,7 @@
               :number="includedInhabitants"
             />
           </h1>
-          <span>Berliner*innen können unter diesen<br>Bedingungen einen Grünraum erreichen</span>
+          <span>Berliner:innen können unter diesen<br>Bedingungen einen Grünraum erreichen</span>
         </div>
         <div class="excluded">
           <h1>
@@ -16,11 +16,11 @@
               :number="excludedInhabitants"
             />
           </h1>
-          <span>Berliner*innen können unter diesen<br>Bedingungen <u>keinen</u> Grünraum erreichen</span>
+          <span>Berliner:innen können unter diesen<br>Bedingungen <u>keinen</u> Grünraum erreichen</span>
         </div>
       </section>
       <section class="legend">
-        <div class="figure" /> entspricht 10.000 Berliner*innen
+        <div class="figure" /> entspricht 10.000 Berliner:innen
       </section>
       <section class="districts">
         <div

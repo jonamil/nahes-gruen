@@ -50,7 +50,7 @@
             <h3>Abdeckung</h3>
             <button title="Erläuterung" @click="currentModal = 'coverage'" />
             <br><mark>{{ coveragePercentage }}<span>%</span></mark>
-            <p>aller Berliner*innen können unter diesen Bedingungen von zuhause einen Grünraum erreichen.</p>
+            <p>aller Berliner:innen können unter diesen Bedingungen von zuhause eine Grünfläche erreichen.</p>
           </div>
         </section>
         <section :class="'properties' + (contentView !== 'map' ? ' hidden' : '')">

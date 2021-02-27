@@ -87,7 +87,7 @@
         </section>
         <section ref="introArticle" class="article">
           <div
-            v-for="(section, index) in introContents.articleSections"
+            v-for="(section, index) in introContents.article"
             :key="index"
           >
             <h3 v-if="section.heading">{{ section.heading }}</h3>
@@ -97,6 +97,26 @@
               v-html="paragraph"
             />
           </div>
+        </section>
+        <section class="footer">
+          <div class="fade" />
+          <button class="expand" @click="toggleArticle">
+            {{ introExpanded ? 'Text einklappen' : 'Weiterlesen' }}
+          </button>
+          <h3>Team</h3>
+          <button class="info" title="Erläuterung" @click="currentModal = 'team'" />
+          <p>
+            <span
+              v-for="(name, index) in introContents.team"
+              :key="index"
+              v-html="name + ' '"
+            />
+          </p>
+          <h3>Über das Projekt</h3>
+          <p v-html="introContents.about" />
+          <a target="_blank" href="https://fh-potsdam.de/">
+            <img src="../assets/fhp.svg" alt="Fachhochschule Potsdam" />
+          </a>
         </section>
       </div>
       <button class="close" title="Schließen" @click="hideIntro" />
@@ -286,8 +306,9 @@ export default {
     this.sliderProperties.trackWidth = input.getBoundingClientRect().width;
 
     this.$refs.introArticle.addEventListener('click', event => {
-      if (event.target.localName === 'sup') {
+      if (event.target.localName === 'sup' || (event.target.localName === 'a' && event.target.classList.contains('sources'))) {
         this.currentModal = 'sources';
+        event.preventDefault();
       }
     });
   }
@@ -838,24 +859,75 @@ export default {
   left: 0;
   width: 75vw;
   max-width: 65.0rem;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.controls .sidebar .inner.intro.expanded {
   overflow-y: auto;
+}
+
+.controls .sidebar .inner.intro h3 {
+  margin: 2.2rem 0.1rem -0.1rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  color: rgba(0,0,0,0.65);
+}
+
+.controls .sidebar .inner.intro p {
+  margin: 0.9rem 0 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.controls .sidebar .inner.intro p a {
+  padding-bottom: 0.1rem;
+  text-decoration: none;
+  box-shadow: inset 0 -0.15rem rgba(0,0,0,0.2);
+  color: inherit;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.controls .sidebar .inner.intro p a:hover {
+  box-shadow: inset 0 -0.15rem rgba(0,0,0,0.65);
+}
+
+.controls .sidebar .inner.intro p figure {
+  position: relative;
+  margin: 0;
+}
+
+.controls .sidebar .inner.intro p figure img {
+  display: block;
+  width: 100%;
+  margin: 2.5rem 0 2.7rem;
+}
+
+.controls .sidebar .inner.intro p figure figcaption {
+  position: absolute;
+  left: -1.3rem;
+  bottom: 0;
+  font-size: 1.0rem;
+  line-height: 1.2;
+  color: rgba(0,0,0,0.4);
+  transform: rotate(-90deg);
+  transform-origin: bottom left;
 }
 
 .controls .sidebar .inner.intro section {
   max-width: 45.0rem;
-  margin: 0 auto;
   padding: 0 2.5rem;
+  margin: 0 auto;
 }
 
 .controls .sidebar .inner.intro section.welcome {
-  margin-top: 4.4rem;
-  margin-bottom: 4.4rem;
+  margin-top: 3.8rem;
   text-align: center;
 }
 
 .controls .sidebar .inner.intro section.welcome p {
-  margin: 4.2rem 0 4.6rem;
+  margin: 3.4rem 0 3.9rem;
   text-align: left;
   font-size: 1.5rem;
   font-weight: 520;
@@ -882,23 +954,108 @@ export default {
 }
 
 .controls .sidebar .inner.intro section.article {
-  margin-top: 14.0rem;
-  margin-bottom: 8.0rem;
+  margin-top: 9.7rem;
 }
 
-.controls .sidebar .inner.intro section.article h3 {
-  margin: 3.2rem 0 -0.3rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-  color: rgba(0,0,0,0.65);
+.controls .sidebar .inner.intro section.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 2.5rem 4.0rem;
+  background: #FAF6F0;
 }
 
-.controls .sidebar .inner.intro section.article p {
-  margin: 1.4rem 0 0;
+.controls .sidebar .inner.intro.expanded section.footer {
+  position: relative;
+  margin-top: 4.65rem;
+}
+
+.controls .sidebar .inner.intro section.footer .fade {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 9.0rem;
+  background-image: linear-gradient(to bottom, rgba(250,246,240,0) 0%, rgba(250,246,240,1) 100%);
+  pointer-events: none;
+}
+
+.controls .sidebar .inner.intro.expanded section.footer .fade {
+  display: none;
+}
+
+.controls .sidebar .inner.intro section.footer button.expand {
+  display: block;
+  margin: 0.5rem auto 0.5rem;
+  padding: 0 1.2rem;
   font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 2.6rem;
+  border: 0.2rem solid rgba(0,0,0,0.1);
+  border-radius: 1.5rem;
+  color: rgba(0,0,0,0.65);
+  background: transparent;
+}
+
+.controls .sidebar .inner.intro section.footer h3 {
+  display: inline-block;
+}
+
+.controls .sidebar .inner.intro section.footer p {
+  margin-top: 0.7rem;
   line-height: 1.45;
+}
+
+.controls .sidebar .inner.intro section.footer p span {
+  margin-right: 0.6rem;
+}
+
+.controls .sidebar .inner.intro section.footer p span:after {
+  content: '·';
+  font-weight: 700;
+  margin-left: 0.3rem;
+}
+
+.controls .sidebar .inner.intro section.footer p span:last-child:after {
+  display: none;
+}
+
+.controls .sidebar .inner.intro section.footer > a {
+  position: absolute;
+  left: -3.4rem;
+  bottom: 4.0rem;
+  opacity: 0.4;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.controls .sidebar .inner.intro section.footer > a:hover {
+  opacity: 0.85;
+}
+
+@media (max-height: 792px) {
+  .controls .sidebar .inner.intro section.welcome {
+    margin-top: 3.3rem;
+  }
+
+  .controls .sidebar .inner.intro section.welcome img {
+    height: 10.0rem;
+  }
+
+  .controls .sidebar .inner.intro section.welcome p {
+    margin: 3.0rem 0 3.5rem;
+  }
+
+  .controls .sidebar .inner.intro section.article {
+    margin-top: 7.7rem;
+  }
+}
+
+@media (max-height: 720px) {
+  .controls .sidebar .inner.intro:not(.expanded) section.footer {
+    top: 49.8rem;
+    bottom: initial;
+  }
 }
 
 

@@ -367,6 +367,7 @@ export default {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  padding: 0;
   border: none;
 }
 
@@ -705,9 +706,14 @@ export default {
   pointer-events: none;
 }
 
-/* Somewhat hacky way of hiding the progress span within Firefox (as Firefox does not support
-   z-index on range’s shadow elements, but instead supplies additional progress element) */
-@supports (-moz-appearance:none) {
+/* Somewhat hacky way of hiding the progress span within Firefox and Edge (as those do not support
+   z-index on range’s shadow elements, but instead supply additional progress element) */
+@supports (-moz-appearance: none) {
+  .controls .sidebar .slider span {
+    display: none;
+  }
+}
+@supports (-ms-ime-align: auto) {
   .controls .sidebar .slider span {
     display: none;
   }
@@ -793,6 +799,51 @@ export default {
   border-radius: 0.6rem 0 0 0.6rem;
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
   box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.25);
+}
+
+/* IE/Edge range shadow elements */
+
+.controls .sidebar .slider input::-ms-thumb {
+  cursor: grab;
+  width: 2.0rem;
+  height: 2.0rem;
+  margin-top: -0.4rem;
+  border: none;
+  border-radius: 100%;
+  background: #565655;
+  box-shadow: inset 0 0 0 0.2rem #565655, inset 0 0 0 0.4rem #C9FE53;
+}
+
+.controls .sidebar .slider input::-ms-thumb:active {
+  cursor: grabbing;
+}
+
+.controls .sidebar .slider input::-ms-track {
+  cursor: pointer;
+  width: 100%;
+  height: 1.2rem;
+  margin: 0.4rem 0;
+  border: none;
+  color: transparent;
+  background: transparent;
+}
+
+.controls .sidebar .slider input:focus-visible::-ms-track {
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1), 0 0 0 2px #FAF6F0, 0 0 0 4px #60ABF0;
+}
+
+.controls .sidebar .slider input::-ms-fill-lower {
+  height: 1.2rem;
+  border-radius: 0.6rem 0 0 0.6rem;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%), #C9FE53;
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.25);
+}
+
+.controls .sidebar .slider input::-ms-fill-upper {
+  height: 1.2rem;
+  border-radius: 0 0.6rem 0.6rem 0;
+  background: #F2FFD7;
+  box-shadow: inset 0 0 0 0.2rem rgba(0,0,0,0.1);
 }
 
 /* End of range shadow elements */

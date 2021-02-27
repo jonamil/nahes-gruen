@@ -112,15 +112,6 @@ export default {
     tourIndex() {
       return this.controlState.tourIndex;
     },
-    transportMode() {
-      return this.controlState.transportMode;
-    },
-    transportMinutes() {
-      return this.controlState.transportMinutes;
-    },
-    parkProperty() {
-      return this.controlState.parkProperty;
-    },
     waterLayer() {
       if (this.water) {
         return new GeoJsonLayer({
@@ -140,13 +131,13 @@ export default {
           data: this.parks,
           getLineWidth: 0,
           getFillColor: park => {
-            if (this.parkProperty === 'noise') {
+            if (this.controlState.parkProperty === 'noise') {
               if      (park.properties.noise >= 65) return [224,88,12,255];
               else if (park.properties.noise >= 60) return [235,128,46,255];
               else if (park.properties.noise >= 55) return [244,162,79,255];
               else if (park.properties.noise >= 50) return [247,194,124,255];
               else                                  return [247,213,154,255];
-            } else if (this.parkProperty === 'vegetation') {
+            } else if (this.controlState.parkProperty === 'vegetation') {
               if      (park.properties.veg >= 15) return [28,102,75,255];
               else if (park.properties.veg >= 10) return [34,125,82,255];
               else if (park.properties.veg >=  5) return [41,149,90,255];
@@ -158,7 +149,7 @@ export default {
             }
           },
           updateTriggers: {
-            getFillColor: this.parkProperty
+            getFillColor: this.controlState.parkProperty
           },
           pickable: true,
           onHover: (info) => this.updateParkTooltip(info)
@@ -173,9 +164,23 @@ export default {
           id: 'isobands',
           data: this.isobands,
           getLineWidth: 0,
-          getFillColor: isoband => (isoband.properties.mode === this.transportMode && isoband.properties.minutes <= this.transportMinutes) ? [201,254,83,204] : [0,0,0,0],
+          getFillColor: isoband => {
+            if (isoband.properties.mode === this.controlState.transportMode && isoband.properties.minutes <= this.controlState.transportMinutes) {
+              if (this.controlState.higherContrast) {
+                return [0,0,0,190];
+              } else {
+                return [201,254,83,204];
+              }
+            } else {
+              return [0,0,0,0];
+            }
+          },
           updateTriggers: {
-            getFillColor: [this.transportMode, this.transportMinutes]
+            getFillColor: [
+              this.controlState.transportMode,
+              this.controlState.transportMinutes,
+              this.controlState.higherContrast
+            ]
           }
         });
       } else {

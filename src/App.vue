@@ -64,6 +64,8 @@ export default {
         introScreen: true,
         // Index of the current tour stop (if the tour is not running, this is false)
         tourIndex: false,
+        // Whether the high contrast color scheme for map elements is enabled
+        higherContrast: false,
         // Currently selected transport mode
         transportMode: 'walking',
         // Currently selected transport duration in minutes
@@ -119,17 +121,12 @@ export default {
   },
 
   created () {
-    document.title = 'Nahes Grün, Fernes Grün';
+    document.title = 'Nahes Grün / Fernes Grün';
 
     // Asynchronously fetch each geodata source
     ['isobands', 'parks', 'water'].forEach(source => {
       this.fetchJSON(source);
     });
-
-    // If the intro screen was hidden during a previous visit, load straight into the regular view
-    if (window.localStorage.getItem('introScreen') === 'false') {
-      this.controlState.introScreen = false;
-    }
   }
 }
 </script>

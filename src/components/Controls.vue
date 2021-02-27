@@ -121,7 +121,7 @@
       </div>
       <button class="close" title="Schließen" @click="hideIntro" />
     </div>
-    <div class="floating top">
+    <div class="floating inputs top">
       <div class="view-settings">
         <button title="Einführung" @click="showIntro" />
         <div class="view-toggle">
@@ -144,7 +144,7 @@
         </div>
       </div>
     </div>
-    <div class="floating bottom">
+    <div class="floating inputs bottom">
       <TourWindow
         :tourStops="tourStops"
         :tourIndex="tourIndex"
@@ -152,13 +152,20 @@
         v-on:update:currentModal="currentModal = $event"
       />
     </div>
+    <div class="floating intro bottom">
+      <ContrastWindow
+        :higherContrast="higherContrast"
+        v-on:update:higherContrast="$emit('update:higherContrast', $event)"
+      />
+    </div>
     <ExplanationModal :currentModal.sync="currentModal" />
   </div>
 </template>
 
 <script>
-import TourWindow from './TourWindow.vue'
-import ExplanationModal from './ExplanationModal.vue'
+import TourWindow from './TourWindow.vue';
+import ContrastWindow from './ContrastWindow.vue';
+import ExplanationModal from './ExplanationModal.vue';
 
 import introContents from '../data/intro-contents.json';
 
@@ -167,6 +174,7 @@ export default {
 
   components: {
     TourWindow,
+    ContrastWindow,
     ExplanationModal
   },
 
@@ -190,6 +198,10 @@ export default {
     },
     tourIndex: {
       type: [Number, Boolean],
+      default: false
+    },
+    higherContrast: {
+      type: Boolean,
       default: false
     },
     transportMode: {
@@ -219,6 +231,7 @@ export default {
       },
 
       currentModal: false,
+      introExpanded: false,
 
       availableTransportModes: {
         walking: 'Ich habe die Möglichkeit<br>zu Fuß zu gehen',
@@ -264,11 +277,9 @@ export default {
     showIntro() {
       this.$emit('update:introScreen', true);
       this.$refs.sidebar.scrollTop = 0;
-      window.localStorage.setItem('introScreen', 'true');
     },
     hideIntro() {
       this.$emit('update:introScreen', false);
-      window.localStorage.setItem('introScreen', 'false');
     },
     startTour() {
       this.hideIntro();
@@ -285,6 +296,10 @@ export default {
       this.exitTour();
       this.hideIntro();
       this.$emit('update:contentView', 'map');
+    },
+    toggleArticle() {
+      if (this.introExpanded) this.$refs.intro.scrollTop = 0;
+      this.introExpanded = !this.introExpanded;
     }
   },
 
@@ -1098,9 +1113,24 @@ export default {
   pointer-events: auto;
 }
 
-#app.intro .controls .floating {
+.controls .floating.intro {
   visibility: hidden;
   opacity: 0;
+  left: 65.0rem;
+}
+
+#app.intro .controls .floating.inputs {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#app.intro .controls .floating.inputs * {
+  pointer-events: none;
+}
+
+#app.intro .controls .floating.intro {
+  visibility: visible;
+  opacity: 1;
 }
 
 .controls .floating.top {

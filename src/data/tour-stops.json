@@ -53,7 +53,7 @@
 	{
 		"title": "Lautes Grün, leises Grün",
 		"paragraphs": [
-			"Orte mit einer niedrigen Lärmbelastung sind besonders in Städten als Ausgleich und Entlastung zum Alltagslärm wichtig. Beim durchschnittlichen Lärmpegel innerhalb der Grünflächen, basierend auf Verkehrslärm, zeigen sich klare Unterschiede, zum Beispiel hier im Südosten Berlins. Die dunkleren Flächen sind im Durchschnitt sehr laut, die blassorangenen Flächen eher ruhig. Große Naturräume können bei einem Lärmpegel unter 55dB<sub>A</sub> als sogenannte ruhige Gebiete eingestuft werden.<sup>16</sup>"
+			"Orte mit einer niedrigen Lärmbelastung sind besonders in Städten als Ausgleich und Entlastung zum Alltagslärm wichtig. Beim durchschnittlichen Lärmpegel innerhalb der Grünflächen, basierend auf Verkehrslärm, zeigen sich klare Unterschiede, zum Beispiel hier im Südosten Berlins. Die rötlicheren Flächen sind im Durchschnitt sehr laut, die blassorangenen Flächen eher ruhig. Große Naturräume können bei einem Lärmpegel unter 55 dB<sub>A</sub> als sogenannte ruhige Gebiete eingestuft werden.<sup>16</sup>"
 		],
 		"controlState": {
 			"contentView": "map",

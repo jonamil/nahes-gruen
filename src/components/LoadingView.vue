@@ -37,9 +37,9 @@ export default {
   color: rgba(0,0,0,0.45);
   /*color: #29955A;*/
   background: #F8F3EB;
-  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
-              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
-              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.03),
+              0 0.4rem 0.4rem rgba(0,0,0,0.03),
+              0 0.2rem 0.2rem rgba(0,0,0,0.03);
   transform: translateX(-50%) translateY(-50%);
 }
 

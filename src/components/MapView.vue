@@ -266,7 +266,7 @@ export default {
           this.pickedPark.tooltipOrientation = 'above';
         }
 
-        this.$refs.tooltip.$el.style.transform = 'translate(' + x / 10 + 'rem, ' + y / 10 + 'rem)';
+        this.$refs.tooltip.$el.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
       } else {
         this.deck.setProps({ getCursor: ({ isDragging }) => isDragging ? 'grabbing' : 'grab' });
         

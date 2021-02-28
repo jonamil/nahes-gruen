@@ -46,10 +46,6 @@ export default {
     return {
       open: false
     }
-  },
-
-  methods: {
-    
   }
 }
 </script>
@@ -73,9 +69,9 @@ export default {
   padding: 0.6rem;
   border-radius: 2.6rem;
   background: #262524;
-  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.05),
-              0 0.4rem 0.4rem rgba(0, 0, 0, 0.05),
-              0 0.2rem 0.2rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.05),
+              0 0.4rem 0.4rem rgba(0,0,0,0.05),
+              0 0.2rem 0.2rem rgba(0,0,0,0.05);
 }
 
 .contrast .collapsed button {
@@ -105,9 +101,9 @@ export default {
   font-size: 1.2rem;
   color: rgba(255,255,255,0.95);
   background: #262524;
-  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.05),
-              0 0.4rem 0.4rem rgba(0, 0, 0, 0.05),
-              0 0.2rem 0.2rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.05),
+              0 0.4rem 0.4rem rgba(0,0,0,0.05),
+              0 0.2rem 0.2rem rgba(0,0,0,0.05);
 }
 
 .contrast .expanded button {
@@ -126,8 +122,6 @@ export default {
   margin: -0.2rem 0 0;
   font-size: 1.4rem;
   font-weight: 700;
-  /*text-transform: uppercase;
-  letter-spacing: 0.05rem;*/
 }
 
 .contrast .expanded p {
@@ -141,7 +135,6 @@ export default {
 }
 
 .contrast .expanded .vertical-toggle label input:checked {
-  /*border: 0.2rem solid rgba(0,0,0,0.25);*/
   background: #fff;
 }
 

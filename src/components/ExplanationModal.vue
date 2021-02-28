@@ -127,9 +127,9 @@ export default {
   padding: 2.5rem 2.5rem 0;
   border-radius: 2.5rem;
   background: #F8F3EB;
-  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
-              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
-              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.03),
+              0 0.4rem 0.4rem rgba(0,0,0,0.03),
+              0 0.2rem 0.2rem rgba(0,0,0,0.03);
   transform: translateX(-50%) translateY(-50%) scale(0.98);
   transition: transform 0.1s ease-in-out;
 }

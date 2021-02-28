@@ -58,7 +58,7 @@
             <button title="Erläuterung" @click="currentModal = 'properties'" />
             <div class="vertical-toggle">
               <label
-                v-for="(propertyAttributes, propertyKey) in availableParkProperties"
+                v-for="(propertyTitle, propertyKey) in availableParkProperties"
                 :key="propertyKey"
                 :class="propertyKey + (propertyKey === parkProperty ? ' checked' : '')"
               >
@@ -69,7 +69,7 @@
                   :checked="propertyKey === parkProperty"
                   @change="$emit('update:parkProperty', $event.target.value)"
                 />
-                <span v-html="propertyAttributes.title" />
+                <span v-html="propertyTitle" />
               </label>
             </div>
           </div>
@@ -237,15 +237,9 @@ export default {
         cycling: 'Ich habe die Möglichkeit<br>Fahrrad zu fahren'
       },
       availableParkProperties: {
-        none: {
-          title: 'Keine Auswahl'
-        },
-        noise: {
-          title: 'Lärmbelastung'
-        },
-        vegetation: {
-          title: 'Vegetationsmenge'
-        }
+        none: 'Keine Auswahl',
+        noise: 'Lärmbelastung',
+        vegetation: 'Vegetationsmenge'
       }
     }
   },
@@ -1019,6 +1013,7 @@ export default {
   right: 0;
   padding: 0 2.5rem 4.0rem;
   background: #FAF6F0;
+  box-shadow: 10rem 0 #FAF6F0, -10rem 0 #FAF6F0;
 }
 
 .controls .sidebar .inner.intro.expanded section.footer {
@@ -1029,8 +1024,8 @@ export default {
 .controls .sidebar .inner.intro section.footer .fade {
   position: absolute;
   bottom: 100%;
-  left: 0;
-  right: 0;
+  left: -10.0rem;
+  right: -10.0rem;
   height: 9.0rem;
   background-image: linear-gradient(to bottom, rgba(250,246,240,0) 0%, rgba(250,246,240,1) 100%);
   pointer-events: none;
@@ -1189,9 +1184,9 @@ export default {
   padding: 0.6rem;
   border-radius: 2.6rem;
   background: #FAF6F0;
-  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
-              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
-              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.03),
+              0 0.4rem 0.4rem rgba(0,0,0,0.03),
+              0 0.2rem 0.2rem rgba(0,0,0,0.03);
 }
 
 .controls .floating.top .view-settings button {

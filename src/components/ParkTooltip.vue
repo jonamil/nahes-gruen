@@ -129,7 +129,6 @@ export default {
   box-sizing: border-box;
   bottom: 0;
   width: 100%;
-  /*min-height: 20.0rem;*/
   padding: 1.6rem 2.0rem 1.7rem;
   border-radius: 2.5rem;
   background: #FCFBF7;
@@ -204,7 +203,6 @@ export default {
   width: 2.6rem;
   height: 2.6rem;
   margin: -0.2rem 0.4rem -0.8rem;
-  /*background-color: #f00;*/
   background-position: center;
   background-repeat: no-repeat;
 }

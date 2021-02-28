@@ -112,9 +112,9 @@ export default {
   padding: 2.0rem;
   border-radius: 2.5rem;
   background: #FAF6F0;
-  box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.03),
-              0 0.4rem 0.4rem rgba(0, 0, 0, 0.03),
-              0 0.2rem 0.2rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0.8rem 0.8rem rgba(0,0,0,0.03),
+              0 0.4rem 0.4rem rgba(0,0,0,0.03),
+              0 0.2rem 0.2rem rgba(0,0,0,0.03);
   transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -147,7 +147,6 @@ export default {
 .tour .navigation {
   position: relative;
   margin-top: 1.9rem;
-  /*background: #f00;*/
 }
 
 .tour .navigation button {

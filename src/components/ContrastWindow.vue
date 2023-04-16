@@ -1,5 +1,5 @@
 <template>
-  <div :class="'contrast' + (open ? ' open' : '')" @click.self="open = false">
+  <div class="contrast" :class="{ open: open }" @click.self="open = false">
     <div v-show="!open" class="collapsed">
       <button @click="open = true">Kontraste</button>
     </div>
@@ -8,7 +8,7 @@
       <h3>Kontraste</h3>
       <p>Hier können die Kontraste der Karte erhöht werden. Dies ist empfehlenswert für Menschen mit Beeinträchtigungen der Farbwahrnehmung.</p>
       <div class="vertical-toggle">
-        <label :class="'standard' + (!higherContrast ? ' checked' : '')">
+        <label class="standard" :class="{ checked: !higherContrast }">
           <input
             type="radio"
             name="higher-contrast"
@@ -17,7 +17,7 @@
           />
           <span>Standardansicht</span>
         </label>
-        <label :class="'higher' + (higherContrast ? ' checked' : '')">
+        <label class="higher" :class="{ checked: higherContrast }">
           <input
             type="radio"
             name="higher-contrast"

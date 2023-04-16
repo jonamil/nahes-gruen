@@ -1,5 +1,5 @@
 <template>
-  <div ref="tour" :class="'tour' + (this.tourIndex !== false ? ' visible' : '')">
+  <div ref="tour" class="tour" :class="{ visible: this.tourIndex !== false }">
     <h3>Station {{ mostRecentTourIndex + 1 }} von {{ finalTourStopIndex + 1 }}</h3>
     <h1>{{ mostRecentTourStop.title }}</h1>
     <p
@@ -15,7 +15,8 @@
         @click="previousStop"
       />
       <button
-        :class="'exit' + (mostRecentTourIndex === tourStops.length - 1 ? ' final' : '')"
+        class="exit"
+        :class="{ final: mostRecentTourIndex === tourStops.length - 1 }"
         @click="exitTour"
       >
         {{ mostRecentTourIndex === tourStops.length - 1 ? 'Rundgang abschließen' : 'Rundgang verlassen' }}

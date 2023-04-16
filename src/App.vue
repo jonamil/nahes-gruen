@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="controlState.introScreen ? 'intro' : ''">
+  <div id="app" :class="{ intro: controlState.introScreen }">
     <MapView
       :isobands="isobands"
       :parks="parks"
@@ -9,10 +9,10 @@
       :initialMapState="initialMapState"
     />
     <LoadingView
-      :class="loadingComplete ? 'hidden' : ''"
+      :class="{ hidden: loadingComplete }"
     />
     <DistrictView
-      :class="controlState.contentView !== 'district' ? 'hidden' : ''"
+      :class="{ hidden: controlState.contentView !== 'district' }"
       :coverage="coverage"
       :controlState="controlState"
     />
@@ -107,7 +107,7 @@ export default {
         const data = await response.json();
         this[source] = data;
       } catch {
-        this.[source] = null;
+        this[source] = null;
       }
     }
   },

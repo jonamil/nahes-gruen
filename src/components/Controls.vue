@@ -13,7 +13,7 @@
               <label
                 v-for="(modeTitle, modeKey) in availableTransportModes"
                 :key="modeKey"
-                :class="modeKey + (modeKey === transportMode ? ' checked' : '')"
+                :class="[modeKey, { checked: modeKey === transportMode }]"
               >
                 <input
                   type="radio"
@@ -52,7 +52,7 @@
             <p>aller Berliner:innen können unter diesen Bedingungen von zuhause eine Grünfläche erreichen.</p>
           </div>
         </section>
-        <section :class="'properties' + (contentView !== 'map' ? ' hidden' : '')">
+        <section class="properties" :class="{ hidden: contentView !== 'map' }">
           <div class="field">
             <h3>Flächenmerkmale</h3>
             <button title="Erläuterung" @click="currentModal = 'properties'" />
@@ -60,7 +60,7 @@
               <label
                 v-for="(propertyTitle, propertyKey) in availableParkProperties"
                 :key="propertyKey"
-                :class="propertyKey + (propertyKey === parkProperty ? ' checked' : '')"
+                :class="[propertyKey, { checked: propertyKey === parkProperty }]"
               >
                 <input
                   type="radio"
@@ -76,7 +76,7 @@
         </section>
       </div>
       <button class="close" title="Schließen" @click="hideIntro" />
-      <div ref="intro" :class="'inner intro' + (introExpanded ? ' expanded' : '')">
+      <div ref="intro" class="inner intro" :class="{ expanded: introExpanded }">
         <section class="welcome">
           <img src="../assets/logo.svg" height="122" alt="Nahes Grün, Fernes Grün" />
           <p v-html="introContents.welcome" />

@@ -1,5 +1,5 @@
 <template>
-  <div :class="'tooltip ' + pickedPark.tooltipOrientation">
+  <div class="tooltip" :class="pickedPark.tooltipOrientation">
     <div class="inner">
       <h2>{{ parkName }}</h2>
       <span>{{ parkProperties.ortsteil }}</span>
@@ -10,30 +10,30 @@
         </div>
         <div class="property amenities">
           <h3>Ausstattung</h3>
-          <div :class="'icon benches' + (parkProperties.benches > 0 ? '' : ' disabled')" />
-          <div :class="'icon toilets' + (parkProperties.toilets > 0 ? '' : ' disabled')" />
-          <div :class="'icon playgrounds' + (parkProperties.playgrounds > 0 ? '' : ' disabled')" />
+          <div class="icon benches" :class="{ disabled: parkProperties.benches > 0 }" />
+          <div class="icon toilets" :class="{ disabled: parkProperties.toilets > 0 }" />
+          <div class="icon playgrounds" :class="{ disabled: parkProperties.playgrounds > 0 }" />
         </div>
       </div>
       <div :class="'property noise' + (controlState.parkProperty === 'noise' ? ' active' : '')">
         <h3>Lärmbelastung</h3>
         <div class="rating">
-          <div :class="parkProperties.noise > ratingThresholds.noise[0] ? 'filled' : ''"></div>
-          <div :class="parkProperties.noise >= ratingThresholds.noise[1] ? 'filled' : ''"></div>
-          <div :class="parkProperties.noise >= ratingThresholds.noise[2] ? 'filled' : ''"></div>
-          <div :class="parkProperties.noise >= ratingThresholds.noise[3] ? 'filled' : ''"></div>
-          <div :class="parkProperties.noise >= ratingThresholds.noise[4] ? 'filled' : ''"></div>
+          <div :class="{ filled: parkProperties.noise > ratingThresholds.noise[0] }"></div>
+          <div :class="{ filled: parkProperties.noise >= ratingThresholds.noise[1] }"></div>
+          <div :class="{ filled: parkProperties.noise >= ratingThresholds.noise[2] }"></div>
+          <div :class="{ filled: parkProperties.noise >= ratingThresholds.noise[3] }"></div>
+          <div :class="{ filled: parkProperties.noise >= ratingThresholds.noise[4] }"></div>
         </div>
         <span>{{ parkNoise }} dB<sub>A</sub></span>
       </div>
       <div :class="'property vegetation' + (controlState.parkProperty === 'vegetation' ? ' active' : '')">
         <h3>Vegetationsmenge</h3>
         <div class="rating">
-          <div :class="parkProperties.veg > ratingThresholds.vegetation[0] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg >= ratingThresholds.vegetation[1] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg >= ratingThresholds.vegetation[2] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg >= ratingThresholds.vegetation[3] ? 'filled' : ''"></div>
-          <div :class="parkProperties.veg >= ratingThresholds.vegetation[4] ? 'filled' : ''"></div>
+          <div :class="{ filled: parkProperties.veg > ratingThresholds.vegetation[0] }"></div>
+          <div :class="{ filled: parkProperties.veg >= ratingThresholds.vegetation[1] }"></div>
+          <div :class="{ filled: parkProperties.veg >= ratingThresholds.vegetation[2] }"></div>
+          <div :class="{ filled: parkProperties.veg >= ratingThresholds.vegetation[3] }"></div>
+          <div :class="{ filled: parkProperties.veg >= ratingThresholds.vegetation[4] }"></div>
         </div>
         <span>{{ parkVegetation }}</span>
       </div>

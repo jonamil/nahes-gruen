@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="'modal' + (currentModal ? ' visible' : '')"
+    class="modal"
+    :class="{ visible: currentModal }"
     @click.self="hideModal"
     @keydown.esc="hideModal"
   >

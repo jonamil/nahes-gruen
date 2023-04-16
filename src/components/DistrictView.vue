@@ -38,7 +38,8 @@
               <div
                 v-for="figureNumber in district.figures"
                 :key="figureNumber"
-                :class="'figure' + (figureNumber / district.figures - 1 / district.figures * 0.5 <= district.percentage / 100 ? '' : ' excluded')"
+                class="figure"
+                :class="{ excluded: !(figureNumber / district.figures - 1 / district.figures * 0.5 <= district.percentage / 100) }"
               />
             </div>
           </div>
